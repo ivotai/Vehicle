@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.app.startAct
-import com.unicorn.vehicle.ui.VehicleListAct
+import com.unicorn.vehicle.ui.ApplyListAct
 import kotlinx.android.synthetic.main.act_login.*
 
 class LoginAct : AppCompatActivity() {
@@ -14,7 +14,7 @@ class LoginAct : AppCompatActivity() {
         setContentView(R.layout.act_login)
 
         tvLogin.safeClicks().subscribe {
-            startAct(VehicleListAct::class.java)
+            startAct(ApplyListAct::class.java)
         }
     }
 
