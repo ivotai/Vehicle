@@ -10,7 +10,6 @@ import com.unicorn.vehicle.app.Configs
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.base.BaseResponse
 import com.unicorn.vehicle.data.model.base.PageResponse
-import com.unicorn.vehicle.ui.BaseAct
 import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.ui_title_swipe_recycler.*

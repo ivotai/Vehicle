@@ -1,4 +1,4 @@
-package com.unicorn.vehicle.ui
+package com.unicorn.vehicle.ui.other
 
 import android.content.Context
 import android.util.AttributeSet

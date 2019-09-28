@@ -1,5 +1,6 @@
 package com.unicorn.vehicle.ui
 
+import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.addDefaultItemDecoration
 import com.unicorn.vehicle.data.model.Vehicle
 import com.unicorn.vehicle.data.model.base.BaseResponse
@@ -8,6 +9,7 @@ import com.unicorn.vehicle.ui.adapter.VehicleAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
 import com.unicorn.vehicle.ui.base.SimplePageAct
 import io.reactivex.Single
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.ui_title_swipe_recycler.*
 
 class VehicleListAct : SimplePageAct<Vehicle, KVHolder>() {
@@ -16,6 +18,12 @@ class VehicleListAct : SimplePageAct<Vehicle, KVHolder>() {
         super.initViews()
         titleBar.setTitle("选择车辆")
         recyclerView.addDefaultItemDecoration(1)
+    }
+
+    override fun registerEvent() {
+        RxBus.registerEvent(this, Vehicle::class.java, Consumer {
+            finish()
+        })
     }
 
     override val simpleAdapter = VehicleAdapter()

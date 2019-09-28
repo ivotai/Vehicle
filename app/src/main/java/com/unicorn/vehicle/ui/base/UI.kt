@@ -1,4 +1,4 @@
-package com.unicorn.vehicle.ui
+package com.unicorn.vehicle.ui.base
 
 interface UI {
 
