@@ -1,5 +1,7 @@
 package com.unicorn.vehicle.data.model
 
+import java.io.Serializable
+
 data class Apply(
     val person: String,
     val reason: String,
@@ -7,15 +9,13 @@ data class Apply(
     val endTime: String,
     val destination: String,
     val vehicleType: String
-) {
+) : Serializable {
 
-    lateinit var vehicle: Vehicle
+     var vehicle: Vehicle? = null
 }
 
 /*
-    基本信息
-    申请人
-    申请事由
+
 
     其他信息
     用车时间

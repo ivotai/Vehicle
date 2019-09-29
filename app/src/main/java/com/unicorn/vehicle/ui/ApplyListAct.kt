@@ -15,7 +15,7 @@ class ApplyListAct : SimplePageAct<Apply, KVHolder>() {
     
     override fun initViews() {
         super.initViews()
-        titleBar.setTitle("申请列表")
+        titleBar.setTitle("用车申请")
         recyclerView.addItemDecoration(LinearSpanDecoration(Configs.defaultPaddingDp))
     }
 

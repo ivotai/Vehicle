@@ -16,8 +16,19 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        release {
+            storeFile file("../unicorn.jks")
+            storePassword "unicorn"
+            keyAlias "unicorn"
+            keyPassword "unicorn"
+            v1SigningEnabled true
+            v2SigningEnabled false
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -64,6 +75,7 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:3.1.1'
     implementation 'com.kaopiz:kprogresshud:1.0.2'
     implementation 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
+    implementation 'com.afollestad.material-dialogs:input:3.1.1'
 }
 
 androidExtensions {

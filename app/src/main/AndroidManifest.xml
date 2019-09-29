@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.ApplyListAct" />
+        <activity android:name=".ui.ApplyDetailAct" />
         <activity android:name=".ui.VehicleListAct" />
     </application>
 
