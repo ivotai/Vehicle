@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
-        <activity android:name=".LoginAct">
+        <activity android:name=".ui.LoginAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

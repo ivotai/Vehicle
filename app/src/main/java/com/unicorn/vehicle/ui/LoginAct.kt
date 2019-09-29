@@ -1,10 +1,10 @@
-package com.unicorn.vehicle
+package com.unicorn.vehicle.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.app.startAct
-import com.unicorn.vehicle.ui.ApplyListAct
 import kotlinx.android.synthetic.main.act_login.*
 
 class LoginAct : AppCompatActivity() {
@@ -13,7 +13,7 @@ class LoginAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_login)
 
-        tvLogin.safeClicks().subscribe {
+        rtvLogin.safeClicks().subscribe {
             startAct(ApplyListAct::class.java)
         }
     }
