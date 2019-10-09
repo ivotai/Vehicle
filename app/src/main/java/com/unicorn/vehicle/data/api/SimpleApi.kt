@@ -1,5 +1,6 @@
 package com.unicorn.vehicle.data.api
 
+import com.unicorn.vehicle.data.model.CarRequisition
 import com.unicorn.vehicle.data.model.CarRequisitionListParam
 import com.unicorn.vehicle.data.model.LoggedUser
 import com.unicorn.vehicle.data.model.UserLoginParam
@@ -16,7 +17,7 @@ interface SimpleApi {
     fun login(@Body userLoginParam: UserLoginParam): Single<BaseResponse<LoggedUser>>
 
     @POST("Car/CarRequisitionList")
-    fun getCarRequisitionList(@Body pageRequest: PageRequest<CarRequisitionListParam>): Single<PageResponse<Any>>
+    fun getCarRequisitionList(@Body pageRequest: PageRequest<CarRequisitionListParam>): Single<PageResponse<CarRequisition>>
 //    @POST("Authorization/UserLogin")
 //    fun autoLogin(@Body userLogin: UserLogin): Call<Response<UserLoginResult>>
 
