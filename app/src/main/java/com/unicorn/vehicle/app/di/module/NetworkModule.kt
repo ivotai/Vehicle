@@ -21,7 +21,8 @@ class NetworkModule {
         val builder = OkHttpClient.Builder()
             .readTimeout(10, TimeUnit.SECONDS)
             .addInterceptor { chain ->
-                if ("UserLogin" in chain.request().url.encodedPathSegments)
+                val encodedPathSegments = chain.request().url.encodedPathSegments
+                if ("Code" in encodedPathSegments || "UserLogin" in encodedPathSegments)
                     chain.proceed(chain.request())
                 else
                     NetworkHelper.proceedRequestWithSession(chain)
