@@ -6,7 +6,9 @@ import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
 import com.unicorn.vehicle.app.helper.DictHelper
+import com.unicorn.vehicle.data.model.CarListParam
 import com.unicorn.vehicle.data.model.UserLoginParam
+import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_login.*
@@ -42,7 +44,7 @@ class LoginAct : BaseAct() {
                     Global.loggedUser = it.data
                     startAct(CarRequisitionListAct::class.java)
 //                    saveUserInfo()
-//                    test()
+//                    t()
                 },
                 onError = {
                     mask.dismiss()
@@ -51,6 +53,17 @@ class LoginAct : BaseAct() {
             )
     }
 
+    private fun t() {
+        api.getCarList(PageRequest(pageNo = 1, searchParam = CarListParam()))
+            .observeOnMain(this)
+            .subscribeBy(
+                onSuccess = {
+                    if (it.failed) return@subscribeBy
+                },
+                onError = {
+                }
+            )
+    }
 
     override val layoutId = R.layout.act_login
 

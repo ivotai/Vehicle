@@ -10,7 +10,7 @@ data class CarRequisition(
     val keyBackServerTime: Any,
     val keyBoxPassword: Any,
     val keyPickUpServerTime: Any,
-    val requisitionCarID: String? = null,
+    var requisitionCarID: Int? = null,
     val requisitionCarName: String,
     val requisitionCarType: Int,
     val requisitionCarTypeDisplay: String,

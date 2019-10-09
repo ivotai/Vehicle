@@ -7,8 +7,9 @@ import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.safeClicks
+import com.unicorn.vehicle.app.startAct
+import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarRequisition
-import com.unicorn.vehicle.data.model.Vehicle
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.act_car_requisition_detail.*
@@ -33,8 +34,8 @@ class CarRequisitionDetailAct : BaseAct() {
     }
 
     override fun bindIntent() {
-        tvRequisitionCarName.safeClicks().subscribe {
-            //            startAct(VehicleListAct::class.java)
+        llRequisitionCarName.safeClicks().subscribe {
+            startAct(CarListAct::class.java)
         }
 
         rtvAgree.safeClicks().subscribe {
@@ -58,9 +59,9 @@ class CarRequisitionDetailAct : BaseAct() {
     }
 
     override fun registerEvent() {
-        RxBus.registerEvent(this, Vehicle::class.java, Consumer {
-            //            apply.vehicle = it
-//            tvVehicle.text = it.name
+        RxBus.registerEvent(this, Car::class.java, Consumer {
+            carRequisition.requisitionCarID = it.id
+            tvRequisitionCarName.text = it.name
         })
     }
 
