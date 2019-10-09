@@ -1,21 +1,48 @@
 package com.unicorn.vehicle.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.blankj.utilcode.util.EncryptUtils
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.safeClicks
-import com.unicorn.vehicle.app.startAct
+import com.unicorn.vehicle.app.*
+import com.unicorn.vehicle.app.helper.DialogHelper
+import com.unicorn.vehicle.data.model.UserLoginParam
+import com.unicorn.vehicle.ui.base.BaseAct
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_login.*
 
-class LoginAct : AppCompatActivity() {
+class LoginAct : BaseAct() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.act_login)
-
-        rtvLogin.safeClicks().subscribe {
-            startAct(ApplyListAct::class.java)
-        }
+    override fun initViews() {
+        etLoginStr.setText("guiyang")
+        etUserPwd.setText("123")
     }
+
+    override fun bindIntent() {
+        rtvLogin.safeClicks().subscribe { login() }
+    }
+
+    private fun login() {
+        val mask = DialogHelper.showMask(this)
+        val userLoginParam = UserLoginParam(
+            loginStr = etLoginStr.trimText(),
+            userPwd = EncryptUtils.encryptMD5ToString(etUserPwd.trimText())
+        )
+        api.login(userLoginParam = userLoginParam)
+            .observeOnMain(this)
+            .subscribeBy(
+                onSuccess = {
+                    mask.dismiss()
+                    if (it.failed) return@subscribeBy
+                    Global.loggedUser = it.data
+                    startAct(ApplyListAct::class.java)
+//                    saveUserInfo()
+                },
+                onError = {
+                    mask.dismiss()
+//                    ExceptionHelper.showPrompt(it)
+                }
+            )
+    }
+
+    override val layoutId = R.layout.act_login
 
 }
