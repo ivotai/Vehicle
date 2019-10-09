@@ -6,7 +6,6 @@ import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.safeClicks
-import com.unicorn.vehicle.app.startAct
 import com.unicorn.vehicle.data.model.Apply
 import com.unicorn.vehicle.data.model.Vehicle
 import com.unicorn.vehicle.ui.base.BaseAct
@@ -35,7 +34,7 @@ class ApplyDetailAct : BaseAct() {
 
     override fun bindIntent() {
         tvVehicle.safeClicks().subscribe {
-            startAct(VehicleListAct::class.java)
+//            startAct(VehicleListAct::class.java)
         }
 
         rtvAgree.safeClicks().subscribe {

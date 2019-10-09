@@ -8,7 +8,6 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.Configs
 import com.unicorn.vehicle.app.observeOnMain
-import com.unicorn.vehicle.data.model.base.BaseResponse
 import com.unicorn.vehicle.data.model.base.PageResponse
 import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
@@ -18,7 +17,7 @@ abstract class SimplePageAct<Model, K : BaseViewHolder> : BaseAct() {
 
     abstract val simpleAdapter: BaseQuickAdapter<Model, K>
 
-    abstract fun loadPage(page: Int): Single<BaseResponse<PageResponse<Model>>>
+    abstract fun loadPage(page: Int): Single<PageResponse<Model>>
 
     private val total
         get() = simpleAdapter.data.size
@@ -52,8 +51,8 @@ abstract class SimplePageAct<Model, K : BaseViewHolder> : BaseAct() {
             .subscribeBy(
                 onSuccess = {
                     mSwipeRefreshLayout.isRefreshing = false
-                    simpleAdapter.setNewData(it.data.content)
-                    checkIsLoadAll(it.data)
+                    simpleAdapter.setNewData(it.items)
+                    checkIsLoadAll(it)
                     // 在这里设置 empty view
 //                    simpleAdapter.setEmptyView(R.layout.ui_no_order, mRecyclerView)
                 },
@@ -69,8 +68,8 @@ abstract class SimplePageAct<Model, K : BaseViewHolder> : BaseAct() {
             .subscribeBy(
                 onSuccess = {
                     simpleAdapter.loadMoreComplete()
-                    simpleAdapter.addData(it.data.content)
-                    checkIsLoadAll(it.data)
+                    simpleAdapter.addData(it.items)
+                    checkIsLoadAll(it)
                 },
                 onError = {
                     simpleAdapter.loadMoreComplete()
@@ -79,7 +78,7 @@ abstract class SimplePageAct<Model, K : BaseViewHolder> : BaseAct() {
     }
 
     private fun checkIsLoadAll(pageResponse: PageResponse<Model>) {
-        val isLoadAll = total >= pageResponse.totalElements // more safe but not exact
+        val isLoadAll = total >= pageResponse.total // more safe but not exact
         if (isLoadAll) simpleAdapter.loadMoreEnd(true)
     }
 

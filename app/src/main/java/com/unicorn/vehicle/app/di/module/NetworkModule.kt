@@ -1,6 +1,7 @@
 package com.unicorn.vehicle.app.di.module
 
 import com.unicorn.vehicle.app.Configs
+import com.unicorn.vehicle.app.helper.NetworkHelper
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -19,12 +20,12 @@ class NetworkModule {
     fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
             .readTimeout(10, TimeUnit.SECONDS)
-//            .addInterceptor { chain ->
-//                if ("login" in chain.request().url.encodedPathSegments)
-//                    chain.proceed(chain.request())
-//                else
-//                    NetworkHelper.proceedRequestWithSession(chain)
-//            }
+            .addInterceptor { chain ->
+                if ("UserLogin" in chain.request().url.encodedPathSegments)
+                    chain.proceed(chain.request())
+                else
+                    NetworkHelper.proceedRequestWithSession(chain)
+            }
 //            .addInterceptor { chain ->
 //                val response = chain.proceed(chain.request())
 //                if (response.code != 401) return@addInterceptor response
