@@ -6,6 +6,8 @@ import io.reactivex.schedulers.Schedulers
 
 object DictHelper {
 
+    var isInitFinish = false
+
     fun initDict() {
         with(api) {
             getCarState().flatMap {
@@ -21,6 +23,7 @@ object DictHelper {
                 .subscribeOn(Schedulers.io())
                 .subscribe {
                     requisitionFromType = it.data
+                    isInitFinish = true
                 }
         }
     }

@@ -1,9 +1,11 @@
 package com.unicorn.vehicle.ui
 
 import com.blankj.utilcode.util.EncryptUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
+import com.unicorn.vehicle.app.helper.DictHelper
 import com.unicorn.vehicle.data.model.UserLoginParam
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.rxkotlin.subscribeBy
@@ -21,6 +23,10 @@ class LoginAct : BaseAct() {
     }
 
     private fun login() {
+        if (!DictHelper.isInitFinish) {
+            ToastUtils.showShort("字典表初始化中")
+            return
+        }
         val mask = DialogHelper.showMask(this)
         val userLoginParam = UserLoginParam(
             loginStr = etLoginStr.trimText(),
