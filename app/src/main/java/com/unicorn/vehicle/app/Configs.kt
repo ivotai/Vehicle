@@ -8,7 +8,7 @@ object Configs {
 
     val defaultPaddingDp = ConvertUtils.dp2px(16f)
 
-    const val baseUrl = "https://tk.csnbgsh.cn/"
+    const val baseUrl = "http://xuhui.menze.net.cn/SmartKeyBox/api/"
 
     const val displayDateFormat = "yyyy-MM-dd"
 

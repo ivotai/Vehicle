@@ -43,7 +43,8 @@ class ApplyListAct : SimplePageAct<Apply, KVHolder>() {
             val baseResponse = BaseResponse(
                 success = true,
                 data = pageResponse,
-                message = ""
+                errorMsg = "",
+                errorCode = ""
             )
             it.onSuccess(baseResponse)
         }

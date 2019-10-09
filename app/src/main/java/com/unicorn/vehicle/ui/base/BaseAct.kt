@@ -2,6 +2,7 @@ package com.unicorn.vehicle.ui.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.unicorn.vehicle.app.di.ComponentHolder
 
 abstract class BaseAct : AppCompatActivity(), UI {
 
@@ -26,6 +27,6 @@ abstract class BaseAct : AppCompatActivity(), UI {
     override fun registerEvent() {
     }
 
-//    protected val api = ComponentHolder.appComponent.api()
+    protected val api = ComponentHolder.appComponent.api()
 
 }
