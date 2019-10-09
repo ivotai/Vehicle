@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.CarRequisitionListAct" />
-        <activity android:name=".ui.ApplyDetailAct" />
+        <activity android:name=".ui.CarRequisitionDetailAct" />
         <activity android:name=".ui.VehicleListAct" />
     </application>
 

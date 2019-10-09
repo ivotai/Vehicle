@@ -2,25 +2,14 @@
   "total": 2,
   "items": [
     {
-      "requisitionID": "fe987574-88be-44bd-b16f-15cb283b79a8",
-      "requisitionFromType": 0,
-      "requisitionCarType": 4,
+
+      "requisitionCarTypeDisplay": "小型车",
       "requisitionCarID": null,
-      "requisitionCause": "出警",
-      "state": 2,
-      "requisitionServerTime": "2019-10-08T23:51:05.18",
-      "requisitionUserID": "2",
+      "requisitionCarName": "",
+
       "approvalServerTime": "2019-10-09T00:33:02.877",
       "approvalUserID": "2",
       "approvalRemark": "不批",
-      "keyBoxPassword": null,
-      "keyPickUpServerTime": null,
-      "keyBackServerTime": null,
-      "requisitionFromTypeDisplay": "普通申请",
-      "requisitionCarTypeDisplay": "小型车",
-      "requisitionCarName": "",
-      "stateDisplay": "不通过",
-      "requisitionUserName": "桂阳",
       "approvalUserName": "桂阳"
     },
     {

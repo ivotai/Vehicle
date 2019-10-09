@@ -1,5 +1,7 @@
 package com.unicorn.vehicle.data.model
 
+import java.io.Serializable
+
 data class CarRequisition(
     val approvalRemark: String,
     val approvalServerTime: String,
@@ -8,7 +10,7 @@ data class CarRequisition(
     val keyBackServerTime: Any,
     val keyBoxPassword: Any,
     val keyPickUpServerTime: Any,
-    val requisitionCarID: Any,
+    val requisitionCarID: String? = null,
     val requisitionCarName: String,
     val requisitionCarType: Int,
     val requisitionCarTypeDisplay: String,
@@ -21,4 +23,4 @@ data class CarRequisition(
     val requisitionUserName: String,
     val state: Int,
     val stateDisplay: String
-)
+) : Serializable

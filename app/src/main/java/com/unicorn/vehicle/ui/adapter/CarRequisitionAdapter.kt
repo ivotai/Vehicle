@@ -1,10 +1,13 @@
 package com.unicorn.vehicle.ui.adapter
 
+import android.content.Intent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.helper.DictHelper
+import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.data.model.CarRequisition
+import com.unicorn.vehicle.ui.CarRequisitionDetailAct
 import com.unicorn.vehicle.ui.base.KVHolder
 import kotlinx.android.synthetic.main.item_car_requisition.*
 
@@ -21,11 +24,11 @@ class CarRequisitionAdapter :
             tvRequisitionState.text =
                 DictHelper.requisitionStates.findLast { it.id == item.state }?.value
 
-//            root.safeClicks().subscribe {
-//                Intent(mContext,ApplyDetailAct::class.java).apply {
-//                    putExtra("Apply",item)
-//                }.let { mContext.startActivity(it) }
-//            }
+            root.safeClicks().subscribe {
+                Intent(mContext, CarRequisitionDetailAct::class.java).apply {
+                    putExtra("CarRequisition", item)
+                }.let { mContext.startActivity(it) }
+            }
         }
     }
 
