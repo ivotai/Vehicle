@@ -6,12 +6,16 @@ import com.afollestad.materialdialogs.input.input
 import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.RxBus
+import com.unicorn.vehicle.app.helper.DialogHelper
+import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.app.startAct
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarRequisition
+import com.unicorn.vehicle.data.model.event.Approve
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.functions.Consumer
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_car_requisition_detail.*
 
 class CarRequisitionDetailAct : BaseAct() {
@@ -43,9 +47,7 @@ class CarRequisitionDetailAct : BaseAct() {
                 ToastUtils.showShort("请选择车辆")
                 return@subscribe
             }
-            //
-            ToastUtils.showShort("已通过该申请")
-            finish()
+            approve()
         }
 
         rtvReject.safeClicks().subscribe {
@@ -56,6 +58,25 @@ class CarRequisitionDetailAct : BaseAct() {
                 }
             }
         }
+    }
+
+    private fun approve() {
+        val mask = DialogHelper.showMask(this)
+        api.approve(carRequisition = carRequisition)
+            .observeOnMain(this)
+            .subscribeBy(
+                onSuccess = {
+                    mask.dismiss()
+                    if (it.failed) return@subscribeBy
+                    ToastUtils.showShort("申请已通过")
+                    RxBus.post(Approve())
+                    finish()
+                },
+                onError = {
+                    mask.dismiss()
+//                    ExceptionHelper.showPrompt(it)
+                }
+            )
     }
 
     override fun registerEvent() {

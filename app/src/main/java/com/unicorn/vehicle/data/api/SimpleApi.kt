@@ -21,6 +21,9 @@ interface SimpleApi {
     @POST("Car/CarList")
     fun getCarList(@Body pageRequest: PageRequest<CarListParam>): Single<PageResponse<Car>>
 
+    @POST("Car/CarRequisitionApprove")
+    fun approve(@Body carRequisition: CarRequisition): Single<BaseResponse<CarRequisition>>
+
 //    @POST("Authorization/UserLogin")
 //    fun autoLogin(@Body userLogin: UserLogin): Call<Response<UserLoginResult>>
 
