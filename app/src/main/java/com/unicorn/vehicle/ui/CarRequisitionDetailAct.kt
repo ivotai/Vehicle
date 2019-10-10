@@ -12,7 +12,7 @@ import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.app.startAct
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarRequisition
-import com.unicorn.vehicle.data.model.event.Approve
+import com.unicorn.vehicle.data.model.event.RefreshList
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
@@ -53,8 +53,8 @@ class CarRequisitionDetailAct : BaseAct() {
         rtvReject.safeClicks().subscribe {
             MaterialDialog(this).show {
                 input(hint = "填写拒绝原因") { dialog, text ->
-                    ToastUtils.showShort(text)
-                    finish()
+                    carRequisition.approvalRemark = text.toString()
+                    deny()
                 }
             }
         }
@@ -69,7 +69,26 @@ class CarRequisitionDetailAct : BaseAct() {
                     mask.dismiss()
                     if (it.failed) return@subscribeBy
                     ToastUtils.showShort("申请已通过")
-                    RxBus.post(Approve())
+                    RxBus.post(RefreshList())
+                    finish()
+                },
+                onError = {
+                    mask.dismiss()
+//                    ExceptionHelper.showPrompt(it)
+                }
+            )
+    }
+
+    private fun deny() {
+        val mask = DialogHelper.showMask(this)
+        api.deny(carRequisition = carRequisition)
+            .observeOnMain(this)
+            .subscribeBy(
+                onSuccess = {
+                    mask.dismiss()
+                    if (it.failed) return@subscribeBy
+                    ToastUtils.showShort("申请已拒绝")
+                    RxBus.post(RefreshList())
                     finish()
                 },
                 onError = {

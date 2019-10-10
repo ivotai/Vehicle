@@ -6,7 +6,7 @@ import com.unicorn.vehicle.data.model.CarRequisition
 import com.unicorn.vehicle.data.model.CarRequisitionListParam
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
-import com.unicorn.vehicle.data.model.event.Approve
+import com.unicorn.vehicle.data.model.event.RefreshList
 import com.unicorn.vehicle.ui.adapter.CarRequisitionAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
 import com.unicorn.vehicle.ui.base.SimplePageAct
@@ -34,7 +34,7 @@ class CarRequisitionListAct : SimplePageAct<CarRequisition, KVHolder>() {
         )
 
     override fun registerEvent() {
-        RxBus.registerEvent(this, Approve::class.java, Consumer {
+        RxBus.registerEvent(this, RefreshList::class.java, Consumer {
             loadFirstPage()
         })
     }

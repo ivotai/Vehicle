@@ -24,6 +24,8 @@ interface SimpleApi {
     @POST("Car/CarRequisitionApprove")
     fun approve(@Body carRequisition: CarRequisition): Single<BaseResponse<CarRequisition>>
 
+    @POST("Car/CarRequisitionDeny")
+    fun deny(@Body carRequisition: CarRequisition): Single<BaseResponse<CarRequisition>>
 //    @POST("Authorization/UserLogin")
 //    fun autoLogin(@Body userLogin: UserLogin): Call<Response<UserLoginResult>>
 

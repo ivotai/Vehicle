@@ -3,7 +3,7 @@ package com.unicorn.vehicle.data.model
 import java.io.Serializable
 
 data class CarRequisition(
-    val approvalRemark: String,
+    var approvalRemark: String,
     val approvalServerTime: String,
     val approvalUserID: String,
     val approvalUserName: String,
