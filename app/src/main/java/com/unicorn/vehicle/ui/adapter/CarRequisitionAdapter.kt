@@ -18,7 +18,7 @@ class CarRequisitionAdapter :
         helper.apply {
             rtvRequisitionServerTime.text = item.requisitionServerTime
             tvRequisitionUserName.text = item.requisitionUserName
-            tvRequisitionCause.text = item.requisitionCause
+            tvRequisitionCauseDisplay.text = item.requisitionCauseDisplay
             tvRequisitionCarTypeDisplay.text = item.requisitionCarTypeDisplay
             tvIsState0.visibility = if (item.state == 0) View.VISIBLE else View.INVISIBLE
             tvRequisitionState.text =

@@ -36,9 +36,12 @@ interface SimpleApi {
     fun getCarType(): Observable<BaseResponse<List<DictItem>>>
 
     @POST("Code/DictRequisitionState")
-    fun getDictRequisitionState(): Observable<BaseResponse<List<DictItem>>>
+    fun getRequisitionState(): Observable<BaseResponse<List<DictItem>>>
 
     @POST("Code/DictRequisitionFromType")
-    fun getDictRequisitionFromType(): Observable<BaseResponse<List<DictItem>>>
+    fun getRequisitionFromType(): Observable<BaseResponse<List<DictItem>>>
+
+    @POST("Code/DictRequisitionCause")
+    fun getRequisitionCause(): Observable<BaseResponse<List<DictItem>>>
 
 }

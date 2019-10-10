@@ -25,7 +25,7 @@ class CarRequisitionDetailAct : BaseAct() {
         with(carRequisition) {
             tvRequisitionUserName.text = requisitionUserName
             tvRequisitionServerTime.text = requisitionServerTime
-            tvRequisitionCause.text = requisitionCause
+            tvRequisitionCauseDisplay.text = requisitionCauseDisplay
             tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
             tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
             tvRequisitionCarName.text = requisitionCarName

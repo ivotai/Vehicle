@@ -15,16 +15,17 @@ object DictHelper {
                 getCarType()
             }.flatMap {
                 carTypes = it.data
-                getDictRequisitionState()
+                getRequisitionState()
             }.flatMap {
                 requisitionStates = it.data
-                getDictRequisitionFromType()
+                getRequisitionCause()
+            }.flatMap {
+                requisitionCauses = it.data
+                getRequisitionFromType()
+            }.subscribeOn(Schedulers.io()).subscribe {
+                requisitionFromTypes = it.data
+                isInitFinish = true
             }
-                .subscribeOn(Schedulers.io())
-                .subscribe {
-                    requisitionFromType = it.data
-                    isInitFinish = true
-                }
         }
     }
 
@@ -33,6 +34,7 @@ object DictHelper {
     lateinit var carStates: List<DictItem>
     lateinit var carTypes: List<DictItem>
     lateinit var requisitionStates: List<DictItem>
-    lateinit var requisitionFromType: List<DictItem>
+    lateinit var requisitionFromTypes: List<DictItem>
+    lateinit var requisitionCauses: List<DictItem>
 
 }
