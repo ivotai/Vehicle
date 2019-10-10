@@ -312,6 +312,8 @@
                     android:textSize="16dp" />
 
                 <TextView
+                    android:gravity="end"
+                    android:hint="请选择车辆"
                     android:id="@+id/tvRequisitionCarName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

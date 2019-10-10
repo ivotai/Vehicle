@@ -27,8 +27,7 @@ class CarRequisitionDetailAct : BaseAct() {
             tvRequisitionCauseDisplay.text = requisitionCauseDisplay
             tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
             tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
-            tvRequisitionCarName.text =
-                if (requisitionCarName.isEmpty()) "请选择车辆" else requisitionCarName
+            tvRequisitionCarName.text =requisitionCarName
             tvRequisitionStartTime.text =
                 DateTime(requisitionStartTime).toString(Configs.displayDateFormat)
             tvRequisitionEndTime.text =
