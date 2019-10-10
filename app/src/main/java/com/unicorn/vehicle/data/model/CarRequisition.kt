@@ -1,15 +1,16 @@
 package com.unicorn.vehicle.data.model
 
 import java.io.Serializable
+import java.util.*
 
 data class CarRequisition(
     var approvalRemark: String,
-    val approvalServerTime: String,
+    val approvalServerTime: Date,
     val approvalUserID: String,
     val approvalUserName: String,
-    val keyBackServerTime: Any,
+    val keyBackServerTime: Date,
     val keyBoxPassword: Any,
-    val keyPickUpServerTime: Any,
+    val keyPickUpServerTime: Date,
     var requisitionCarID: Int? = null,
     val requisitionCarName: String,
     val requisitionCarType: Int,
@@ -19,11 +20,11 @@ data class CarRequisition(
     val requisitionFromType: Int,
     val requisitionFromTypeDisplay: String,
     val requisitionID: String,
-    val requisitionServerTime: String,
+    val requisitionServerTime: Date,
     val requisitionUserID: String,
     val requisitionUserName: String,
-    val requisitionStartTime: String,
-    val requisitionEndTime: String,
+    val requisitionStartTime: Date,
+    val requisitionEndTime: Date,
     val requisitionDestination: String,
     val state: Int,
     val stateDisplay: String

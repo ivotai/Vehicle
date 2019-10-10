@@ -1,5 +1,6 @@
 package com.unicorn.vehicle.app.di.module
 
+import com.google.gson.GsonBuilder
 import com.unicorn.vehicle.app.Configs
 import com.unicorn.vehicle.app.helper.NetworkHelper
 import dagger.Module
@@ -46,7 +47,12 @@ class NetworkModule {
             .baseUrl(Configs.baseUrl)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(
+                GsonConverterFactory.create(
+                    // 2019-10-09T15:40:29.103
+                    GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").create()
+                )
+            )
             .build()
     }
 

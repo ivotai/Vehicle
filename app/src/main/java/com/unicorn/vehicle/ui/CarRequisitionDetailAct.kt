@@ -14,6 +14,7 @@ import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_car_requisition_detail.*
+import org.joda.time.DateTime
 
 class CarRequisitionDetailAct : BaseAct() {
 
@@ -21,18 +22,18 @@ class CarRequisitionDetailAct : BaseAct() {
         titleBar.setTitle("用车申请详情")
         with(carRequisition) {
             tvRequisitionUserName.text = requisitionUserName
-            tvRequisitionServerTime.text = requisitionServerTime
+            tvRequisitionServerTime.text = DateTime(requisitionServerTime).toString(Configs.displayDateFormat)
             tvRequisitionCauseDisplay.text = requisitionCauseDisplay
             tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
             tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
             tvRequisitionCarName.text = requisitionCarName
-            tvRequisitionStartTime.text = requisitionStartTime
-            tvRequisitionEndTime.text = requisitionEndTime
+            tvRequisitionStartTime.text = DateTime(requisitionStartTime).toString(Configs.displayDateFormat)
+            tvRequisitionEndTime.text = DateTime(requisitionEndTime).toString(Configs.displayDateFormat)
             tvRequisitionDestination.text = requisitionDestination
             tvStateDisplay.text = stateDisplay
             tvApprovalUserName.text = approvalUserName
             tvApprovalRemark.text = approvalRemark
-            tvApprovalServerTime.text = approvalServerTime
+            tvApprovalServerTime.text = DateTime(approvalServerTime).toString(Configs.displayDateFormat)
             llButton.visibility = if (state == 0) View.VISIBLE else View.GONE
         }
     }
