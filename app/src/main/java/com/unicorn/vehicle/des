@@ -1,7 +1,6 @@
 CarRequisitionListParam
 // 审批人 id
-          0      待审批
-          1 2    已审批
+
 
 车辆类型        事由
 目的地

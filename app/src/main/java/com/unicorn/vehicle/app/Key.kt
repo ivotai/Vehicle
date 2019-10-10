@@ -5,7 +5,7 @@ object Key{
     const val Cookie = "Cookie"
     const val SESSION = "ASP.NET_SessionId"
     const val CarRequisition = "CarRequisition"
-    const val Password = "Password"
+    const val CarRequisitionState = "CarRequisition"
     const val KeepPwd = "KeepPwd"
     const val PayOrderResponse = "PayOrderResponse"
     const val CvTicketResponse = "CvTicketResponse"

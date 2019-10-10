@@ -42,7 +42,7 @@ class LoginAct : BaseAct() {
                     mask.dismiss()
                     if (it.failed) return@subscribeBy
                     Global.loggedUser = it.data
-                    startAct(CarRequisitionListAct::class.java)
+                    startAct(CarRequisitionAct::class.java)
 //                    saveUserInfo()
 //                    t()
                 },

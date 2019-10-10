@@ -9,7 +9,7 @@ import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarRequisition
-import com.unicorn.vehicle.data.model.event.RefreshList
+import com.unicorn.vehicle.data.model.event.RefreshCarRequisitionList
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
@@ -69,7 +69,7 @@ class CarRequisitionDetailAct : BaseAct() {
                     mask.dismiss()
                     if (it.failed) return@subscribeBy
                     ToastUtils.showShort("申请已通过")
-                    RxBus.post(RefreshList())
+                    RxBus.post(RefreshCarRequisitionList(carRequisitionState = carRequisition.state))
                     finish()
                 },
                 onError = {
@@ -88,7 +88,7 @@ class CarRequisitionDetailAct : BaseAct() {
                     mask.dismiss()
                     if (it.failed) return@subscribeBy
                     ToastUtils.showShort("申请已拒绝")
-                    RxBus.post(RefreshList())
+                    RxBus.post(RefreshCarRequisitionList(carRequisitionState = carRequisition.state))
                     finish()
                 },
                 onError = {
