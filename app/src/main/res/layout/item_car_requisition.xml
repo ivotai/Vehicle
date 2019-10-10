@@ -43,7 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvRequisitionCauseDisplay"
+                android:id="@+id/tvRequisitionCarTypeDisplay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -54,7 +54,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvRequisitionUserName" />
 
             <TextView
-                android:id="@+id/tvRequisitionCarTypeDisplay"
+                android:id="@+id/tvRequisitionDestination"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -63,8 +63,8 @@
                 android:textColor="@color/md_grey_600"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tvRequisitionCauseDisplay"
-                app:layout_constraintTop_toBottomOf="@+id/tvRequisitionCauseDisplay"
+                app:layout_constraintStart_toStartOf="@+id/tvRequisitionCarTypeDisplay"
+                app:layout_constraintTop_toBottomOf="@+id/tvRequisitionCarTypeDisplay"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -81,7 +81,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvRequisitionDestination"
+                android:id="@+id/tvRequisitionCauseDisplay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
