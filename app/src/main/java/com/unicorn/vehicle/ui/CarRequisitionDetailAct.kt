@@ -22,18 +22,23 @@ class CarRequisitionDetailAct : BaseAct() {
         titleBar.setTitle("用车申请详情")
         with(carRequisition) {
             tvRequisitionUserName.text = requisitionUserName
-            tvRequisitionServerTime.text = DateTime(requisitionServerTime).toString(Configs.displayDateFormat)
+            tvRequisitionServerTime.text =
+                DateTime(requisitionServerTime).toString(Configs.displayDateFormat)
             tvRequisitionCauseDisplay.text = requisitionCauseDisplay
             tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
             tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
-            tvRequisitionCarName.text = requisitionCarName
-            tvRequisitionStartTime.text = DateTime(requisitionStartTime).toString(Configs.displayDateFormat)
-            tvRequisitionEndTime.text = DateTime(requisitionEndTime).toString(Configs.displayDateFormat)
+            tvRequisitionCarName.text =
+                if (requisitionCarName.isEmpty()) "请选择车辆" else requisitionCarName
+            tvRequisitionStartTime.text =
+                DateTime(requisitionStartTime).toString(Configs.displayDateFormat)
+            tvRequisitionEndTime.text =
+                DateTime(requisitionEndTime).toString(Configs.displayDateFormat)
             tvRequisitionDestination.text = requisitionDestination
             tvStateDisplay.text = stateDisplay
             tvApprovalUserName.text = approvalUserName
             tvApprovalRemark.text = approvalRemark
-            tvApprovalServerTime.text = DateTime(approvalServerTime).toString(Configs.displayDateFormat)
+            tvApprovalServerTime.text =
+                DateTime(approvalServerTime).toString(Configs.displayDateFormat)
             llButton.visibility = if (state == 0) View.VISIBLE else View.GONE
         }
     }

@@ -49,8 +49,8 @@ class NetworkModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(
                 GsonConverterFactory.create(
-                    // 2019-10-09T15:40:29.103
-                    GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").create()
+                                              // 2019-10-09T15:40:29.103
+                    GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
                 )
             )
             .build()
