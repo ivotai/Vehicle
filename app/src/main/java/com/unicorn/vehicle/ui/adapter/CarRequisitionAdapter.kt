@@ -4,7 +4,7 @@ import android.content.Intent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.helper.DictHelper
+import com.unicorn.vehicle.app.Key
 import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.data.model.CarRequisition
 import com.unicorn.vehicle.ui.CarRequisitionDetailAct
@@ -20,13 +20,12 @@ class CarRequisitionAdapter :
             tvRequisitionUserName.text = item.requisitionUserName
             tvRequisitionCauseDisplay.text = item.requisitionCauseDisplay
             tvRequisitionCarTypeDisplay.text = item.requisitionCarTypeDisplay
+            tvRequisitionDestination.text = item.requisitionDestination
             tvIsState0.visibility = if (item.state == 0) View.VISIBLE else View.INVISIBLE
-            tvRequisitionState.text =
-                DictHelper.requisitionStates.findLast { it.id == item.state }?.value
 
             root.safeClicks().subscribe {
                 Intent(mContext, CarRequisitionDetailAct::class.java).apply {
-                    putExtra("CarRequisition", item)
+                    putExtra(Key.CarRequisition, item)
                 }.let { mContext.startActivity(it) }
             }
         }

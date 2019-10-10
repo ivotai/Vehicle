@@ -5,11 +5,8 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.RxBus
+import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
-import com.unicorn.vehicle.app.observeOnMain
-import com.unicorn.vehicle.app.safeClicks
-import com.unicorn.vehicle.app.startAct
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarRequisition
 import com.unicorn.vehicle.data.model.event.RefreshList
@@ -29,6 +26,9 @@ class CarRequisitionDetailAct : BaseAct() {
             tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
             tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
             tvRequisitionCarName.text = requisitionCarName
+            tvRequisitionStartTime.text = requisitionStartTime
+            tvRequisitionEndTime.text = requisitionEndTime
+            tvRequisitionDestination.text = requisitionDestination
             tvStateDisplay.text = stateDisplay
             tvApprovalUserName.text = approvalUserName
             tvApprovalRemark.text = approvalRemark
@@ -107,6 +107,6 @@ class CarRequisitionDetailAct : BaseAct() {
 
     override val layoutId = R.layout.act_car_requisition_detail
 
-    private val carRequisition by lazy { intent.getSerializableExtra("CarRequisition") as CarRequisition }
+    private val carRequisition by lazy { intent.getSerializableExtra(Key.CarRequisition) as CarRequisition }
 
 }

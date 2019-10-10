@@ -22,6 +22,9 @@ data class CarRequisition(
     val requisitionServerTime: String,
     val requisitionUserID: String,
     val requisitionUserName: String,
+    val requisitionStartTime: String,
+    val requisitionEndTime: String,
+    val requisitionDestination: String,
     val state: Int,
     val stateDisplay: String
 ) : Serializable
