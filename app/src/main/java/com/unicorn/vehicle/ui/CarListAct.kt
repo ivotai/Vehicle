@@ -1,5 +1,6 @@
 package com.unicorn.vehicle.ui
 
+import com.unicorn.vehicle.app.Key
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.addDefaultItemDecoration
 import com.unicorn.vehicle.data.model.Car
@@ -24,12 +25,14 @@ class CarListAct : SimplePageAct<Car, KVHolder>() {
     override val simpleAdapter = CarAdapter()
 
     override fun loadPage(page: Int): Single<PageResponse<Car>> =
-        api.getCarList(PageRequest(pageNo = page, searchParam = CarListParam()))
+        api.getCarList(PageRequest(pageNo = page, searchParam = CarListParam(carType = carType)))
 
     override fun registerEvent() {
         RxBus.registerEvent(this, Car::class.java, Consumer {
             finish()
         })
     }
+
+    private val carType by lazy { intent.getIntExtra(Key.CarType, 0) }
 
 }

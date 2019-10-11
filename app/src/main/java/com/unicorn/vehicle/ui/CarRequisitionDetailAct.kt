@@ -1,5 +1,6 @@
 package com.unicorn.vehicle.ui
 
+import android.content.Intent
 import android.view.View
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
@@ -44,7 +45,11 @@ class CarRequisitionDetailAct : BaseAct() {
 
     override fun bindIntent() {
         llRequisitionCarName.safeClicks().subscribe {
-            startAct(CarListAct::class.java)
+            Intent(this, CarListAct::class.java).apply {
+                putExtra(Key.CarType, carRequisition.requisitionCarType)
+            }.let {
+                startActivity(it)
+            }
         }
 
         rtvAgree.safeClicks().subscribe {

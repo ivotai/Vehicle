@@ -13,8 +13,8 @@ class CarAdapter : BaseQuickAdapter<Car, KVHolder>(R.layout.item_car) {
 
     override fun convert(helper: KVHolder, item: Car) {
         helper.apply {
-            tvName.text = item.name
-            tvNo.text = item.no
+            tvName.text = "${item.name} ${item.no}"
+            tvNo.text = item.carTypeDisplay
             tvCarStateDisplay.text = item.carStateDisplay
             Glide.with(context).load("https://img.mychebao.com/download/image/2b87963f872a2b7d7a2cb4846f88ad22_mid.jpg").into(ivImage)
 

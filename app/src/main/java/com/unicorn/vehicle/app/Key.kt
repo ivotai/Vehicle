@@ -6,7 +6,7 @@ object Key{
     const val SESSION = "ASP.NET_SessionId"
     const val CarRequisition = "CarRequisition"
     const val Position = "Position"
-    const val KeepPwd = "KeepPwd"
+    const val CarType = "CarType"
     const val PayOrderResponse = "PayOrderResponse"
     const val CvTicketResponse = "CvTicketResponse"
     const val OrderId = "OrderId"
