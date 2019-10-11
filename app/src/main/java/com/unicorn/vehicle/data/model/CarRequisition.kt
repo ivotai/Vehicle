@@ -16,6 +16,7 @@ data class CarRequisition(
     val requisitionCarType: Int,
     val requisitionCarTypeDisplay: String,
     val requisitionCause: Int,
+    val requisitionCarNo: String,
     val requisitionCauseDisplay: String,
     val requisitionFromType: Int,
     val requisitionFromTypeDisplay: String,

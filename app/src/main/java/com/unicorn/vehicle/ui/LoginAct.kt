@@ -41,7 +41,7 @@ class LoginAct : BaseAct() {
                 onSuccess = {
                     mask.dismiss()
                     if (it.failed) return@subscribeBy
-                    Global.loggedUser = it.data
+                    Globals.loggedUser = it.data
                     startAct(CarRequisitionAct::class.java)
 //                    saveUserInfo()
 //                    t()

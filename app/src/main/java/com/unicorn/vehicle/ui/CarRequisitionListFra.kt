@@ -1,6 +1,7 @@
 package com.unicorn.vehicle.ui
 
 import com.unicorn.vehicle.app.Configs
+import com.unicorn.vehicle.app.Globals
 import com.unicorn.vehicle.app.Key
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.data.model.CarRequisition
@@ -25,7 +26,7 @@ class CarRequisitionListFra : SimplePageFra<CarRequisition, KVHolder>() {
     }
 
     override fun afterLoadFirstPage(total: Int) {
-        RxBus.post(CarRequisitionTotal(carRequisitionState = carRequisitionState, total = total))
+        RxBus.post(CarRequisitionTotal(position = position, total = total))
     }
 
     override val simpleAdapter = CarRequisitionAdapter()
@@ -34,17 +35,20 @@ class CarRequisitionListFra : SimplePageFra<CarRequisition, KVHolder>() {
         api.getCarRequisitionList(
             PageRequest(
                 pageNo = page,
-                searchParam = CarRequisitionListParam(state = carRequisitionState)
+                searchParam =
+                if (position == 0)
+                    CarRequisitionListParam(states = listOf(0))
+                else
+                    CarRequisitionListParam(states = listOf(1, 2), approvalUserID = Globals.uid)
             )
         )
 
     override fun registerEvent() {
         RxBus.registerEvent(this, RefreshCarRequisitionList::class.java, Consumer {
-            if (carRequisitionState == it.carRequisitionState)
-                loadFirstPage()
+            loadFirstPage()
         })
     }
 
-    private val carRequisitionState by lazy { arguments!!.getInt(Key.CarRequisitionState) }
+    private val position by lazy { arguments!!.getInt(Key.Position) }
 
 }

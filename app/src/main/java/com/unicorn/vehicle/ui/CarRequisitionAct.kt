@@ -19,10 +19,9 @@ class CarRequisitionAct : BaseAct() {
 
     override fun registerEvent() {
         RxBus.registerEvent(this, CarRequisitionTotal::class.java, Consumer {
-            val pos = it.carRequisitionState
-            val badge = tabs.getTabAt(pos)!!.orCreateBadge
-            badge.isVisible = true
+            val badge = tabs.getTabAt(it.position)!!.orCreateBadge
             badge.number = it.total
+            badge.isVisible = true
         })
     }
 

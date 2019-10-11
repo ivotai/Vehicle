@@ -2,7 +2,7 @@ package com.unicorn.vehicle.app
 
 import com.unicorn.vehicle.data.model.LoggedUser
 
-object Global {
+object Globals {
 
     val sid: String get() = loggedUser.sid
 

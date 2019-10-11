@@ -27,7 +27,7 @@ class CarRequisitionDetailAct : BaseAct() {
             tvRequisitionCauseDisplay.text = requisitionCauseDisplay
             tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
             tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
-            tvRequisitionCarName.text =requisitionCarName
+            tvRequisitionCarName.text = requisitionCarName
             tvRequisitionStartTime.text =
                 DateTime(requisitionStartTime).toString(Configs.displayDateFormat)
             tvRequisitionEndTime.text =
@@ -74,7 +74,7 @@ class CarRequisitionDetailAct : BaseAct() {
                     mask.dismiss()
                     if (it.failed) return@subscribeBy
                     ToastUtils.showShort("申请已通过")
-                    RxBus.post(RefreshCarRequisitionList(carRequisitionState = carRequisition.state))
+                    RxBus.post(RefreshCarRequisitionList())
                     finish()
                 },
                 onError = {
@@ -93,7 +93,7 @@ class CarRequisitionDetailAct : BaseAct() {
                     mask.dismiss()
                     if (it.failed) return@subscribeBy
                     ToastUtils.showShort("申请已拒绝")
-                    RxBus.post(RefreshCarRequisitionList(carRequisitionState = carRequisition.state))
+                    RxBus.post(RefreshCarRequisitionList())
                     finish()
                 },
                 onError = {
