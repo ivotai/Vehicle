@@ -28,7 +28,7 @@ class CarRequisitionDetailAct : BaseAct() {
             tvRequisitionCauseDisplay.text = requisitionCauseDisplay
             tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
             tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
-            tvRequisitionCarName.text = requisitionCarName
+            tvRequisitionCarName.text = requisitionCarNo
             tvRequisitionStartTime.text =
                 DateTime(requisitionStartTime).toString(Configs.displayDateFormat)
             tvRequisitionEndTime.text =
@@ -111,7 +111,7 @@ class CarRequisitionDetailAct : BaseAct() {
     override fun registerEvent() {
         RxBus.registerEvent(this, Car::class.java, Consumer {
             carRequisition.requisitionCarID = it.id
-            tvRequisitionCarName.text = it.name
+            tvRequisitionCarName.text = it.no
         })
     }
 

@@ -14,8 +14,7 @@ import kotlinx.android.synthetic.main.act_login.*
 class LoginAct : BaseAct() {
 
     override fun initViews() {
-        etLoginStr.setText("guiyang")
-        etUserPwd.setText("123")
+
     }
 
     override fun bindIntent() {
@@ -39,6 +38,10 @@ class LoginAct : BaseAct() {
                 onSuccess = {
                     mask.dismiss()
                     if (it.failed) return@subscribeBy
+                    if(it.data.role != 1){
+                        ToastUtils.showShort("无法登录，您没有审批权限")
+                        return@subscribeBy
+                    }
                     Globals.loggedUser = it.data
                     startAct(CarRequisitionAct::class.java)
 //                    saveUserInfo()
