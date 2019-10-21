@@ -14,7 +14,7 @@ class App : MultiDexApplication() {
     private fun doMyWork() {
         DictHelper.initDict()
         JPushInterface.init(this)
-        JPushInterface.setDebugMode(true)
+//        JPushInterface.setDebugMode(true)
     }
 
 }

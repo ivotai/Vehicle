@@ -1,9 +1,13 @@
 package com.unicorn.vehicle.jpush
 
 import android.content.Context
+import android.content.Intent
 import cn.jpush.android.api.CustomMessage
 import cn.jpush.android.api.NotificationMessage
 import cn.jpush.android.service.JPushMessageReceiver
+import com.unicorn.vehicle.app.Key
+import com.unicorn.vehicle.ui.CarRequisitionDetailAct
+import org.json.JSONObject
 
 class MyJPushReceiver : JPushMessageReceiver() {
 //    override fun onTagOperatorResult(context: Context?, jPushMessage: JPushMessage?) {
@@ -30,8 +34,17 @@ class MyJPushReceiver : JPushMessageReceiver() {
 //        super.onMobileNumberOperatorResult(context, jPushMessage)
 //    }
 
-    override fun onNotifyMessageOpened(p0: Context?, p1: NotificationMessage?) {
-        super.onNotifyMessageOpened(p0, p1)
+    override fun onNotifyMessageOpened(context: Context, notificationMessage: NotificationMessage) {
+        super.onNotifyMessageOpened(context, notificationMessage)
+
+        val extra = notificationMessage.notificationExtras
+        val jsonObject = JSONObject(extra)
+        val carRequisitionId = jsonObject.getString(Key.CarRequisitionId)
+
+        val intent1 = Intent(context, CarRequisitionDetailAct::class.java)
+        intent1.putExtra(Key.CarRequisitionId, carRequisitionId)
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent1);
     }
 
     override fun onNotifyMessageArrived(p0: Context?, p1: NotificationMessage?) {
