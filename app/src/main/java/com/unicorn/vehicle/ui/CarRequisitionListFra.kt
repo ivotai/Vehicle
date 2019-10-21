@@ -39,7 +39,10 @@ class CarRequisitionListFra : SimplePageFra<CarRequisition, KVHolder>() {
                 if (position == 0)
                     CarRequisitionListParam(states = listOf(0))
                 else
-                    CarRequisitionListParam(states = listOf(1, 2), approvalUserID = Globals.uid)
+                    CarRequisitionListParam(
+                        states = listOf(1, 2, 3, 4),
+                        approvalUserID = Globals.uid
+                    )
             )
         )
 

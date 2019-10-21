@@ -160,6 +160,33 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:layout_marginTop="1px"
+                android:background="@color/md_white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="20dp"
+                    android:text="申请状态"
+                    android:textColor="@color/md_grey_700"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tvStateDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:text=""
+                    android:textColor="@color/md_grey_700"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
                 android:background="@color/md_white"
                 android:orientation="horizontal">
 
@@ -344,34 +371,6 @@
                     android:textColor="@color/md_black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="1px"
-                android:background="@color/md_white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="20dp"
-                    android:text="审核状态"
-                    android:textColor="@color/md_grey_700"
-                    android:textSize="16dp" />
-
-                <TextView
-                    android:id="@+id/tvStateDisplay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text=""
-                    android:textColor="@color/md_grey_700"
-                    android:textSize="16dp" />
 
             </LinearLayout>
 
