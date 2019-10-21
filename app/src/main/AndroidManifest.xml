@@ -24,6 +24,27 @@
         <activity android:name=".ui.CarRequisitionAct" />
         <activity android:name=".ui.CarRequisitionDetailAct" />
         <activity android:name=".ui.CarListAct" />
+
+        <service
+            android:name=".jpush.PushService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".jpush.MyJPushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="com.unicorn.vehicle" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

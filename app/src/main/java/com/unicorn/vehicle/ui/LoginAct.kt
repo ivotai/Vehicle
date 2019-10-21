@@ -1,5 +1,7 @@
 package com.unicorn.vehicle.ui
 
+import android.content.Context
+import cn.jpush.android.api.JPushInterface
 import com.blankj.utilcode.util.EncryptUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.vehicle.R
@@ -14,7 +16,8 @@ import kotlinx.android.synthetic.main.act_login.*
 class LoginAct : BaseAct() {
 
     override fun initViews() {
-
+            etLoginStr.setText("admin")
+            etUserPwd.setText("3.14159")
     }
 
     override fun bindIntent() {
@@ -38,12 +41,13 @@ class LoginAct : BaseAct() {
                 onSuccess = {
                     mask.dismiss()
                     if (it.failed) return@subscribeBy
-                    if(it.data.role != 1){
+                    if (it.data.role != 1) {
                         ToastUtils.showShort("无法登录，您没有审批权限")
                         return@subscribeBy
                     }
                     Globals.loggedUser = it.data
                     startAct(CarRequisitionAct::class.java)
+                    setTag(it.data.uid)
 //                    saveUserInfo()
 //                    t()
                 },
@@ -55,5 +59,9 @@ class LoginAct : BaseAct() {
     }
 
     override val layoutId = R.layout.act_login
+
+    private fun setTag(uid: String) {
+        JPushInterface.setAlias(this as Context, 0, uid)
+    }
 
 }
