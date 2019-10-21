@@ -27,7 +27,7 @@ class CarRequisitionAdapter :
 
             root.safeClicks().subscribe {
                 Intent(mContext, CarRequisitionDetailAct::class.java).apply {
-                    putExtra(Key.CarRequisition, item)
+                    putExtra(Key.CarRequisitionId, item.requisitionID)
                 }.let { mContext.startActivity(it) }
             }
         }

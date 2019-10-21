@@ -10,6 +10,7 @@ import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarRequisition
+import com.unicorn.vehicle.data.model.StringQuery
 import com.unicorn.vehicle.data.model.event.RefreshCarRequisitionList
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.functions.Consumer
@@ -21,26 +22,48 @@ class CarRequisitionDetailAct : BaseAct() {
 
     override fun initViews() {
         titleBar.setTitle("用车申请详情")
-        with(carRequisition) {
-            tvRequisitionUserName.text = requisitionUserName
-            tvRequisitionServerTime.text =
-                DateTime(requisitionServerTime).toString(Configs.displayDateFormat)
-            tvRequisitionCauseDisplay.text = requisitionCauseDisplay
-            tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
-            tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
-            tvRequisitionCarName.text = requisitionCarNo
-            tvRequisitionStartTime.text =
-                DateTime(requisitionStartTime).toString(Configs.displayDateFormat)
-            tvRequisitionEndTime.text =
-                DateTime(requisitionEndTime).toString(Configs.displayDateFormat)
-            tvRequisitionDestination.text = requisitionDestination
-            tvStateDisplay.text = stateDisplay
-            tvApprovalUserName.text = approvalUserName
-            tvApprovalRemark.text = approvalRemark
-            tvApprovalServerTime.text =
-                DateTime(approvalServerTime).toString(Configs.displayDateFormat)
-            llButton.visibility = if (state == 0) View.VISIBLE else View.GONE
+        getCarRequisition()
+    }
+
+    private fun getCarRequisition() {
+        fun display() {
+            with(carRequisition) {
+                tvRequisitionUserName.text = requisitionUserName
+                tvRequisitionServerTime.text =
+                    DateTime(requisitionServerTime).toString(Configs.displayDateFormat)
+                tvRequisitionCauseDisplay.text = requisitionCauseDisplay
+                tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
+                tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
+                tvRequisitionCarName.text = requisitionCarNo
+                tvRequisitionStartTime.text =
+                    DateTime(requisitionStartTime).toString(Configs.displayDateFormat)
+                tvRequisitionEndTime.text =
+                    DateTime(requisitionEndTime).toString(Configs.displayDateFormat)
+                tvRequisitionDestination.text = requisitionDestination
+                tvStateDisplay.text = stateDisplay
+                tvApprovalUserName.text = approvalUserName
+                tvApprovalRemark.text = approvalRemark
+                tvApprovalServerTime.text =
+                    DateTime(approvalServerTime).toString(Configs.displayDateFormat)
+                llButton.visibility = if (state == 0) View.VISIBLE else View.GONE
+            }
         }
+
+        val mask = DialogHelper.showMask(this)
+        api.getCarRequisition(StringQuery(key = carRequisitionId))
+            .observeOnMain(this)
+            .subscribeBy(
+                onSuccess = {
+                    mask.dismiss()
+                    if (it.failed) return@subscribeBy
+                    carRequisition = it.data
+                    display()
+                },
+                onError = {
+                    mask.dismiss()
+//                    ExceptionHelper.showPrompt(it)
+                }
+            )
     }
 
     override fun bindIntent() {
@@ -117,6 +140,8 @@ class CarRequisitionDetailAct : BaseAct() {
 
     override val layoutId = R.layout.act_car_requisition_detail
 
-    private val carRequisition by lazy { intent.getSerializableExtra(Key.CarRequisition) as CarRequisition }
+    private val carRequisitionId by lazy { intent.getStringExtra(Key.CarRequisitionId) }
+
+    private lateinit var carRequisition: CarRequisition
 
 }
