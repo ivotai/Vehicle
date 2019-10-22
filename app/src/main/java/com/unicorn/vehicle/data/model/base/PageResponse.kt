@@ -2,16 +2,16 @@ package com.unicorn.vehicle.data.model.base
 
 import com.blankj.utilcode.util.ToastUtils
 
-data class PageResponse<T>(
+class PageResponse<T>(
+    errorCode: String,
     val success: Boolean,
     val errorMsg: String,
-    val errorCode: String,
     val pageNo: Int,
     val pageSize: Int,
     val total: Int,          // 总数
     val totalPage: Int,      // 总页数
     val items: List<T>
-) {
+) : ErrorCode(errorCode) {
     val failed: Boolean
         get() {
             val failed = !success

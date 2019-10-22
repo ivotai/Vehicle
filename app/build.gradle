@@ -91,6 +91,7 @@ dependencies {
     implementation 'cn.jiguang.sdk:jpush:3.3.6'
     implementation 'cn.jiguang.sdk:jcore:2.1.6'
 
+
 }
 
 androidExtensions {

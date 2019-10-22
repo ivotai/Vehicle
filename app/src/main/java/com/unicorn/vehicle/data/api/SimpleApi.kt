@@ -6,6 +6,7 @@ import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
 import io.reactivex.Observable
 import io.reactivex.Single
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -14,6 +15,9 @@ interface SimpleApi {
 
     @POST("Authorization/UserLogin")
     fun login(@Body userLoginParam: UserLoginParam): Single<BaseResponse<LoggedUser>>
+
+    @POST("Authorization/UserLogin")
+    fun autoLogin(@Body userLoginParam: UserLoginParam): Call<BaseResponse<LoggedUser>>
 
     @POST("Car/CarRequisitionList")
     fun getCarRequisitionList(@Body pageRequest: PageRequest<CarRequisitionListParam>): Single<PageResponse<CarRequisition>>

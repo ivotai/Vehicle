@@ -8,11 +8,11 @@ import okhttp3.Response
 
 object NetworkHelper {
 
-//    fun proceedRequestWithNewSession(chain: Interceptor.Chain): Response {
-//        // session 过期时使用 token 登录，获取新的 session 和 token。
-//        api.loginSilently().execute().body().let { Globals.loginResponse = it!! }
-//        return proceedRequestWithSession(chain)
-//    }
+    fun proceedRequestWithNewSession(chain: Interceptor.Chain): Response {
+        api.autoLogin(Globals.userLoginParam).execute().body()
+            .let { Globals.loggedUser = it!!.data }
+        return proceedRequestWithSession(chain)
+    }
 
     fun proceedRequestWithSession(chain: Interceptor.Chain): Response {
         return chain.request().newBuilder()

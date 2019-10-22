@@ -7,6 +7,7 @@ import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
 import com.unicorn.vehicle.app.helper.DictHelper
+import com.unicorn.vehicle.data.model.LoggedUser
 import com.unicorn.vehicle.data.model.UserLoginParam
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.rxkotlin.subscribeBy
@@ -45,10 +46,9 @@ class LoginAct : BaseAct() {
                         return@subscribeBy
                     }
                     Globals.loggedUser = it.data
+                    Globals.userLoginParam = userLoginParam
                     startAct(CarRequisitionAct::class.java)
-                    setAlias(it.data.uid)
-//                    saveUserInfo()
-//                    t()
+                    setAliasAndTags(it.data)
                 },
                 onError = {
                     mask.dismiss()
@@ -59,8 +59,9 @@ class LoginAct : BaseAct() {
 
     override val layoutId = R.layout.act_login
 
-    private fun setAlias(uid: String) {
-        JPushInterface.setAlias(this, 0, uid)
+    private fun setAliasAndTags(loggedUser: LoggedUser) {
+        JPushInterface.setAliasAndTags(this, loggedUser.uid, setOf(loggedUser.role.toString())
+        ) { p0, p1, p2 -> }
     }
 
 }

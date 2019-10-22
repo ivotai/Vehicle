@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="ivotai">
     <words>
+      <w>gson</w>
       <w>jpush</w>
       <w>pushcore</w>
       <w>rxjava</w>
