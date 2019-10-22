@@ -4,15 +4,15 @@ import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.data.model.event.CarRequisitionTotal
 import com.unicorn.vehicle.ui.adapter.pager.CarRequisitionPagerAdapter
-import com.unicorn.vehicle.ui.base.BaseAct
+import com.unicorn.vehicle.ui.base.BaseFra
 import io.reactivex.functions.Consumer
-import kotlinx.android.synthetic.main.act_car_requisition.*
+import kotlinx.android.synthetic.main.fra_car_requisition.*
 
-class CarRequisitionAct : BaseAct() {
+class CarRequisitionFra : BaseFra() {
 
     override fun initViews() {
         titleBar.setTitle("用车申请")
-        viewPaper.adapter = CarRequisitionPagerAdapter(supportFragmentManager)
+        viewPaper.adapter = CarRequisitionPagerAdapter(childFragmentManager)
         viewPaper.offscreenPageLimit = CarRequisitionPagerAdapter.titles.size - 1
         tabs.setupWithViewPager(viewPaper)
     }
@@ -25,6 +25,6 @@ class CarRequisitionAct : BaseAct() {
         })
     }
 
-    override val layoutId = R.layout.act_car_requisition
+    override val layoutId = R.layout.fra_car_requisition
 
 }
