@@ -7,8 +7,8 @@ object Key{
     const val CarRequisitionId = "CarRequisitionId"
     const val Position = "Position"
     const val CarType = "CarType"
-    const val PayOrderResponse = "PayOrderResponse"
-    const val CvTicketResponse = "CvTicketResponse"
+    const val LoginStr = "LoginStr"
+    const val UserPwd = "UserPwd"
     const val OrderId = "OrderId"
 
 }

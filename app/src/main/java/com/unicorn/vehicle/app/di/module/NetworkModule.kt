@@ -1,7 +1,6 @@
 package com.unicorn.vehicle.app.di.module
 
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.unicorn.vehicle.app.Configs
 import com.unicorn.vehicle.app.helper.NetworkHelper
 import com.unicorn.vehicle.data.model.base.ErrorCode
@@ -18,11 +17,6 @@ import javax.inject.Singleton
 
 @Module
 class NetworkModule {
-
-    @Singleton
-    @Provides
-    fun provideGson(): Gson =
-        GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create()   // 2019-10-09T15:40:29.103
 
     @Singleton
     @Provides

@@ -3,6 +3,7 @@ package com.unicorn.vehicle.ui
 import cn.jpush.android.api.JPushInterface
 import com.blankj.utilcode.util.EncryptUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.github.florent37.rxsharedpreferences.RxSharedPreferences
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
@@ -16,8 +17,13 @@ import kotlinx.android.synthetic.main.act_login.*
 class LoginAct : BaseAct() {
 
     override fun initViews() {
-        etLoginStr.setText("admin")
-        etUserPwd.setText("3.14159")
+        fun restoreUserInfo() {
+            RxSharedPreferences.with(this).apply {
+                getString(Key.LoginStr, "").subscribe { etLoginStr.setText(it) }
+                getString(Key.UserPwd, "").subscribe { etUserPwd.setText(it) }
+            }
+        }
+        restoreUserInfo()
     }
 
     override fun bindIntent() {
@@ -25,6 +31,12 @@ class LoginAct : BaseAct() {
     }
 
     private fun login() {
+        fun saveUserInfo() {
+            RxSharedPreferences.with(this).apply {
+                putString(Key.LoginStr, etLoginStr.trimText()).subscribe { }
+                putString(Key.UserPwd, etUserPwd.trimText()).subscribe { }
+            }
+        }
         if (!DictHelper.isInitFinish) {
             ToastUtils.showShort("字典表初始化中")
             return
@@ -46,7 +58,7 @@ class LoginAct : BaseAct() {
                         return@subscribeBy
                     }
                     Globals.loggedUser = it.data
-                    Globals.userLoginParam = userLoginParam
+                    saveUserInfo()
                     startAct(CarRequisitionAct::class.java)
                     setAliasAndTags(it.data)
                 },
@@ -60,7 +72,8 @@ class LoginAct : BaseAct() {
     override val layoutId = R.layout.act_login
 
     private fun setAliasAndTags(loggedUser: LoggedUser) {
-        JPushInterface.setAliasAndTags(this, loggedUser.uid, setOf(loggedUser.role.toString())
+        JPushInterface.setAliasAndTags(
+            this, loggedUser.uid, setOf(loggedUser.role.toString())
         ) { p0, p1, p2 -> }
     }
 
