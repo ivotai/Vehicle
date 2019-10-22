@@ -58,8 +58,9 @@ class LoginAct : BaseAct() {
                         return@subscribeBy
                     }
                     Globals.loggedUser = it.data
+                    Globals.isLogin = true
                     saveUserInfo()
-                    startAct(CarRequisitionAct::class.java)
+                    toActAndFinish(CarRequisitionAct::class.java)
                     setAliasAndTags(it.data)
                 },
                 onError = {

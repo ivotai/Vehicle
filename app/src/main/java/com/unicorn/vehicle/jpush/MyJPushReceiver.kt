@@ -5,9 +5,9 @@ import android.content.Intent
 import cn.jpush.android.api.CustomMessage
 import cn.jpush.android.api.NotificationMessage
 import cn.jpush.android.service.JPushMessageReceiver
-import com.unicorn.vehicle.app.Key
-import com.unicorn.vehicle.ui.CarRequisitionDetailAct
-import org.json.JSONObject
+import com.unicorn.vehicle.app.Globals
+import com.unicorn.vehicle.ui.CarRequisitionAct
+import com.unicorn.vehicle.ui.LoginAct
 
 class MyJPushReceiver : JPushMessageReceiver() {
 //    override fun onTagOperatorResult(context: Context?, jPushMessage: JPushMessage?) {
@@ -37,13 +37,16 @@ class MyJPushReceiver : JPushMessageReceiver() {
     override fun onNotifyMessageOpened(context: Context, notificationMessage: NotificationMessage) {
         super.onNotifyMessageOpened(context, notificationMessage)
 
-        val extra = notificationMessage.notificationExtras
-        val jsonObject = JSONObject(extra)
-        val carRequisitionId = jsonObject.getString(Key.CarRequisitionId)
+//        val extra = notificationMessage.notificationExtras
+//        val jsonObject = JSONObject(extra)
+//        val carRequisitionId = jsonObject.getString(Key.CarRequisitionId)
 
-        val intent1 = Intent(context, CarRequisitionDetailAct::class.java)
-        intent1.putExtra(Key.CarRequisitionId, carRequisitionId)
-        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val intent1 = Intent(
+            context,
+            if (Globals.isLogin) CarRequisitionAct::class.java else LoginAct::class.java
+        )
+//        intent1.putExtra(Key.CarRequisitionId, carRequisitionId)
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         context.startActivity(intent1);
     }
 

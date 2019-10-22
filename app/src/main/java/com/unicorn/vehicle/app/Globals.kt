@@ -10,4 +10,6 @@ object Globals {
 
     lateinit var loggedUser: LoggedUser
 
+    var isLogin = false
+
 }
