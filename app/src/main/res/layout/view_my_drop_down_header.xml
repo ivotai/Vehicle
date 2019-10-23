@@ -1,0 +1,57 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal">
+
+    <TextView
+        android:background="@color/md_red_400"
+        android:id="@+id/tvCarType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="车辆类型"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvCarState"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCarState"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:text="车辆状态"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCarType"
+        app:layout_constraintEnd_toStartOf="@+id/tv1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvCarType"
+        app:layout_constraintTop_toTopOf="@+id/tvCarType" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:text="车辆状态"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCarState"
+        app:layout_constraintEnd_toStartOf="@+id/tv2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvCarState"
+        app:layout_constraintTop_toTopOf="@+id/tvCarState" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:text="车辆状态"
+        app:layout_constraintBottom_toBottomOf="@+id/tv1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv1"
+        app:layout_constraintTop_toTopOf="@+id/tv1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
