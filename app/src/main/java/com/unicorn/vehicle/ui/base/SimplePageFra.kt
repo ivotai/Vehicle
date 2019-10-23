@@ -19,7 +19,9 @@ abstract class SimplePageFra<Model, K : BaseViewHolder> : BaseFra() {
 
     abstract fun loadPage(page: Int): Single<PageResponse<Model>>
 
-    abstract fun afterLoadFirstPage(total: Int)
+    protected open fun afterLoadFirstPage(total: Int) {
+
+    }
 
     private val total
         get() = simpleAdapter.data.size

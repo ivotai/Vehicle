@@ -23,7 +23,7 @@
         </activity>
         <activity android:name=".ui.CarRequisitionFra" />
         <activity android:name=".ui.CarRequisitionDetailAct" />
-        <activity android:name=".ui.CarListAct" />
+        <activity android:name=".ui.CarSelectAct" />
         <activity android:name=".ui.MainAct"/>
         <service
             android:name=".jpush.PushService"

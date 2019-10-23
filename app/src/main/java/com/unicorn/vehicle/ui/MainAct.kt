@@ -80,7 +80,7 @@ class MainAct : BaseAct() {
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
                     viewPager.currentItem = drawerItem.identifier.toInt()
-                    return true
+                    return false
                 }
             })
             .build()

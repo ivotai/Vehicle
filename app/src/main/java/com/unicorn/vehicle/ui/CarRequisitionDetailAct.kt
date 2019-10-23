@@ -68,8 +68,8 @@ class CarRequisitionDetailAct : BaseAct() {
 
     override fun bindIntent() {
         llRequisitionCarName.safeClicks().subscribe {
-            Intent(this, CarListAct::class.java).apply {
-                putExtra(Key.CarType, carRequisition.requisitionCarType)
+            Intent(this, CarSelectAct::class.java).apply {
+                putExtra(Key.CarRequisition, carRequisition)
             }.let {
                 startActivity(it)
             }

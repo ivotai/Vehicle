@@ -9,7 +9,7 @@ import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.ui.base.KVHolder
 import kotlinx.android.synthetic.main.item_car.*
 
-class CarAdapter : BaseQuickAdapter<Car, KVHolder>(R.layout.item_car) {
+class CarSelectAdapter : BaseQuickAdapter<Car, KVHolder>(R.layout.item_car) {
 
     override fun convert(helper: KVHolder, item: Car) {
         helper.apply {
