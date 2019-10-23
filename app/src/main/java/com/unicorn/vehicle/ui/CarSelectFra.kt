@@ -13,7 +13,7 @@ import io.reactivex.Single
 import kotlinx.android.synthetic.main.ui_swipe_recycler.*
 
 // 查询特定 carType 的车辆
-class CarFra : SimplePageFra<Car, KVHolder>() {
+class CarSelectFra : SimplePageFra<Car, KVHolder>() {
 
     override fun initViews() {
         super.initViews()

@@ -6,8 +6,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.unicorn.vehicle.app.Key
 import com.unicorn.vehicle.data.model.CarRequisition
-import com.unicorn.vehicle.ui.CarFra
-import com.unicorn.vehicle.ui.CarFra2
+import com.unicorn.vehicle.ui.CarSelectFra
+import com.unicorn.vehicle.ui.CarSelectFra2
 
 class CarSelectPagerAdapter(fm: FragmentManager, private val carRequisition: CarRequisition) :
     FragmentStatePagerAdapter(fm) {
@@ -21,11 +21,11 @@ class CarSelectPagerAdapter(fm: FragmentManager, private val carRequisition: Car
     }
 
     override fun getItem(position: Int): Fragment {
-        return if (position == 0) CarFra().apply {
+        return if (position == 0) CarSelectFra().apply {
             val bundle = Bundle()
             bundle.putInt(Key.CarType, carRequisition.requisitionCarType)
             arguments = bundle
-        } else CarFra2()
+        } else CarSelectFra2()
     }
 
     override fun getCount() = titles.size
