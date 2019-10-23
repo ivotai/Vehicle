@@ -6,8 +6,8 @@ import cn.jpush.android.api.CustomMessage
 import cn.jpush.android.api.NotificationMessage
 import cn.jpush.android.service.JPushMessageReceiver
 import com.unicorn.vehicle.app.Globals
-import com.unicorn.vehicle.ui.CarRequisitionFra
 import com.unicorn.vehicle.ui.LoginAct
+import com.unicorn.vehicle.ui.MainAct
 
 class MyJPushReceiver : JPushMessageReceiver() {
 //    override fun onTagOperatorResult(context: Context?, jPushMessage: JPushMessage?) {
@@ -43,7 +43,7 @@ class MyJPushReceiver : JPushMessageReceiver() {
 
         val intent1 = Intent(
             context,
-            if (Globals.isLogin) CarRequisitionFra::class.java else LoginAct::class.java
+            if (Globals.isLogin) MainAct::class.java else LoginAct::class.java
         )
 //        intent1.putExtra(Key.CarRequisitionId, carRequisitionId)
         intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)

@@ -92,6 +92,7 @@ dependencies {
     implementation 'cn.jiguang.sdk:jcore:2.1.6'
     implementation 'com.github.florent37:rxsharedpreferences:1.0.0'
     implementation group: 'com.mikepenz', name: 'materialdrawer', version: '7.0.0-rc08'
+    implementation 'com.mikepenz:fontawesome-typeface:5.9.0.0-kotlin@aar'
 
 }
 

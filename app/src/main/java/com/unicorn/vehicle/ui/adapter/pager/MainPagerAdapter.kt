@@ -9,7 +9,7 @@ import com.unicorn.vehicle.ui.CarRequisitionFra
 class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     companion object {
-        val titles = listOf("用车申请", "车辆状态")
+        val titles = listOf("用车申请","车辆状态")
     }
 
     override fun getItem(position: Int) = CarRequisitionFra().apply {
