@@ -1,15 +1,18 @@
 package com.unicorn.vehicle.ui
 
 import android.view.LayoutInflater
+import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jakewharton.rxbinding3.view.clicks
+import com.jakewharton.rxbinding3.widget.textChanges
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.addDefaultItemDecoration
 import com.unicorn.vehicle.app.helper.DictHelper
+import com.unicorn.vehicle.app.trimText
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarListParam
 import com.unicorn.vehicle.data.model.DictItem
@@ -20,8 +23,10 @@ import com.unicorn.vehicle.ui.adapter.DictAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
 import com.unicorn.vehicle.ui.base.SimplePageFra
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fra_car_list.*
+import java.util.concurrent.TimeUnit
 
 class CarListFra : SimplePageFra<Car, KVHolder>() {
 
@@ -36,6 +41,7 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
         dropDownView.setHeaderView(collapsedView)
         tvCarState = collapsedView.findViewById(R.id.tvCarState)
         tvCarType = collapsedView.findViewById(R.id.tvCarType)
+        etKeyword = collapsedView.findViewById(R.id.etKeyword)
 
         val expandedView =
             LayoutInflater.from(context).inflate(R.layout.view_my_drop_down_expanded, null, false)
@@ -67,6 +73,11 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
             dictAdapter.setNewData(DictHelper.carStates.plusElement(DictItem(null, "所有")))
             dropDownView.expandDropDown()
         }
+        etKeyword.textChanges()
+            .debounce(500, TimeUnit.MILLISECONDS)
+//            .filter { it.isNotBlank() }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { loadFirstPage() }
     }
 
     override fun registerEvent() {
@@ -74,11 +85,11 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
             if (isCarState) {
                 tvCarState.text = it.value
                 carState = it.id
-                if(it.id == null) tvCarState.text = "车辆状态"
+                if (it.id == null) tvCarState.text = "车辆状态"
             } else {
                 tvCarType.text = it.value
                 carType = it.id
-                if(it.id == null) tvCarType.text = "车辆类型"
+                if (it.id == null) tvCarType.text = "车辆类型"
             }
             loadFirstPage()
             dropDownView.collapseDropDown()
@@ -95,9 +106,12 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
 
     private lateinit var tvCarState: TextView
 
+    private lateinit var etKeyword: EditText
+
     private var carType: Int? = null
 
     private var carState: Int? = null
+
 
     //
 
@@ -108,7 +122,8 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
             PageRequest(
                 pageNo = page, searchParam = CarListParam(
                     carType = carType,
-                    carState = carState
+                    carState = carState,
+                    no = etKeyword.trimText()
                 )
             )
         )

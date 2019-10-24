@@ -1,11 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="64dp"
         android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
@@ -32,42 +33,46 @@
             android:text="车辆状态"
             android:textColor="@color/md_white"
             android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvCarType"
-            app:layout_constraintEnd_toStartOf="@+id/tv1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rfl"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/tvCarType"
-            app:layout_constraintTop_toTopOf="@+id/tvCarType" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv1"
+        <FrameLayout
+            android:id="@+id/rfl"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="其他1"
-            android:textColor="@color/md_white"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvCarState"
-            app:layout_constraintEnd_toStartOf="@+id/tv2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/tvCarState"
-            app:layout_constraintTop_toTopOf="@+id/tvCarState" />
-
-        <TextView
-            android:id="@+id/tv2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="其他2"
-            android:textColor="@color/md_white"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/tv1"
-            app:layout_constraintTop_toTopOf="@+id/tv1" />
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@+id/tvCarState">
+
+            <com.flyco.roundview.RoundFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="4dp"
+                app:rv_backgroundColor="@color/md_white"
+                app:rv_isRadiusHalfHeight="true">
+
+                <EditText
+                    android:id="@+id/etKeyword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:hint="请输入车牌号"
+                    android:paddingStart="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="6dp"
+                    android:textSize="16dp" />
+
+            </com.flyco.roundview.RoundFrameLayout>
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

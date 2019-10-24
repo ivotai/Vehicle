@@ -3,10 +3,8 @@
   "errorMsg": "",
   "errorCode": "0",
   "data": {
-    "sid": "0wpmjrdik2cdb3yh00ttbafp",
-    "uid": "999",
-    "userName": "管理员",
-    "role": 1
-  },
-  "extendData": null
+    "needUpdate": false,
+    "apkUrl": null
+},
+"extendData": null
 }
