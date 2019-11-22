@@ -51,4 +51,7 @@ interface SimpleApi {
     @POST("Code/DictRequisitionCause")
     fun getRequisitionCause(): Observable<BaseResponse<List<DictItem>>>
 
+    @POST("file/CheckAppVersion")
+    fun checkAppVersion(@Body stringQuery: StringQuery): Single<BaseResponse<CheckAppVersionResponse>>
+
 }

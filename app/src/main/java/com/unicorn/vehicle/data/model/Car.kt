@@ -8,5 +8,7 @@ data class Car(
     val flag: Int,
     val id: Int,
     val name: String,
-    val no: String
+    val no: String,
+    val requisitionUserName: String,
+    val pictureUrl:String
 )

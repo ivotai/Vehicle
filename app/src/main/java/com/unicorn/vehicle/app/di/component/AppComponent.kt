@@ -6,6 +6,7 @@ import com.unicorn.vehicle.app.di.module.BasicModule
 import com.unicorn.vehicle.app.di.module.NetworkModule
 import com.unicorn.vehicle.data.api.SimpleApi
 import dagger.Component
+import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
 @Singleton
@@ -15,5 +16,7 @@ interface AppComponent {
     fun api(): SimpleApi
 
     fun context(): Context
+
+    fun client(): OkHttpClient
 
 }
