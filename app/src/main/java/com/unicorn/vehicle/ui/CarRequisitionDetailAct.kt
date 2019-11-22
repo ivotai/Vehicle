@@ -30,15 +30,15 @@ class CarRequisitionDetailAct : BaseAct() {
             with(carRequisition) {
                 tvRequisitionUserName.text = requisitionUserName
                 tvRequisitionServerTime.text =
-                    DateTime(requisitionServerTime).toString(Configs.displayDateFormat)
+                    DateTime(requisitionServerTime).toString(Configs.displayDateFormat2)
                 tvRequisitionCauseDisplay.text = requisitionCauseDisplay
                 tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
                 tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
                 tvRequisitionCarName.text = requisitionCarNo
                 tvRequisitionStartTime.text =
-                    DateTime(requisitionStartTime).toString(Configs.displayDateFormat)
+                    DateTime(requisitionStartTime).toString(Configs.displayDateFormat2)
                 tvRequisitionEndTime.text =
-                    DateTime(requisitionEndTime).toString(Configs.displayDateFormat)
+                    DateTime(requisitionEndTime).toString(Configs.displayDateFormat2)
                 tvRequisitionDestination.text = requisitionDestination
                 tvStateDisplay.text = stateDisplay
                 tvApprovalUserName.text = approvalUserName

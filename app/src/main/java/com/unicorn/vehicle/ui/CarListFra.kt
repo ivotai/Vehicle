@@ -22,6 +22,7 @@ import com.unicorn.vehicle.ui.adapter.CarSelectAdapter
 import com.unicorn.vehicle.ui.adapter.DictAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
 import com.unicorn.vehicle.ui.base.SimplePageFra
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -33,6 +34,10 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
     override fun initViews() {
         super.initViews()
         initDropDownView()
+        HorizontalDividerItemDecoration.Builder(context)
+            .colorResId(R.color.md_grey_400)
+            .size(1)
+            .build().let { mRecyclerView.addItemDecoration(it) }
     }
 
     private fun initDropDownView() {

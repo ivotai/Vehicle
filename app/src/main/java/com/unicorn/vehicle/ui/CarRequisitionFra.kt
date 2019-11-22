@@ -19,6 +19,7 @@ class CarRequisitionFra : BaseFra() {
 
     override fun registerEvent() {
         RxBus.registerEvent(this, CarRequisitionTotal::class.java, Consumer {
+            if (it.position == 1) return@Consumer
             val badge = tabs.getTabAt(it.position)!!.orCreateBadge
             badge.number = it.total
             badge.isVisible = true

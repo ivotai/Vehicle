@@ -10,5 +10,7 @@ data class Car(
     val name: String,
     val no: String,
     val requisitionUserName: String,
-    val pictureUrl:String
+    val pictureUrl: String,
+    val keyInBox: Boolean,
+    val carInGarage: Boolean
 )
