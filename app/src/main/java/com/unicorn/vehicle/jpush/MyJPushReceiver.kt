@@ -5,7 +5,7 @@ import android.content.Intent
 import cn.jpush.android.api.CustomMessage
 import cn.jpush.android.api.NotificationMessage
 import cn.jpush.android.service.JPushMessageReceiver
-import com.unicorn.vehicle.app.Globals
+import com.unicorn.vehicle.app.isLogin
 import com.unicorn.vehicle.ui.LoginAct
 import com.unicorn.vehicle.ui.MainAct
 
@@ -43,7 +43,7 @@ class MyJPushReceiver : JPushMessageReceiver() {
 //        val carRequisitionId = jsonObject.getString(Key.CarRequisitionId)
 
         val intent =
-            Intent(context, if (Globals.isLogin) MainAct::class.java else LoginAct::class.java)
+            Intent(context, if (isLogin) MainAct::class.java else LoginAct::class.java)
 //        intent1.putExtra(Key.CarRequisitionId, carRequisitionId)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         context.startActivity(intent);

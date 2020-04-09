@@ -47,8 +47,8 @@ class LoginAct : BaseAct() {
                         ToastUtils.showShort("无法登录，您没有审批权限")
                         return@subscribeBy
                     }
-                    Globals.loggedUser = response.data
-                    Globals.isLogin = true
+                    loggedUser = response.data
+                    isLogin = true
                     saveUserInfo()
                     toActAndFinish(MainAct::class.java)
                     setAliasAndTags(response.data)

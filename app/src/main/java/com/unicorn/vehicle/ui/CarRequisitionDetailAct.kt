@@ -16,8 +16,8 @@ import com.unicorn.vehicle.data.model.CarRequisition
 import com.unicorn.vehicle.data.model.StringQuery
 import com.unicorn.vehicle.data.model.event.RefreshCarRequisitionList
 import com.unicorn.vehicle.ui.base.BaseAct
-import displayDateFormat
-import displayDateFormat2
+import com.unicorn.vehicle.app.displayDateFormat
+import com.unicorn.vehicle.app.displayDateFormat2
 import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_car_requisition_detail.*

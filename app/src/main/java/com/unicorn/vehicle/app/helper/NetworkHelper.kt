@@ -2,9 +2,10 @@ package com.unicorn.vehicle.app.helper
 
 import com.blankj.utilcode.util.EncryptUtils
 import com.unicorn.vehicle.app.AppInfo
-import com.unicorn.vehicle.app.Globals
 import com.unicorn.vehicle.app.Key
 import com.unicorn.vehicle.app.di.Holder
+import com.unicorn.vehicle.app.loggedUser
+import com.unicorn.vehicle.app.sid
 import com.unicorn.vehicle.data.model.UserLoginParam
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -17,14 +18,14 @@ object NetworkHelper {
                 loginStr = LoginStr,
                 userPwd = EncryptUtils.encryptMD5ToString(UserPwd)
             )
-        ).execute().body().let { Globals.loggedUser = it!!.data }
+        ).execute().body().let { loggedUser = it!!.data }
         return proceedRequestWithSession(chain)
     }
 
     fun proceedRequestWithSession(chain: Interceptor.Chain): Response {
         return chain.request().newBuilder()
             .removeHeader(Key.Cookie)
-            .addHeader(Key.Cookie, "${Key.SESSION}=${Globals.sid}")
+            .addHeader(Key.Cookie, "${Key.SESSION}=${sid}")
             .build()
             .let { chain.proceed(it) }
     }

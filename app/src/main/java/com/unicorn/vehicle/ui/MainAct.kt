@@ -12,8 +12,8 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IProfile
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.Globals
 import com.unicorn.vehicle.app.helper.UpdateHelper
+import com.unicorn.vehicle.app.loggedUser
 import com.unicorn.vehicle.ui.adapter.pager.MainPagerAdapter
 import com.unicorn.vehicle.ui.base.BaseAct
 import kotlinx.android.synthetic.main.act_main.*
@@ -46,7 +46,7 @@ class MainAct : BaseAct() {
         })
     }
 
-    private fun addDrawer() = with(Globals.loggedUser) {
+    private fun addDrawer() = with(loggedUser) {
         val accountHeader = AccountHeaderBuilder()
             .withActivity(this@MainAct)
 //            .withHeaderBackground(R.drawable.header)

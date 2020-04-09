@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.base.PageResponse
-import defaultPageSize
+import com.unicorn.vehicle.app.defaultPageSize
 import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.ui_swipe_recycler.*

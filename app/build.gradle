@@ -39,11 +39,13 @@ android {
         develop {
             applicationId "com.example.myapplication.develop"
             buildConfigField "String", "BASE_URL", "\"http://renjiawen1988.vicp.cc:33333/SmartKeyBox/api/\""
+            buildConfigField "String", "IMG_BASE_URL", "\"http://car.menze.net.cn/\""
             flavorDimensions "default"
 
         }
         stable {
             buildConfigField "String", "BASE_URL", "\"http://xuhui.menze.net.cn/SmartKeyBox/api/\""
+            buildConfigField "String", "IMG_BASE_URL", "\"http://car.menze.net.cn/\""
             flavorDimensions "default"
         }
     }
