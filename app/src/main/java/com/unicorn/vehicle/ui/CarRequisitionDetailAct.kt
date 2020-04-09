@@ -6,13 +6,18 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.*
+import com.unicorn.vehicle.app.Key
+import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.helper.DialogHelper
+import com.unicorn.vehicle.app.observeOnMain
+import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarRequisition
 import com.unicorn.vehicle.data.model.StringQuery
 import com.unicorn.vehicle.data.model.event.RefreshCarRequisitionList
 import com.unicorn.vehicle.ui.base.BaseAct
+import displayDateFormat
+import displayDateFormat2
 import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_car_requisition_detail.*
@@ -30,21 +35,21 @@ class CarRequisitionDetailAct : BaseAct() {
             with(carRequisition) {
                 tvRequisitionUserName.text = requisitionUserName
                 tvRequisitionServerTime.text =
-                    DateTime(requisitionServerTime).toString(Configs.displayDateFormat2)
+                    DateTime(requisitionServerTime).toString(displayDateFormat2)
                 tvRequisitionCauseDisplay.text = requisitionCauseDisplay
                 tvRequisitionFromTypeDisplay.text = requisitionFromTypeDisplay
                 tvRequisitionCarTypeDisplay.text = requisitionCarTypeDisplay
                 tvRequisitionCarName.text = requisitionCarNo
                 tvRequisitionStartTime.text =
-                    DateTime(requisitionStartTime).toString(Configs.displayDateFormat2)
+                    DateTime(requisitionStartTime).toString(displayDateFormat2)
                 tvRequisitionEndTime.text =
-                    DateTime(requisitionEndTime).toString(Configs.displayDateFormat2)
+                    DateTime(requisitionEndTime).toString(displayDateFormat2)
                 tvRequisitionDestination.text = requisitionDestination
                 tvStateDisplay.text = stateDisplay
                 tvApprovalUserName.text = approvalUserName
                 tvApprovalRemark.text = approvalRemark
                 tvApprovalServerTime.text =
-                    DateTime(approvalServerTime).toString(Configs.displayDateFormat)
+                    DateTime(approvalServerTime).toString(displayDateFormat)
                 llButton.visibility = if (state == 0) View.VISIBLE else View.GONE
             }
         }

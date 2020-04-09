@@ -1,6 +1,5 @@
 package com.unicorn.vehicle.ui
 
-import com.unicorn.vehicle.app.Configs
 import com.unicorn.vehicle.app.Globals
 import com.unicorn.vehicle.app.Key
 import com.unicorn.vehicle.app.RxBus
@@ -14,6 +13,7 @@ import com.unicorn.vehicle.ui.adapter.CarRequisitionAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
 import com.unicorn.vehicle.ui.base.SimplePageFra
 import com.unicorn.vehicle.ui.other.LinearSpanDecoration
+import defaultPaddingDp
 import io.reactivex.Single
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.ui_swipe_recycler.*
@@ -22,7 +22,7 @@ class CarRequisitionListFra : SimplePageFra<CarRequisition, KVHolder>() {
 
     override fun initViews() {
         super.initViews()
-        recyclerView.addItemDecoration(LinearSpanDecoration(Configs.defaultPaddingDp))
+        recyclerView.addItemDecoration(LinearSpanDecoration(defaultPaddingDp))
     }
 
     override fun afterLoadFirstPage(total: Int) {

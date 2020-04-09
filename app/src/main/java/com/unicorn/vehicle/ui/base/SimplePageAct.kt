@@ -6,9 +6,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.Configs
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.base.PageResponse
+import defaultPageSize
 import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.ui_title_swipe_recycler.*
@@ -23,7 +23,7 @@ abstract class SimplePageAct<Model, K : BaseViewHolder> : BaseAct() {
         get() = simpleAdapter.data.size
 
     private val pageNo
-        get() = total / Configs.defaultPageSize + 1
+        get() = total / defaultPageSize + 1
 
     protected open val mRecyclerView: RecyclerView get() = recyclerView
 
