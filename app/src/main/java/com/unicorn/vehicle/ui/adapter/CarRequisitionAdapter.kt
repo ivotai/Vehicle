@@ -4,12 +4,12 @@ import android.content.Intent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.Key
+import com.unicorn.vehicle.app.CarRequisitionId
+import com.unicorn.vehicle.app.displayDateFormat
 import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.data.model.CarRequisition
 import com.unicorn.vehicle.ui.CarRequisitionDetailAct
 import com.unicorn.vehicle.ui.base.KVHolder
-import com.unicorn.vehicle.app.displayDateFormat
 import kotlinx.android.synthetic.main.item_car_requisition.*
 import org.joda.time.DateTime
 
@@ -29,7 +29,7 @@ class CarRequisitionAdapter :
 
             root.safeClicks().subscribe {
                 Intent(mContext, CarRequisitionDetailAct::class.java).apply {
-                    putExtra(Key.CarRequisitionId, item.requisitionID)
+                    putExtra(CarRequisitionId, item.requisitionID)
                 }.let { mContext.startActivity(it) }
             }
         }

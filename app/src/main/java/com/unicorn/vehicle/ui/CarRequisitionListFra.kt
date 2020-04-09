@@ -1,6 +1,6 @@
 package com.unicorn.vehicle.ui
 
-import com.unicorn.vehicle.app.Key
+import com.unicorn.vehicle.app.Position
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.defaultPadding
 import com.unicorn.vehicle.app.uid
@@ -52,6 +52,6 @@ class CarRequisitionListFra : SimplePageFra<CarRequisition, KVHolder>() {
         })
     }
 
-    private val position by lazy { arguments!!.getInt(Key.Position) }
+    private val position by lazy { arguments!!.getInt(Position) }
 
 }

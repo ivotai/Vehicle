@@ -6,18 +6,13 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.Key
-import com.unicorn.vehicle.app.RxBus
+import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
-import com.unicorn.vehicle.app.observeOnMain
-import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarRequisition
 import com.unicorn.vehicle.data.model.StringQuery
 import com.unicorn.vehicle.data.model.event.RefreshCarRequisitionList
 import com.unicorn.vehicle.ui.base.BaseAct
-import com.unicorn.vehicle.app.displayDateFormat
-import com.unicorn.vehicle.app.displayDateFormat2
 import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_car_requisition_detail.*
@@ -74,7 +69,7 @@ class CarRequisitionDetailAct : BaseAct() {
     override fun bindIntent() {
         llRequisitionCarName.safeClicks().subscribe {
             Intent(this, CarSelectAct::class.java).apply {
-                putExtra(Key.CarRequisition, carRequisition)
+                putExtra(CarRequisition, carRequisition)
             }.let {
                 startActivity(it)
             }
@@ -145,7 +140,7 @@ class CarRequisitionDetailAct : BaseAct() {
 
     override val layoutId = R.layout.act_car_requisition_detail
 
-    private val carRequisitionId by lazy { intent.getStringExtra(Key.CarRequisitionId) }
+    private val carRequisitionId by lazy { intent.getStringExtra(CarRequisitionId) }
 
     private lateinit var carRequisition: CarRequisition
 

@@ -1,11 +1,8 @@
 package com.unicorn.vehicle.app.helper
 
 import com.blankj.utilcode.util.EncryptUtils
-import com.unicorn.vehicle.app.AppInfo
-import com.unicorn.vehicle.app.Key
+import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.di.Holder
-import com.unicorn.vehicle.app.loggedUser
-import com.unicorn.vehicle.app.sid
 import com.unicorn.vehicle.data.model.UserLoginParam
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -24,8 +21,8 @@ object NetworkHelper {
 
     fun proceedRequestWithSession(chain: Interceptor.Chain): Response {
         return chain.request().newBuilder()
-            .removeHeader(Key.Cookie)
-            .addHeader(Key.Cookie, "${Key.SESSION}=${sid}")
+            .removeHeader(Cookie)
+            .addHeader(Cookie, "${SESSION}=${sid}")
             .build()
             .let { chain.proceed(it) }
     }
