@@ -6,7 +6,6 @@ import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
-import com.unicorn.vehicle.app.helper.DictHelper
 import com.unicorn.vehicle.data.model.LoggedUser
 import com.unicorn.vehicle.data.model.UserLoginParam
 import com.unicorn.vehicle.ui.base.BaseAct
@@ -32,45 +31,40 @@ class LoginAct : BaseAct() {
             LoginStr = etLoginStr.trimText()
             UserPwd = etUserPwd.trimText()
         }
-        if (!DictHelper.isInitFinish) {
-            ToastUtils.showShort("字典表初始化中")
-            return
-        }
+
         val mask = DialogHelper.showMask(this)
         val userLoginParam = UserLoginParam(
             loginStr = etLoginStr.trimText(),
             userPwd = EncryptUtils.encryptMD5ToString(etUserPwd.trimText())
         )
-
         api.login(userLoginParam = userLoginParam)
             .observeOnMain(this)
             .subscribeBy(
-                onSuccess = {
+                onSuccess = { response ->
                     mask.dismiss()
-                    if (it.failed) return@subscribeBy
-                    if (it.data.role != 1) {
+                    if (response.failed) return@subscribeBy
+                    if (response.data.role != 1) {
                         ToastUtils.showShort("无法登录，您没有审批权限")
                         return@subscribeBy
                     }
-                    Globals.loggedUser = it.data
+                    Globals.loggedUser = response.data
                     Globals.isLogin = true
                     saveUserInfo()
                     toActAndFinish(MainAct::class.java)
-                    setAliasAndTags(it.data)
+                    setAliasAndTags(response.data)
                 },
                 onError = {
                     mask.dismiss()
-//                    ExceptionHelper.showPrompt(it)
                 }
             )
     }
-
-    override val layoutId = R.layout.act_login
 
     private fun setAliasAndTags(loggedUser: LoggedUser) {
         JPushInterface.setAliasAndTags(
             this, loggedUser.uid, setOf(loggedUser.role.toString())
         ) { p0, p1, p2 -> }
     }
+
+    override val layoutId = R.layout.act_login
 
 }

@@ -1,7 +1,7 @@
 package com.unicorn.vehicle.app.di.module
 
 import com.google.gson.Gson
-import com.unicorn.vehicle.app.Configs
+import com.unicorn.vehicle.BuildConfig
 import com.unicorn.vehicle.app.helper.NetworkHelper
 import com.unicorn.vehicle.data.model.base.ErrorCode
 import dagger.Module
@@ -56,7 +56,7 @@ class NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Configs.baseUrl)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))

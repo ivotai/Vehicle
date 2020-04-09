@@ -34,6 +34,19 @@ android {
             v2SigningEnabled false
         }
     }
+    flavorDimensions "default"
+    productFlavors {
+        develop {
+            applicationId "com.example.myapplication.develop"
+            buildConfigField "String", "BASE_URL", "\"http://renjiawen1988.vicp.cc:33333/SmartKeyBox/api/\""
+            flavorDimensions "default"
+
+        }
+        stable {
+            buildConfigField "String", "BASE_URL", "\"http://xuhui.menze.net.cn/SmartKeyBox/api/\""
+            flavorDimensions "default"
+        }
+    }
     buildTypes {
         release {
             signingConfig signingConfigs.release
