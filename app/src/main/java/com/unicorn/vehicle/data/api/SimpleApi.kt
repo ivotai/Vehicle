@@ -33,8 +33,6 @@ interface SimpleApi {
 
     @POST("Car/CarRequisitionDeny")
     fun deny(@Body carRequisition: CarRequisition): Single<BaseResponse<CarRequisition>>
-//    @POST("Authorization/UserLogin")
-//    fun autoLogin(@Body userLogin: UserLogin): Call<Response<UserLoginResult>>
 
     @POST("Code/DictCarState")
     fun getCarState(): Observable<BaseResponse<List<DictItem>>>

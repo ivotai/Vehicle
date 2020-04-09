@@ -1,7 +1,7 @@
 package com.unicorn.vehicle.app.helper
 
 import com.blankj.utilcode.util.EncryptUtils
-import com.github.florent37.rxsharedpreferences.RxSharedPreferences
+import com.unicorn.vehicle.app.AppInfo
 import com.unicorn.vehicle.app.Globals
 import com.unicorn.vehicle.app.Key
 import com.unicorn.vehicle.app.di.ComponentHolder
@@ -11,15 +11,13 @@ import okhttp3.Response
 
 object NetworkHelper {
 
-    fun proceedRequestWithNewSession(chain: Interceptor.Chain): Response {
-        var loginStr = ""
-        var userPwd = ""
-        RxSharedPreferences.with(context).apply {
-            getString(Key.LoginStr, "").subscribe { loginStr = it }
-            getString(Key.UserPwd, "").subscribe { userPwd = it }
-        }
-        api.autoLogin(UserLoginParam(loginStr = loginStr, userPwd =  EncryptUtils.encryptMD5ToString(userPwd))).execute().body()
-            .let { Globals.loggedUser = it!!.data }
+    fun proceedRequestWithNewSession(chain: Interceptor.Chain): Response = with(AppInfo) {
+        api.autoLogin(
+            UserLoginParam(
+                loginStr = LoginStr,
+                userPwd = EncryptUtils.encryptMD5ToString(UserPwd)
+            )
+        ).execute().body().let { Globals.loggedUser = it!!.data }
         return proceedRequestWithSession(chain)
     }
 
@@ -32,7 +30,5 @@ object NetworkHelper {
     }
 
     private val api by lazy { ComponentHolder.appComponent.api() }
-
-    private val context by lazy { ComponentHolder.appComponent.context() }
 
 }

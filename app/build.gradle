@@ -90,11 +90,13 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:input:3.1.1'
     implementation 'cn.jiguang.sdk:jpush:3.3.6'
     implementation 'cn.jiguang.sdk:jcore:2.1.6'
-    implementation 'com.github.florent37:rxsharedpreferences:1.0.0'
     implementation group: 'com.mikepenz', name: 'materialdrawer', version: '7.0.0-rc08'
     implementation 'com.mikepenz:fontawesome-typeface:5.9.0.0-kotlin@aar'
     implementation 'com.github.AnthonyFermin:DropDownView:1.0.1'
     implementation 'com.zhy:okhttputils:2.6.2'
+
+    implementation 'com.chibatching.kotpref:kotpref:2.10.0'
+    implementation 'com.chibatching.kotpref:initializer:2.10.0'
 }
 
 androidExtensions {
