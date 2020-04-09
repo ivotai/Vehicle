@@ -5,7 +5,7 @@ import com.kaopiz.kprogresshud.KProgressHUD
 
 object DialogHelper {
 
-    fun showMask(context: Context) =
+    fun showMask(context: Context): KProgressHUD =
         KProgressHUD.create(context)
             .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
             .setCancellable(true)
