@@ -9,6 +9,6 @@ import retrofit2.Retrofit
 class ApiModule {
 
     @Provides
-    fun api(retrofit: Retrofit): SimpleApi = retrofit.create(SimpleApi::class.java)
+    fun provideSimpleApi(retrofit: Retrofit): SimpleApi = retrofit.create(SimpleApi::class.java)
 
 }

@@ -29,6 +29,6 @@ object NetworkHelper {
             .let { chain.proceed(it) }
     }
 
-    private val api by lazy { ComponentHolder.appComponent.api() }
+    private val api by lazy { ComponentHolder.appComponent.simpleApi() }
 
 }

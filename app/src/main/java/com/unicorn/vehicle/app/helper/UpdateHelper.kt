@@ -16,7 +16,7 @@ object UpdateHelper {
 
     fun checkUpdate(activity: BaseAct) {
         val mask = DialogHelper.showMask(activity)
-        val api = ComponentHolder.appComponent.api()
+        val api = ComponentHolder.appComponent.simpleApi()
         api.checkAppVersion(StringQuery(key = AppUtils.getAppVersionName()))
             .observeOnMain(activity)
             .subscribeBy(

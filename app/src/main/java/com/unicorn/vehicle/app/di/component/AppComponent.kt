@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Component(modules = [BasicModule::class, NetworkModule::class, ApiModule::class])
 interface AppComponent {
 
-    fun api(): SimpleApi
+    fun simpleApi(): SimpleApi
 
     fun context(): Context
 

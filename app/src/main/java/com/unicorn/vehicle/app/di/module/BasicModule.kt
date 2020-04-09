@@ -16,6 +16,6 @@ class BasicModule(private val context: Context) {
     @Singleton
     @Provides
     fun provideGson(): Gson =
-        GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create()// 2019-10-09T15:40:29.103
+        GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create() // 2019-10-09T15:40:29.103
 
 }

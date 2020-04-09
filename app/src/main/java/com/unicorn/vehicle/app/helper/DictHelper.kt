@@ -29,7 +29,7 @@ object DictHelper {
         }
     }
 
-    private val api by lazy { ComponentHolder.appComponent.api() }
+    private val api by lazy { ComponentHolder.appComponent.simpleApi() }
 
     lateinit var carStates: List<DictItem>
     lateinit var carTypes: List<DictItem>

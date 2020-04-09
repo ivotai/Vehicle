@@ -35,6 +35,6 @@ abstract class BaseFra : Fragment(), UI {
     override fun registerEvent() {
     }
 
-    protected val api = ComponentHolder.appComponent.api()
+    protected val api = ComponentHolder.appComponent.simpleApi()
 
 }
