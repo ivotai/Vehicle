@@ -27,6 +27,7 @@ class MyJPushReceiver : JPushMessageReceiver() {
 //            .onAliasOperatorResult(context, jPushMessage)
 //        super.onAliasOperatorResult(context, jPushMessage)
 //    }
+
 //
 //    override fun onMobileNumberOperatorResult(context: Context?, jPushMessage: JPushMessage?) {
 //        TagAliasOperatorHelper.getInstance()
@@ -41,13 +42,11 @@ class MyJPushReceiver : JPushMessageReceiver() {
 //        val jsonObject = JSONObject(extra)
 //        val carRequisitionId = jsonObject.getString(Key.CarRequisitionId)
 
-        val intent1 = Intent(
-            context,
-            if (Globals.isLogin) MainAct::class.java else LoginAct::class.java
-        )
+        val intent =
+            Intent(context, if (Globals.isLogin) MainAct::class.java else LoginAct::class.java)
 //        intent1.putExtra(Key.CarRequisitionId, carRequisitionId)
-        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        context.startActivity(intent1);
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        context.startActivity(intent);
     }
 
     override fun onNotifyMessageArrived(p0: Context?, p1: NotificationMessage?) {
