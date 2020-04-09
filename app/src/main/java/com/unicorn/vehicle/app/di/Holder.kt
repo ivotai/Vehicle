@@ -12,7 +12,6 @@ object Holder {
     fun init(application: Application) {
         val basicModule = BasicModule(application.applicationContext)
         appComponent = DaggerAppComponent.builder().basicModule(basicModule).build()
-//        OkHttpUtils.initClient(OkHttpClient());
     }
 
 }

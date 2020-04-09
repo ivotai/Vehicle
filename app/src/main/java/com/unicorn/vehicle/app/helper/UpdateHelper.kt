@@ -1,15 +1,16 @@
 package com.unicorn.vehicle.app.helper
 
+import android.app.Activity
 import com.blankj.utilcode.util.AppUtils
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.unicorn.vehicle.app.di.Holder
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StringQuery
 import com.unicorn.vehicle.ui.base.BaseAct
-import com.zhy.http.okhttp.OkHttpUtils
-import com.zhy.http.okhttp.callback.FileCallBack
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
-import okhttp3.Call
+import rxhttp.wrapper.param.RxHttp
 import java.io.File
 
 object UpdateHelper {
@@ -20,10 +21,11 @@ object UpdateHelper {
         api.checkAppVersion(StringQuery(key = AppUtils.getAppVersionName()))
             .observeOnMain(activity)
             .subscribeBy(
-                onSuccess = {
+                onSuccess = { response ->
                     mask.dismiss()
-                    if (it.data.needUpdate)
-                        download(activity, apkUrl = it.data.url)
+                    if (response.failed) return@subscribeBy
+                    if (response.data.needUpdate)
+                        download(activity = activity, apkUrl = response.data.url)
                 },
                 onError = {
                     mask.dismiss()
@@ -31,35 +33,52 @@ object UpdateHelper {
             )
     }
 
-    private fun download(activity: BaseAct, apkUrl: String) {
-        val mask = KProgressHUD.create(activity)
+    private fun download(activity: Activity, apkUrl: String) {
+        val progressMask = KProgressHUD.create(activity)
             .setStyle(KProgressHUD.Style.BAR_DETERMINATE)
             .setCancellable(true)
             .setDimAmount(0.5f)
             .setMaxProgress(100)
             .show()
-        OkHttpUtils
-            .get()
-            .url(apkUrl)
-            .build()
-            .execute(object : FileCallBack(
-                Holder.appComponent.context().cacheDir.path,
-                "Vehicle.apk"
-            ) {
-                override fun onResponse(response: File, id: Int) {
-                    mask.dismiss()
-                    AppUtils.installApp(response)
+        val destPath = "${Holder.appComponent.context().cacheDir.path}/vehicle.apk"
+        RxHttp.get(apkUrl)
+            .asDownload(
+                destPath,
+                Consumer { progressMask.setProgress(it.progress) },
+                AndroidSchedulers.mainThread()
+            )
+            .subscribeBy(
+                onNext = {
+                    progressMask.dismiss()
+                    AppUtils.installApp(File(it))
+                },
+                onError = {
+                    progressMask.dismiss()
                 }
+            )
 
-                override fun inProgress(progress: Float, total: Long, id: Int) {
-                    val p = (100 * progress).toInt()
-                    mask.setProgress(p)
-                }
-
-                override fun onError(call: Call?, e: Exception?, id: Int) {
-                    mask.dismiss()
-                }
-            })
+//        OkHttpUtils
+//            .get()
+//            .url(apkUrl)
+//            .build()
+//            .execute(object : FileCallBack(
+//                Holder.appComponent.context().cacheDir.path,
+//                "Vehicle.apk"
+//            ) {
+//                override fun onResponse(response: File, id: Int) {
+//                    progressMask.dismiss()
+//                    AppUtils.installApp(response)
+//                }
+//
+//                override fun inProgress(progress: Float, total: Long, id: Int) {
+//                    val p = (100 * progress).toInt()
+//                    progressMask.setProgress(p)
+//                }
+//
+//                override fun onError(call: Call?, e: Exception?, id: Int) {
+//                    progressMask.dismiss()
+//                }
+//            })
     }
 
 }
