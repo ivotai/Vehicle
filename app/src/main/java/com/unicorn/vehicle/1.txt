@@ -1,3 +1,4 @@
 1. 版本更新代码已更新，待测试。
 2. JPush 会请求那些权限，会不会产生问题。
 3. DictHelper 待移除。
+4. LoggedUser 添加 RoleName

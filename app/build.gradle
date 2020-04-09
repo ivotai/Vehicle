@@ -108,10 +108,10 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:input:3.1.1'
     implementation 'cn.jiguang.sdk:jpush:3.3.6'
     implementation 'cn.jiguang.sdk:jcore:2.1.6'
-    implementation group: 'com.mikepenz', name: 'materialdrawer', version: '7.0.0-rc08'
+    //noinspection GradleDependency
+    implementation 'com.mikepenz:materialdrawer:7.0.0'
     implementation 'com.mikepenz:fontawesome-typeface:5.9.0.0-kotlin@aar'
     implementation 'com.github.AnthonyFermin:DropDownView:1.0.1'
-
     implementation 'com.chibatching.kotpref:kotpref:2.10.0'
     implementation 'com.chibatching.kotpref:initializer:2.10.0'
     implementation 'com.rxjava.rxhttp:rxhttp:2.1.1'

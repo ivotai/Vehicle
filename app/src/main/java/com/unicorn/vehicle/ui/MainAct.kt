@@ -3,14 +3,12 @@ package com.unicorn.vehicle.ui
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
-import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
-import com.mikepenz.materialdrawer.model.interfaces.IProfile
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.helper.UpdateHelper
 import com.unicorn.vehicle.app.loggedUser
@@ -46,37 +44,26 @@ class MainAct : BaseAct() {
         })
     }
 
-    private fun addDrawer() = with(loggedUser) {
+    private fun addDrawer() {
         val accountHeader = AccountHeaderBuilder()
-            .withActivity(this@MainAct)
-//            .withHeaderBackground(R.drawable.header)
+            .withActivity(this)
             .addProfiles(
-                ProfileDrawerItem().withName(userName)
-                    .withEmail("角色")
-//                    .withIcon(getResources().getDrawable(R.drawable.profile))
+                ProfileDrawerItem()
+                    .withName(loggedUser.userName)
+                    .withEmail(loggedUser.roleName)
             )
-            .withOnAccountHeaderListener(object : AccountHeader.OnAccountHeaderListener {
-                override fun onProfileChanged(
-                    view: View?,
-                    profile: IProfile<*>,
-                    current: Boolean
-                ): Boolean {
-                    return false
-                }
-            })
             .build()
-
         drawer = DrawerBuilder()
-            .withActivity(this@MainAct)
+            .withActivity(this)
             .withAccountHeader(accountHeader)
-            .withTranslucentStatusBar(false)
             .addDrawerItems(
-                PrimaryDrawerItem().withIcon(FontAwesome.Icon.faw_clipboard).withIdentifier(0).withName(
-                    MainPagerAdapter.titles[0]
-                ),
-                PrimaryDrawerItem().withIcon(FontAwesome.Icon.faw_car).withIdentifier(1).withName(
-                    MainPagerAdapter.titles[1]
-                )
+                PrimaryDrawerItem()
+                    .withIdentifier(0)
+                    .withIcon(FontAwesome.Icon.faw_clipboard)
+                    .withName(MainPagerAdapter.titles[0]),
+                PrimaryDrawerItem().withIdentifier(1)
+                    .withIcon(FontAwesome.Icon.faw_car)
+                    .withName(MainPagerAdapter.titles[1])
             )
             .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                 override fun onItemClick(
