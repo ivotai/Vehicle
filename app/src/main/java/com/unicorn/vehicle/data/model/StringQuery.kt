@@ -1,3 +1,3 @@
 package com.unicorn.vehicle.data.model
 
-data class StringQuery(val key:String)
+data class StringQuery(val key: String)
