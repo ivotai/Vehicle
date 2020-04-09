@@ -2,7 +2,7 @@ package com.unicorn.vehicle.data.model.base
 
 import com.blankj.utilcode.util.ToastUtils
 
-open class BaseResponse<T>(
+open class Response<T>(
     errorCode: String,
     val success: Boolean,
     val errorMsg: String,
