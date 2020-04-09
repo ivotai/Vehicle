@@ -38,7 +38,7 @@ class NetworkModule {
                 val content = body.string()
                 val errorCode = gson.fromJson(content, ErrorCode::class.java)
                 // 如果没有登录超时，返回新的 response
-                if (errorCode.errorCode != "1000") {
+                if (errorCode?.errorCode != "1000") {
                     return@addInterceptor response.newBuilder()
                         .body(content.toResponseBody(body.contentType()))
                         .build()
