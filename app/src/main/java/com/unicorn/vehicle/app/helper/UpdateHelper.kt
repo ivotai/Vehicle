@@ -2,7 +2,7 @@ package com.unicorn.vehicle.app.helper
 
 import com.blankj.utilcode.util.AppUtils
 import com.kaopiz.kprogresshud.KProgressHUD
-import com.unicorn.vehicle.app.di.ComponentHolder
+import com.unicorn.vehicle.app.di.Holder
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StringQuery
 import com.unicorn.vehicle.ui.base.BaseAct
@@ -16,7 +16,7 @@ object UpdateHelper {
 
     fun checkUpdate(activity: BaseAct) {
         val mask = DialogHelper.showMask(activity)
-        val api = ComponentHolder.appComponent.simpleApi()
+        val api = Holder.appComponent.simpleApi()
         api.checkAppVersion(StringQuery(key = AppUtils.getAppVersionName()))
             .observeOnMain(activity)
             .subscribeBy(
@@ -43,7 +43,7 @@ object UpdateHelper {
             .url(apkUrl)
             .build()
             .execute(object : FileCallBack(
-                ComponentHolder.appComponent.context().cacheDir.path,
+                Holder.appComponent.context().cacheDir.path,
                 "Vehicle.apk"
             ) {
                 override fun onResponse(response: File, id: Int) {

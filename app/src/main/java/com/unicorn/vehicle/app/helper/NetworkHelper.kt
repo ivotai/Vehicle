@@ -4,7 +4,7 @@ import com.blankj.utilcode.util.EncryptUtils
 import com.unicorn.vehicle.app.AppInfo
 import com.unicorn.vehicle.app.Globals
 import com.unicorn.vehicle.app.Key
-import com.unicorn.vehicle.app.di.ComponentHolder
+import com.unicorn.vehicle.app.di.Holder
 import com.unicorn.vehicle.data.model.UserLoginParam
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -29,6 +29,6 @@ object NetworkHelper {
             .let { chain.proceed(it) }
     }
 
-    private val api by lazy { ComponentHolder.appComponent.simpleApi() }
+    private val api by lazy { Holder.appComponent.simpleApi() }
 
 }

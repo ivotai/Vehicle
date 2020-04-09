@@ -1,6 +1,6 @@
 package com.unicorn.vehicle.app.helper
 
-import com.unicorn.vehicle.app.di.ComponentHolder
+import com.unicorn.vehicle.app.di.Holder
 import com.unicorn.vehicle.data.model.DictItem
 import io.reactivex.schedulers.Schedulers
 
@@ -29,7 +29,7 @@ object DictHelper {
         }
     }
 
-    private val api by lazy { ComponentHolder.appComponent.simpleApi() }
+    private val api by lazy { Holder.appComponent.simpleApi() }
 
     lateinit var carStates: List<DictItem>
     lateinit var carTypes: List<DictItem>

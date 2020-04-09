@@ -43,18 +43,9 @@ class NetworkModule {
                         .body(content.toResponseBody(body.contentType()))
                         .build()
                 }
-
                 // 如果登录超时，自动登录
                 NetworkHelper.proceedRequestWithNewSession(chain)
             }
-            // 重复登录超时的请求
-
-//            .addInterceptor { chain ->
-//                val response = chain.proceed(chain.request())
-//                if (response.code != 401) return@addInterceptor response
-//                // 401 表示 session 过期
-//                NetworkHelper.proceedRequestWithNewSession(chain)
-//            }
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
