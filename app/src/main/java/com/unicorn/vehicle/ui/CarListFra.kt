@@ -11,7 +11,7 @@ import com.jakewharton.rxbinding3.widget.textChanges
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.addDefaultItemDecoration
-import com.unicorn.vehicle.app.helper.DictHelper
+import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.app.trimText
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarListParam
@@ -25,6 +25,7 @@ import com.unicorn.vehicle.ui.base.SimplePageFra
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fra_car_list.*
 import java.util.concurrent.TimeUnit
 
@@ -64,8 +65,15 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
                 return@subscribe
             }
             isCarState = false
-            dictAdapter.setNewData(DictHelper.carTypes.plusElement(DictItem(null, "所有")))
-            dropDownView.expandDropDown()
+            api.getCarType()
+                .observeOnMain(this)
+                .subscribeBy(
+                    onSuccess = { response ->
+                        if (response.failed) return@subscribeBy
+                        dictAdapter.setNewData(response.data.plusElement(DictItem(null, "所有")))
+                        dropDownView.expandDropDown()
+                    }
+                )
         }
 
         tvCarState.clicks().subscribe {
@@ -74,8 +82,15 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
                 return@subscribe
             }
             isCarState = true
-            dictAdapter.setNewData(DictHelper.carStates.plusElement(DictItem(null, "所有")))
-            dropDownView.expandDropDown()
+            api.getCarState()
+                .observeOnMain(this)
+                .subscribeBy(
+                    onSuccess = { response ->
+                        if (response.failed) return@subscribeBy
+                        dictAdapter.setNewData(response.data.plusElement(DictItem(null, "所有")))
+                        dropDownView.expandDropDown()
+                    }
+                )
         }
 
         etNo.textChanges()
@@ -95,8 +110,8 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
                 carType = it.id
                 if (it.id == null) tvCarType.text = "车辆类型"
             }
-            loadFirstPage()
             dropDownView.collapseDropDown()
+            loadFirstPage()
         })
     }
 
@@ -105,12 +120,6 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
     //
 
     private var isCarState = true
-
-
-    private var carType: Int? = null
-
-    private var carState: Int? = null
-
 
     //
 
@@ -127,6 +136,10 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
                 )
             )
         )
+
+    private var carType: Int? = null
+
+    private var carState: Int? = null
 
     private lateinit var tvCarType: TextView
 

@@ -4,7 +4,6 @@ import com.unicorn.vehicle.data.model.*
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
 import com.unicorn.vehicle.data.model.base.Response
-import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.Body
@@ -35,19 +34,19 @@ interface SimpleApi {
     fun deny(@Body carRequisition: CarRequisition): Single<Response<CarRequisition>>
 
     @POST("Code/DictCarState")
-    fun getCarState(): Observable<Response<List<DictItem>>>
+    fun getCarState(): Single<Response<List<DictItem>>>
 
     @POST("Code/DictCarType")
-    fun getCarType(): Observable<Response<List<DictItem>>>
+    fun getCarType(): Single<Response<List<DictItem>>>
 
-    @POST("Code/DictRequisitionState")
-    fun getRequisitionState(): Observable<Response<List<DictItem>>>
-
-    @POST("Code/DictRequisitionFromType")
-    fun getRequisitionFromType(): Observable<Response<List<DictItem>>>
-
-    @POST("Code/DictRequisitionCause")
-    fun getRequisitionCause(): Observable<Response<List<DictItem>>>
+//    @POST("Code/DictRequisitionState")
+//    fun getRequisitionState(): Observable<Response<List<DictItem>>>
+//
+//    @POST("Code/DictRequisitionFromType")
+//    fun getRequisitionFromType(): Observable<Response<List<DictItem>>>
+//
+//    @POST("Code/DictRequisitionCause")
+//    fun getRequisitionCause(): Observable<Response<List<DictItem>>>
 
     @POST("file/CheckAppVersion")
     fun checkAppVersion(@Body stringQuery: StringQuery): Single<Response<CheckAppVersionResponse>>
