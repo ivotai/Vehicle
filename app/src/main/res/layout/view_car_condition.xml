@@ -16,7 +16,7 @@
             android:gravity="center"
             android:text="车辆类型"
             android:textColor="@color/md_white"
-            android:textSize="15dp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvCarState"
             app:layout_constraintHorizontal_bias="0.5"
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:text="车辆状态"
             android:textColor="@color/md_white"
-            android:textSize="15dp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/rfl"
             app:layout_constraintHorizontal_bias="0.5"
@@ -62,12 +62,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@null"
-                    android:hint="请输入车牌号"
+                    android:hint="车牌号"
                     android:paddingStart="12dp"
                     android:paddingTop="6dp"
                     android:paddingEnd="12dp"
                     android:paddingBottom="6dp"
-                    android:textSize="15dp" />
+                    android:textSize="14dp" />
 
             </com.flyco.roundview.RoundFrameLayout>
 

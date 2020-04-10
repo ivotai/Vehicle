@@ -16,7 +16,7 @@
             app:layout_constraintHorizontal_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="使用事件"
+            android:text="类型"
             android:textColor="@color/md_white"
             android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/tvStartTime"
@@ -55,7 +55,7 @@
         <FrameLayout
             android:id="@+id/rfl"
             android:layout_width="0dp"
-            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintHorizontal_weight="1"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -71,12 +71,13 @@
                 app:rv_isRadiusHalfHeight="true">
 
                 <EditText
+                    android:singleLine="true"
                     android:id="@+id/etCarNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@null"
-                    android:hint="请输入车牌号"
+                    android:hint="车牌号"
                     android:paddingStart="12dp"
                     android:paddingTop="6dp"
                     android:paddingEnd="12dp"
@@ -86,7 +87,6 @@
             </com.flyco.roundview.RoundFrameLayout>
 
         </FrameLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
