@@ -1,6 +1,8 @@
 package com.unicorn.vehicle.ui
 
+import android.graphics.Color
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -23,6 +25,9 @@ class MainAct : BaseAct() {
     }
 
     override fun initViews() {
+        toolbar.title = MainPagerAdapter.titles[0]
+        toolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary))
+        toolbar.setTitleTextColor(Color.WHITE)
         viewPager.adapter = MainPagerAdapter(supportFragmentManager)
         viewPager.offscreenPageLimit = MainPagerAdapter.titles.size - 1
         addDrawer()
@@ -39,6 +44,7 @@ class MainAct : BaseAct() {
             }
 
             override fun onPageSelected(position: Int) {
+                toolbar.title = MainPagerAdapter.titles[position]
                 drawer.setSelection(position.toLong())
             }
         })
@@ -55,6 +61,7 @@ class MainAct : BaseAct() {
             .build()
         drawer = DrawerBuilder()
             .withActivity(this)
+            .withToolbar(toolbar)
             .withAccountHeader(accountHeader)
             .addDrawerItems(
                 PrimaryDrawerItem()

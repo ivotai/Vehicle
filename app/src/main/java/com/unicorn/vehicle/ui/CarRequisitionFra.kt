@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.fra_car_requisition.*
 class CarRequisitionFra : BaseFra() {
 
     override fun initViews() {
-        titleBar.setTitle("用车申请")
         viewPaper.adapter = CarRequisitionPagerAdapter(childFragmentManager)
         viewPaper.offscreenPageLimit = CarRequisitionPagerAdapter.titles.size - 1
         tabs.setupWithViewPager(viewPaper)
