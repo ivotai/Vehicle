@@ -18,7 +18,8 @@ class CarRequisitionFra : BaseFra() {
 
     override fun registerEvent() {
         RxBus.registerEvent(this, CarRequisitionTotal::class.java, Consumer {
-            if (it.position == 1) return@Consumer
+            // 只显示待处理的总数
+            if (it.position == 1 || it.total == 0) return@Consumer
             val badge = tabs.getTabAt(it.position)!!.orCreateBadge
             badge.number = it.total
             badge.isVisible = true
