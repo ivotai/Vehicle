@@ -18,7 +18,7 @@ import com.unicorn.vehicle.data.model.CarListParam
 import com.unicorn.vehicle.data.model.DictItem
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
-import com.unicorn.vehicle.ui.adapter.CarSelectAdapter
+import com.unicorn.vehicle.ui.adapter.CarAdapter
 import com.unicorn.vehicle.ui.adapter.DictAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
 import com.unicorn.vehicle.ui.base.SimplePageFra
@@ -113,7 +113,7 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
 
     //
 
-    override val simpleAdapter = CarSelectAdapter()
+    override val simpleAdapter = CarAdapter()
 
     override fun loadPage(pageNo: Int): Single<PageResponse<Car>> =
         api.getCarList(

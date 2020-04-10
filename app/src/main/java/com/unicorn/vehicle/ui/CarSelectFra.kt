@@ -6,7 +6,7 @@ import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarListParam
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
-import com.unicorn.vehicle.ui.adapter.CarSelectAdapter
+import com.unicorn.vehicle.ui.adapter.CarAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
 import com.unicorn.vehicle.ui.base.SimplePageFra
 import io.reactivex.Single
@@ -20,7 +20,7 @@ class CarSelectFra : SimplePageFra<Car, KVHolder>() {
         recyclerView.addDefaultItemDecoration(1)
     }
 
-    override val simpleAdapter = CarSelectAdapter()
+    override val simpleAdapter = CarAdapter()
 
     override fun loadPage(pageNo: Int): Single<PageResponse<Car>> =
         api.getCarList(PageRequest(pageNo = pageNo, searchParam = CarListParam(carType = carType)))
