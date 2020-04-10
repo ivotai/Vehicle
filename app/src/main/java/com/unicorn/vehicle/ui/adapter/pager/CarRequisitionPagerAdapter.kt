@@ -3,7 +3,7 @@ package com.unicorn.vehicle.ui.adapter.pager
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.unicorn.vehicle.app.Position
+import com.unicorn.vehicle.app.Param
 import com.unicorn.vehicle.ui.CarRequisitionListFra
 
 class CarRequisitionPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
@@ -14,7 +14,7 @@ class CarRequisitionPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapte
 
     override fun getItem(position: Int) = CarRequisitionListFra().apply {
         arguments = Bundle().apply {
-            putInt(Position, position)
+            putInt(Param, position)
         }
     }
 

@@ -122,10 +122,10 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
 
     override val simpleAdapter = CarSelectAdapter()
 
-    override fun loadPage(page: Int): Single<PageResponse<Car>> =
+    override fun loadPage(pageNo: Int): Single<PageResponse<Car>> =
         api.getCarList(
             PageRequest(
-                pageNo = page, searchParam = CarListParam(
+                pageNo = pageNo, searchParam = CarListParam(
                     carType = carType,
                     carState = carState,
                     no = etKeyword.trimText()

@@ -1,6 +1,6 @@
 package com.unicorn.vehicle.ui
 
-import com.unicorn.vehicle.app.Position
+import com.unicorn.vehicle.app.Param
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.defaultPadding
 import com.unicorn.vehicle.app.uid
@@ -31,10 +31,10 @@ class CarRequisitionListFra : SimplePageFra<CarRequisition, KVHolder>() {
 
     override val simpleAdapter = CarRequisitionAdapter()
 
-    override fun loadPage(page: Int): Single<PageResponse<CarRequisition>> =
+    override fun loadPage(pageNo: Int): Single<PageResponse<CarRequisition>> =
         api.getCarRequisitionList(
             PageRequest(
-                pageNo = page,
+                pageNo = pageNo,
                 searchParam =
                 if (position == 0)
                     CarRequisitionListParam(states = listOf(0))
@@ -52,6 +52,6 @@ class CarRequisitionListFra : SimplePageFra<CarRequisition, KVHolder>() {
         })
     }
 
-    private val position by lazy { arguments!!.getInt(Position) }
+    private val position by lazy { arguments!!.getInt(Param) }
 
 }

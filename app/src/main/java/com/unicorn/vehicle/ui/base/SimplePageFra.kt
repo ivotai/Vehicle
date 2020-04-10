@@ -6,9 +6,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.unicorn.vehicle.R
+import com.unicorn.vehicle.app.defaultPageSize
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.base.PageResponse
-import com.unicorn.vehicle.app.defaultPageSize
 import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.ui_swipe_recycler.*
@@ -17,7 +17,7 @@ abstract class SimplePageFra<Model, K : BaseViewHolder> : BaseFra() {
 
     abstract val simpleAdapter: BaseQuickAdapter<Model, K>
 
-    abstract fun loadPage(page: Int): Single<PageResponse<Model>>
+    abstract fun loadPage(pageNo: Int): Single<PageResponse<Model>>
 
     protected open fun afterLoadFirstPage(total: Int) {
 
