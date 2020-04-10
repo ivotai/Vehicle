@@ -17,7 +17,7 @@
             android:gravity="center"
             android:text="车辆类型"
             android:textColor="@color/md_white"
-            android:textSize="16dp"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvCarState"
             app:layout_constraintHorizontal_bias="0.5"
@@ -32,7 +32,7 @@
             android:gravity="center"
             android:text="车辆状态"
             android:textColor="@color/md_white"
-            android:textSize="16dp"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/rfl"
             app:layout_constraintHorizontal_bias="0.5"
@@ -68,7 +68,7 @@
                     android:paddingTop="6dp"
                     android:paddingEnd="12dp"
                     android:paddingBottom="6dp"
-                    android:textSize="16dp" />
+                    android:textSize="15dp" />
 
             </com.flyco.roundview.RoundFrameLayout>
 
