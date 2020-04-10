@@ -4,7 +4,7 @@ import android.content.Intent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.CarRequisitionId
+import com.unicorn.vehicle.app.Param
 import com.unicorn.vehicle.app.displayDateFormat
 import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.data.model.CarRequisition
@@ -29,7 +29,7 @@ class CarRequisitionAdapter :
 
             root.safeClicks().subscribe {
                 Intent(mContext, CarRequisitionDetailAct::class.java).apply {
-                    putExtra(CarRequisitionId, item.requisitionID)
+                    putExtra(Param, item.requisitionID)
                 }.let { mContext.startActivity(it) }
             }
         }

@@ -61,7 +61,6 @@ class CarRequisitionDetailAct : BaseAct() {
                 },
                 onError = {
                     mask.dismiss()
-//                    ExceptionHelper.showPrompt(it)
                 }
             )
     }
@@ -69,10 +68,8 @@ class CarRequisitionDetailAct : BaseAct() {
     override fun bindIntent() {
         llRequisitionCarName.safeClicks().subscribe {
             Intent(this, CarSelectAct::class.java).apply {
-                putExtra(CarRequisition, carRequisition)
-            }.let {
-                startActivity(it)
-            }
+                putExtra(Param, carRequisition)
+            }.let { startActivity(it) }
         }
 
         rtvAgree.safeClicks().subscribe {
@@ -85,7 +82,7 @@ class CarRequisitionDetailAct : BaseAct() {
 
         rtvReject.safeClicks().subscribe {
             MaterialDialog(this).show {
-                input(hint = "填写拒绝原因") { dialog, text ->
+                input(hint = "填写拒绝原因") { _, text ->
                     carRequisition.approvalRemark = text.toString()
                     deny()
                 }
@@ -107,7 +104,6 @@ class CarRequisitionDetailAct : BaseAct() {
                 },
                 onError = {
                     mask.dismiss()
-//                    ExceptionHelper.showPrompt(it)
                 }
             )
     }
@@ -126,7 +122,6 @@ class CarRequisitionDetailAct : BaseAct() {
                 },
                 onError = {
                     mask.dismiss()
-//                    ExceptionHelper.showPrompt(it)
                 }
             )
     }
@@ -138,10 +133,10 @@ class CarRequisitionDetailAct : BaseAct() {
         })
     }
 
-    override val layoutId = R.layout.act_car_requisition_detail
-
-    private val carRequisitionId by lazy { intent.getStringExtra(CarRequisitionId) }
-
     private lateinit var carRequisition: CarRequisition
+
+    private val carRequisitionId by lazy { intent.getStringExtra(Param) }
+
+    override val layoutId = R.layout.act_car_requisition_detail
 
 }

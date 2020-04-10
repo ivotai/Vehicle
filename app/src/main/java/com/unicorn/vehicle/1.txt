@@ -1,4 +1,5 @@
 1. 版本更新代码已更新，待测试。
-2. JPush 会请求那些权限，会不会产生问题。
+2. JPush 会请求那些权限，会不会产生问题，测试能否收到申请。
 3. DictHelper 待移除。
-4. LoggedUser 添加 RoleName
+4. LoggedUser 添加 RoleName。
+5. 测试下，审批车辆申请。
