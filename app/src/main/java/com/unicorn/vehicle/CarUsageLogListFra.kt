@@ -1,4 +1,4 @@
-package com.unicorn.vehicle.ui
+package com.unicorn.vehicle
 
 import android.view.LayoutInflater
 import android.widget.EditText
@@ -8,17 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
-import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.addDefaultItemDecoration
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.app.trimText
-import com.unicorn.vehicle.data.model.Car
+import com.unicorn.vehicle.data.model.CarUsageLog
 import com.unicorn.vehicle.data.model.DictItem
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
-import com.unicorn.vehicle.data.model.param.CarListParam
-import com.unicorn.vehicle.ui.adapter.CarAdapter
+import com.unicorn.vehicle.data.model.param.CarUsageLogListParam
+import com.unicorn.vehicle.ui.adapter.CarUsageLogAdapter
 import com.unicorn.vehicle.ui.adapter.DictAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
 import com.unicorn.vehicle.ui.base.SimplePageFra
@@ -26,10 +25,10 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.fra_car_list.*
+import kotlinx.android.synthetic.main.fra_car_usage_log_list.*
 import java.util.concurrent.TimeUnit
 
-class CarListFra : SimplePageFra<Car, KVHolder>() {
+class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
 
     override fun initViews() {
         super.initViews()
@@ -39,16 +38,16 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
 
     private fun initDropDownView() {
         val collapsedView =
-            LayoutInflater.from(context).inflate(R.layout.view_car_condition, null, false)
+            LayoutInflater.from(context).inflate(R.layout.view_car_usage_log_condition, null, false)
         dropDownView.setHeaderView(collapsedView)
-        tvCarState = collapsedView.findViewById(R.id.tvCarState)
-        tvCarType = collapsedView.findViewById(R.id.tvCarType)
-        etNo = collapsedView.findViewById(R.id.etNo)
+        tvEventType = collapsedView.findViewById(R.id.tvEventType)
+        tvStartTime = collapsedView.findViewById(R.id.tvStartTime)
+        tvEndTime = collapsedView.findViewById(R.id.tvEndTime)
+        etCarNo = collapsedView.findViewById(R.id.etCarNo)
 
         val expandedView =
             LayoutInflater.from(context).inflate(R.layout.ui_recycler, null, false)
         dropDownView.setExpandedView(expandedView)
-
         expandedView.findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = dictAdapter
@@ -59,13 +58,12 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
     override fun bindIntent() {
         super.bindIntent()
 
-        tvCarType.clicks().subscribe {
+        tvEventType.clicks().subscribe {
             if (dropDownView.isExpanded) {
                 dropDownView.collapseDropDown()
                 return@subscribe
             }
-            isCarState = false
-            api.getCarType()
+            api.getDictCarUsageEventType()
                 .observeOnMain(this)
                 .subscribeBy(
                     onSuccess = { response ->
@@ -76,24 +74,7 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
                 )
         }
 
-        tvCarState.clicks().subscribe {
-            if (dropDownView.isExpanded) {
-                dropDownView.collapseDropDown()
-                return@subscribe
-            }
-            isCarState = true
-            api.getCarState()
-                .observeOnMain(this)
-                .subscribeBy(
-                    onSuccess = { response ->
-                        if (response.failed) return@subscribeBy
-                        dictAdapter.setNewData(response.data.plusElement(DictItem(null, "所有")))
-                        dropDownView.expandDropDown()
-                    }
-                )
-        }
-
-        etNo.textChanges()
+        etCarNo.textChanges()
             .debounce(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { loadFirstPage() }
@@ -101,15 +82,9 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
 
     override fun registerEvent() {
         RxBus.registerEvent(this, DictItem::class.java, Consumer {
-            if (isCarState) {
-                tvCarState.text = it.value
-                carState = it.id
-                if (it.id == null) tvCarState.text = "车辆状态"
-            } else {
-                tvCarType.text = it.value
-                carType = it.id
-                if (it.id == null) tvCarType.text = "车辆类型"
-            }
+            tvEventType.text = it.value
+            eventType = it.id
+            if (it.id == null) tvEventType.text = "事件"
             dropDownView.collapseDropDown()
             loadFirstPage()
         })
@@ -119,33 +94,34 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
 
     //
 
-    private var isCarState = true
+    override val simpleAdapter = CarUsageLogAdapter()
 
-    //
-
-    override val simpleAdapter = CarAdapter()
-
-    override fun loadPage(pageNo: Int): Single<PageResponse<Car>> =
-        api.getCarList(
+    override fun loadPage(pageNo: Int): Single<PageResponse<CarUsageLog>> =
+        api.getCarUsageLogList(
             PageRequest(
                 pageNo = pageNo,
-                searchParam = CarListParam(
-                    carType = carType,
-                    carState = carState,
-                    no = etNo.trimText()
+                searchParam = CarUsageLogListParam(
+                    eventType = eventType,
+                    startTime = startTime,
+                    endTime = endTime,
+                    carNo = etCarNo.trimText()
                 )
             )
         )
 
-    private var carType: Int? = null
+    private var eventType: Int? = null
 
-    private var carState: Int? = null
+    private var startTime: String? = null
 
-    private lateinit var tvCarType: TextView
+    private var endTime: String? = null
 
-    private lateinit var tvCarState: TextView
+    private lateinit var tvEventType: TextView
 
-    private lateinit var etNo: EditText
+    private lateinit var tvStartTime: TextView
+
+    private lateinit var tvEndTime: TextView
+
+    private lateinit var etCarNo: EditText
 
     override val mRecyclerView: RecyclerView
         get() = recyclerView
@@ -153,6 +129,6 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
     override val mSwipeRefreshLayout: SwipeRefreshLayout
         get() = swipeRefreshLayout
 
-    override val layoutId = R.layout.fra_car_list
+    override val layoutId = R.layout.fra_car_usage_log_list
 
 }

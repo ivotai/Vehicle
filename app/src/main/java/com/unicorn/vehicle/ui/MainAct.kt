@@ -67,7 +67,10 @@ class MainAct : BaseAct() {
                     .withName(MainPagerAdapter.titles[0]),
                 PrimaryDrawerItem().withIdentifier(1)
                     .withIcon(FontAwesome.Icon.faw_car)
-                    .withName(MainPagerAdapter.titles[1])
+                    .withName(MainPagerAdapter.titles[1]),
+                PrimaryDrawerItem().withIdentifier(2)
+                    .withIcon(FontAwesome.Icon.faw_address_book)
+                    .withName(MainPagerAdapter.titles[2])
             )
             .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                 override fun onItemClick(

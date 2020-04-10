@@ -1,13 +1,10 @@
 package com.unicorn.vehicle.data.api
 
-import com.unicorn.vehicle.data.model.param.CarListParam
-import com.unicorn.vehicle.data.model.param.CarRequisitionListParam
-import com.unicorn.vehicle.data.model.param.StringQuery
-import com.unicorn.vehicle.data.model.param.UserLoginParam
 import com.unicorn.vehicle.data.model.*
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
 import com.unicorn.vehicle.data.model.base.Response
+import com.unicorn.vehicle.data.model.param.*
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.Body
@@ -37,11 +34,17 @@ interface SimpleApi {
     @POST("Car/CarRequisitionDeny")
     fun deny(@Body carRequisition: CarRequisition): Single<Response<CarRequisition>>
 
+    @POST("Car/CarUsageLogList")
+    fun getCarUsageLogList(@Body pageRequest: PageRequest<CarUsageLogListParam>): Single<PageResponse<CarUsageLog>>
+
     @POST("Code/DictCarState")
     fun getCarState(): Single<Response<List<DictItem>>>
 
     @POST("Code/DictCarType")
     fun getCarType(): Single<Response<List<DictItem>>>
+
+    @POST("Code/DictCarUsageEventType")
+    fun getDictCarUsageEventType(): Single<Response<List<DictItem>>>
 
 //    @POST("Code/DictRequisitionState")
 //    fun getRequisitionState(): Observable<Response<List<DictItem>>>
