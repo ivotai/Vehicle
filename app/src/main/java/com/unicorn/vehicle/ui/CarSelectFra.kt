@@ -1,6 +1,6 @@
 package com.unicorn.vehicle.ui
 
-import com.unicorn.vehicle.app.CarType
+import com.unicorn.vehicle.app.Param
 import com.unicorn.vehicle.app.addDefaultItemDecoration
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarListParam
@@ -25,6 +25,6 @@ class CarSelectFra : SimplePageFra<Car, KVHolder>() {
     override fun loadPage(pageNo: Int): Single<PageResponse<Car>> =
         api.getCarList(PageRequest(pageNo = pageNo, searchParam = CarListParam(carType = carType)))
 
-    private val carType by lazy { arguments!!.getInt(CarType, 0) }
+    private val carType by lazy { arguments!!.getInt(Param, 0) }
 
 }

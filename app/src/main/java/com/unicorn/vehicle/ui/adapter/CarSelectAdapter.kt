@@ -19,7 +19,6 @@ class CarSelectAdapter : BaseQuickAdapter<Car, KVHolder>(R.layout.item_car) {
             tvName.text = item.no
             tvNo.text = item.carTypeDisplay
             tvCarStateDisplay.text = "${item.carStateDisplay} ${item.requisitionUserName}"
-//            Glide.with(context).load("https://img.mychebao.com/download/image/2b87963f872a2b7d7a2cb4846f88ad22_mid.jpg").into(ivImage)
             val url = BuildConfig.IMG_BASE_URL + item.pictureUrl
             Glide.with(context).load(url).into(ivImage)
 

@@ -1,5 +1,6 @@
 package com.unicorn.vehicle.ui.base
 
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -14,6 +15,8 @@ import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.ui_swipe_recycler.*
 
 abstract class SimplePageFra<Model, K : BaseViewHolder> : BaseFra() {
+
+    open val grayBg = false
 
     abstract val simpleAdapter: BaseQuickAdapter<Model, K>
 
@@ -35,6 +38,12 @@ abstract class SimplePageFra<Model, K : BaseViewHolder> : BaseFra() {
 
     override fun initViews() {
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary)
+        if (grayBg) mSwipeRefreshLayout.setBackgroundColor(
+            ContextCompat.getColor(
+                context!!,
+                R.color.md_grey_100
+            )
+        )
         mRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             simpleAdapter.bindToRecyclerView(this)

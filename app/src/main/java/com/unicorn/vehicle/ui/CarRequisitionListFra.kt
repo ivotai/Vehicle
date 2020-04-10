@@ -20,6 +20,8 @@ import kotlinx.android.synthetic.main.ui_swipe_recycler.*
 
 class CarRequisitionListFra : SimplePageFra<CarRequisition, KVHolder>() {
 
+    override val grayBg = true
+
     override fun initViews() {
         super.initViews()
         recyclerView.addItemDecoration(LinearSpanDecoration(defaultPadding))
