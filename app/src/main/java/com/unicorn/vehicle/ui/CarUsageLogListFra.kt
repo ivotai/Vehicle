@@ -1,4 +1,4 @@
-package com.unicorn.vehicle
+package com.unicorn.vehicle.ui
 
 import android.view.LayoutInflater
 import android.widget.EditText
@@ -6,12 +6,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.jakewharton.rxbinding3.view.clicks
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.datetime.dateTimePicker
 import com.jakewharton.rxbinding3.widget.textChanges
-import com.unicorn.vehicle.app.RxBus
-import com.unicorn.vehicle.app.addDefaultItemDecoration
-import com.unicorn.vehicle.app.observeOnMain
-import com.unicorn.vehicle.app.trimText
+import com.unicorn.vehicle.R
+import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.data.model.CarUsageLog
 import com.unicorn.vehicle.data.model.DictItem
 import com.unicorn.vehicle.data.model.base.PageRequest
@@ -26,6 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fra_car_usage_log_list.*
+import org.joda.time.DateTime
 import java.util.concurrent.TimeUnit
 
 class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
@@ -58,7 +58,7 @@ class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
     override fun bindIntent() {
         super.bindIntent()
 
-        tvEventType.clicks().subscribe {
+        tvEventType.safeClicks().subscribe {
             if (dropDownView.isExpanded) {
                 dropDownView.collapseDropDown()
                 return@subscribe
@@ -72,6 +72,28 @@ class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
                         dropDownView.expandDropDown()
                     }
                 )
+        }
+
+        tvStartTime.safeClicks().subscribe {
+            MaterialDialog(context!!).show {
+                dateTimePicker { _, dateTime ->
+                    val str = DateTime(dateTime.time).toString(displayDateFormat2)
+                    tvStartTime.text = str
+                    startTime = str
+                    loadFirstPage()
+                }
+            }
+        }
+
+        tvEndTime.safeClicks().subscribe {
+            MaterialDialog(context!!).show {
+                dateTimePicker { _, dateTime ->
+                    val str = DateTime(dateTime.time).toString(displayDateFormat2)
+                    tvEndTime.text = str
+                    endTime = str
+                    loadFirstPage()
+                }
+            }
         }
 
         etCarNo.textChanges()

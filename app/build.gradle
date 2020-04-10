@@ -88,9 +88,10 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
+    implementation 'com.afollestad.material-dialogs:datetime:3.3.0'
+    implementation 'com.afollestad.material-dialogs:input:3.3.0'
     implementation 'com.kaopiz:kprogresshud:1.2.0'
     implementation 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
-    implementation 'com.afollestad.material-dialogs:input:3.1.1'
     implementation 'cn.jiguang.sdk:jpush:3.3.6'
     implementation 'cn.jiguang.sdk:jcore:2.1.6'
     //noinspection GradleDependency
@@ -101,6 +102,7 @@ dependencies {
     implementation 'com.chibatching.kotpref:initializer:2.10.0'
     implementation 'com.rxjava.rxhttp:rxhttp:2.1.1'
     kapt 'com.rxjava.rxhttp:rxhttp-compiler:2.1.1'
+
 }
 
 androidExtensions {

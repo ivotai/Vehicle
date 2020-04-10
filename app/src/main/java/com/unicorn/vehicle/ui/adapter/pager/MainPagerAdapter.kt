@@ -2,7 +2,7 @@ package com.unicorn.vehicle.ui.adapter.pager
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.unicorn.vehicle.CarUsageLogListFra
+import com.unicorn.vehicle.ui.CarUsageLogListFra
 import com.unicorn.vehicle.ui.CarListFra
 import com.unicorn.vehicle.ui.CarRequisitionFra
 

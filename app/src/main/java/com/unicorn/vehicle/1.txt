@@ -1,2 +1,2 @@
 1. 版本更新待测试。
-
+2. 屏蔽 RxBus post DictItem 的多者接收问题。
