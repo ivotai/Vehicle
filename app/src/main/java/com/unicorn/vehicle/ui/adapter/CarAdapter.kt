@@ -3,9 +3,9 @@ package com.unicorn.vehicle.ui.adapter
 import android.annotation.SuppressLint
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.unicorn.vehicle.BuildConfig
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.RxBus
+import com.unicorn.vehicle.app.imgBaseUrl
 import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.ui.base.KVHolder
@@ -19,7 +19,7 @@ class CarAdapter : BaseQuickAdapter<Car, KVHolder>(R.layout.item_car) {
             tvNo.text = item.no
             tvCarTypeDisplay.text = item.carTypeDisplay
             tvCarStateDisplay.text = "${item.carStateDisplay} ${item.requisitionUserName}"
-            val url = BuildConfig.IMG_BASE_URL + item.pictureUrl
+            val url = imgBaseUrl + item.pictureUrl
             Glide.with(context).load(url).into(ivImage)
 
             Glide.with(context).load(if (item.carInGarage) R.mipmap.car else R.mipmap.car_grey)

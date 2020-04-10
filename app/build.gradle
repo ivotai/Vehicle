@@ -34,21 +34,6 @@ android {
             v2SigningEnabled false
         }
     }
-    flavorDimensions "default"
-    productFlavors {
-        develop {
-            applicationId "com.unicorn.vehicle.develop"
-            buildConfigField "String", "BASE_URL", "\"http://renjiawen1988.vicp.cc:33333/SmartKeyBox/api/\""
-            buildConfigField "String", "IMG_BASE_URL", "\"http://car.menze.net.cn/\""
-            flavorDimensions "default"
-
-        }
-        stable {
-            buildConfigField "String", "BASE_URL", "\"http://xuhui.menze.net.cn/SmartKeyBox/api/\""
-            buildConfigField "String", "IMG_BASE_URL", "\"http://car.menze.net.cn/\""
-            flavorDimensions "default"
-        }
-    }
     buildTypes {
         release {
             signingConfig signingConfigs.release
