@@ -3,9 +3,9 @@ package com.unicorn.vehicle.ui
 import com.unicorn.vehicle.app.Param
 import com.unicorn.vehicle.app.addDefaultItemDecoration
 import com.unicorn.vehicle.data.model.Car
-import com.unicorn.vehicle.data.model.param.CarListParam
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
+import com.unicorn.vehicle.data.model.param.CarListParam
 import com.unicorn.vehicle.ui.adapter.CarAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
 import com.unicorn.vehicle.ui.base.SimplePageFra
@@ -23,10 +23,12 @@ class CarSelectFra : SimplePageFra<Car, KVHolder>() {
     override val simpleAdapter = CarAdapter()
 
     override fun loadPage(pageNo: Int): Single<PageResponse<Car>> =
-        api.getCarList(PageRequest(pageNo = pageNo, searchParam = CarListParam(
-            carType = carType
+        api.getCarList(
+            PageRequest(
+                pageNo = pageNo,
+                searchParam = CarListParam(carType = carType)
+            )
         )
-        ))
 
     private val carType by lazy { arguments!!.getInt(Param, 0) }
 
