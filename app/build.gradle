@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId "com.unicorn.vehicle"
         minSdkVersion 21
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.4"
         ndk {
@@ -37,7 +37,7 @@ android {
     flavorDimensions "default"
     productFlavors {
         develop {
-            applicationId "com.example.myapplication.develop"
+            applicationId "com.unicorn.vehicle.develop"
             buildConfigField "String", "BASE_URL", "\"http://renjiawen1988.vicp.cc:33333/SmartKeyBox/api/\""
             buildConfigField "String", "IMG_BASE_URL", "\"http://car.menze.net.cn/\""
             flavorDimensions "default"

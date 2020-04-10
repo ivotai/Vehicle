@@ -13,7 +13,6 @@ class App : MultiDexApplication() {
 
     private fun init() {
         Holder.init(this)
-//        DictHelper.initDict()
         JPushInterface.init(this)
     }
 
