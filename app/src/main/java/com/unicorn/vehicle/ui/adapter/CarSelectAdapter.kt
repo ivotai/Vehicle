@@ -22,10 +22,6 @@ class CarSelectAdapter : BaseQuickAdapter<Car, KVHolder>(R.layout.item_car) {
             val url = BuildConfig.IMG_BASE_URL + item.pictureUrl
             Glide.with(context).load(url).into(ivImage)
 
-//            val bg1 = GradientDrawable().apply {
-//                setStroke(1, Color.parseColor("#6D72D0"))
-//            }
-//            ivCarInGarage.background = bg1
             Glide.with(context).load(if (item.carInGarage) R.mipmap.car else R.mipmap.car_grey)
                 .into(ivCarInGarage)
             Glide.with(context).load(if (item.keyInBox) R.mipmap.key else R.mipmap.key_grey)

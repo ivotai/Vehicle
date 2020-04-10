@@ -22,7 +22,6 @@ import com.unicorn.vehicle.ui.adapter.CarSelectAdapter
 import com.unicorn.vehicle.ui.adapter.DictAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
 import com.unicorn.vehicle.ui.base.SimplePageFra
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -34,10 +33,7 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
     override fun initViews() {
         super.initViews()
         initDropDownView()
-        HorizontalDividerItemDecoration.Builder(context)
-            .colorResId(R.color.md_grey_400)
-            .size(1)
-            .build().let { mRecyclerView.addItemDecoration(it) }
+        mRecyclerView.addDefaultItemDecoration(1)
     }
 
     private fun initDropDownView() {
@@ -46,7 +42,7 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
         dropDownView.setHeaderView(collapsedView)
         tvCarState = collapsedView.findViewById(R.id.tvCarState)
         tvCarType = collapsedView.findViewById(R.id.tvCarType)
-        etKeyword = collapsedView.findViewById(R.id.etKeyword)
+        etNo = collapsedView.findViewById(R.id.etKeyword)
 
         val expandedView =
             LayoutInflater.from(context).inflate(R.layout.view_my_drop_down_expanded, null, false)
@@ -60,6 +56,7 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
 
     override fun bindIntent() {
         super.bindIntent()
+
         tvCarType.clicks().subscribe {
             if (dropDownView.isExpanded) {
                 dropDownView.collapseDropDown()
@@ -69,6 +66,7 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
             dictAdapter.setNewData(DictHelper.carTypes.plusElement(DictItem(null, "所有")))
             dropDownView.expandDropDown()
         }
+
         tvCarState.clicks().subscribe {
             if (dropDownView.isExpanded) {
                 dropDownView.collapseDropDown()
@@ -78,9 +76,9 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
             dictAdapter.setNewData(DictHelper.carStates.plusElement(DictItem(null, "所有")))
             dropDownView.expandDropDown()
         }
-        etKeyword.textChanges()
+
+        etNo.textChanges()
             .debounce(500, TimeUnit.MILLISECONDS)
-//            .filter { it.isNotBlank() }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { loadFirstPage() }
     }
@@ -107,11 +105,6 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
 
     private var isCarState = true
 
-    private lateinit var tvCarType: TextView
-
-    private lateinit var tvCarState: TextView
-
-    private lateinit var etKeyword: EditText
 
     private var carType: Int? = null
 
@@ -125,20 +118,27 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
     override fun loadPage(pageNo: Int): Single<PageResponse<Car>> =
         api.getCarList(
             PageRequest(
-                pageNo = pageNo, searchParam = CarListParam(
+                pageNo = pageNo,
+                searchParam = CarListParam(
                     carType = carType,
                     carState = carState,
-                    no = etKeyword.trimText()
+                    no = etNo.trimText()
                 )
             )
         )
 
-    override val layoutId = R.layout.fra_car_list
+    private lateinit var tvCarType: TextView
+
+    private lateinit var tvCarState: TextView
+
+    private lateinit var etNo: EditText
 
     override val mRecyclerView: RecyclerView
         get() = recyclerView
 
     override val mSwipeRefreshLayout: SwipeRefreshLayout
         get() = swipeRefreshLayout
+
+    override val layoutId = R.layout.fra_car_list
 
 }
