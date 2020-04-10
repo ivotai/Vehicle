@@ -7,7 +7,7 @@ import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
 import com.unicorn.vehicle.data.model.LoggedUser
-import com.unicorn.vehicle.data.model.UserLoginParam
+import com.unicorn.vehicle.data.model.param.UserLoginParam
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_login.*

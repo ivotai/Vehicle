@@ -5,7 +5,7 @@ import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.defaultPadding
 import com.unicorn.vehicle.app.uid
 import com.unicorn.vehicle.data.model.CarRequisition
-import com.unicorn.vehicle.data.model.CarRequisitionListParam
+import com.unicorn.vehicle.data.model.param.CarRequisitionListParam
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
 import com.unicorn.vehicle.data.model.event.CarRequisitionTotal
@@ -39,7 +39,9 @@ class CarRequisitionListFra : SimplePageFra<CarRequisition, KVHolder>() {
                 pageNo = pageNo,
                 searchParam =
                 if (position == 0)
-                    CarRequisitionListParam(states = listOf(0))
+                    CarRequisitionListParam(
+                        states = listOf(0)
+                    )
                 else
                     CarRequisitionListParam(
                         states = listOf(1, 2, 3, 4),

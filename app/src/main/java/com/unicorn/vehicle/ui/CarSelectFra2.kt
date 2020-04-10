@@ -2,7 +2,7 @@ package com.unicorn.vehicle.ui
 
 import com.unicorn.vehicle.app.addDefaultItemDecoration
 import com.unicorn.vehicle.data.model.Car
-import com.unicorn.vehicle.data.model.CarListParam
+import com.unicorn.vehicle.data.model.param.CarListParam
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
 import com.unicorn.vehicle.ui.adapter.CarAdapter

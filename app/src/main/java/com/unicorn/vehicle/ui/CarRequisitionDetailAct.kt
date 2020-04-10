@@ -10,7 +10,7 @@ import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarRequisition
-import com.unicorn.vehicle.data.model.StringQuery
+import com.unicorn.vehicle.data.model.param.StringQuery
 import com.unicorn.vehicle.data.model.event.RefreshCarRequisitionList
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.functions.Consumer

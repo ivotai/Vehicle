@@ -3,7 +3,7 @@ package com.unicorn.vehicle.app.helper
 import com.blankj.utilcode.util.EncryptUtils
 import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.di.Holder
-import com.unicorn.vehicle.data.model.UserLoginParam
+import com.unicorn.vehicle.data.model.param.UserLoginParam
 import okhttp3.Interceptor
 import okhttp3.Response
 

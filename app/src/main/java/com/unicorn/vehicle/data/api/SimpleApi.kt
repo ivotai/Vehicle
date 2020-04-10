@@ -1,5 +1,9 @@
 package com.unicorn.vehicle.data.api
 
+import com.unicorn.vehicle.data.model.param.CarListParam
+import com.unicorn.vehicle.data.model.param.CarRequisitionListParam
+import com.unicorn.vehicle.data.model.param.StringQuery
+import com.unicorn.vehicle.data.model.param.UserLoginParam
 import com.unicorn.vehicle.data.model.*
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse

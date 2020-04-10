@@ -14,7 +14,7 @@ import com.unicorn.vehicle.app.addDefaultItemDecoration
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.app.trimText
 import com.unicorn.vehicle.data.model.Car
-import com.unicorn.vehicle.data.model.CarListParam
+import com.unicorn.vehicle.data.model.param.CarListParam
 import com.unicorn.vehicle.data.model.DictItem
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse

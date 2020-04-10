@@ -1,4 +1,4 @@
-package com.unicorn.vehicle.data.model
+package com.unicorn.vehicle.data.model.param
 
 data class CarRequisitionListParam(
     val requisitionCarType: Int? = null,

@@ -5,7 +5,7 @@ import com.blankj.utilcode.util.AppUtils
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.unicorn.vehicle.app.di.Holder
 import com.unicorn.vehicle.app.observeOnMain
-import com.unicorn.vehicle.data.model.StringQuery
+import com.unicorn.vehicle.data.model.param.StringQuery
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
