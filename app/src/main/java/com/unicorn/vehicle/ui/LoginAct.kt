@@ -62,7 +62,7 @@ class LoginAct : BaseAct() {
     private fun setAliasAndTags(loggedUser: LoggedUser) {
         JPushInterface.setAliasAndTags(
             this, loggedUser.uid, setOf(loggedUser.role.toString())
-        ) { p0, p1, p2 -> }
+        ) { _, _, _ -> }
     }
 
     override val layoutId = R.layout.act_login
