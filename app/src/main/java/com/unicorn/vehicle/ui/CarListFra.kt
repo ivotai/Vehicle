@@ -14,10 +14,10 @@ import com.unicorn.vehicle.app.addDefaultItemDecoration
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.app.trimText
 import com.unicorn.vehicle.data.model.Car
-import com.unicorn.vehicle.data.model.param.CarListParam
 import com.unicorn.vehicle.data.model.DictItem
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
+import com.unicorn.vehicle.data.model.param.CarListParam
 import com.unicorn.vehicle.ui.adapter.CarAdapter
 import com.unicorn.vehicle.ui.adapter.DictAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
@@ -39,14 +39,14 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
 
     private fun initDropDownView() {
         val collapsedView =
-            LayoutInflater.from(context).inflate(R.layout.view_my_drop_down_header, null, false)
+            LayoutInflater.from(context).inflate(R.layout.view_car_condition, null, false)
         dropDownView.setHeaderView(collapsedView)
         tvCarState = collapsedView.findViewById(R.id.tvCarState)
         tvCarType = collapsedView.findViewById(R.id.tvCarType)
         etNo = collapsedView.findViewById(R.id.etKeyword)
 
         val expandedView =
-            LayoutInflater.from(context).inflate(R.layout.view_my_drop_down_expanded, null, false)
+            LayoutInflater.from(context).inflate(R.layout.ui_recycler, null, false)
         dropDownView.setExpandedView(expandedView)
 
         expandedView.findViewById<RecyclerView>(R.id.recyclerView).apply {
