@@ -16,9 +16,9 @@
             app:layout_constraintHorizontal_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="事件"
+            android:text="使用事件"
             android:textColor="@color/md_white"
-            android:textSize="15dp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/tvStartTime"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
             android:gravity="center"
             android:text="开始日期"
             android:textColor="@color/md_white"
-            android:textSize="15dp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/tvEndTime"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tvEventType"
@@ -46,7 +46,7 @@
             android:gravity="center"
             android:text="结束日期"
             android:textColor="@color/md_white"
-            android:textSize="15dp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/rfl"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tvStartTime"
@@ -81,7 +81,7 @@
                     android:paddingTop="6dp"
                     android:paddingEnd="12dp"
                     android:paddingBottom="6dp"
-                    android:textSize="15dp" />
+                    android:textSize="14dp" />
 
             </com.flyco.roundview.RoundFrameLayout>
 

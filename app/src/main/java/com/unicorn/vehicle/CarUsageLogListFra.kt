@@ -84,7 +84,7 @@ class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
         RxBus.registerEvent(this, DictItem::class.java, Consumer {
             tvEventType.text = it.value
             eventType = it.id
-            if (it.id == null) tvEventType.text = "事件"
+            if (it.id == null) tvEventType.text = "使用事件"
             dropDownView.collapseDropDown()
             loadFirstPage()
         })
