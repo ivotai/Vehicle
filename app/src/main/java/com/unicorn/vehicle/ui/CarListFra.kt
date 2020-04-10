@@ -48,10 +48,11 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
             LayoutInflater.from(context).inflate(R.layout.view_my_drop_down_expanded, null, false)
         dropDownView.setExpandedView(expandedView)
 
-        val rvDict = expandedView.findViewById<RecyclerView>(R.id.recyclerView)
-        rvDict.layoutManager = LinearLayoutManager(context)
-        rvDict.adapter = dictAdapter
-        rvDict.addDefaultItemDecoration(1)
+        expandedView.findViewById<RecyclerView>(R.id.recyclerView).apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = dictAdapter
+            addDefaultItemDecoration(1)
+        }
     }
 
     override fun bindIntent() {
