@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.datetime.dateTimePicker
+import com.blankj.utilcode.util.ActivityUtils
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.*
@@ -105,6 +106,7 @@ class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
 
     override fun registerEvent() {
         RxBus.registerEvent(this, DictItemEvent::class.java, Consumer {
+            if (activity != ActivityUtils.getTopActivity()) return@Consumer
             if (it.key != this@CarUsageLogListFra.javaClass.name) return@Consumer
             val dictItem = it.dictItem
             tvEventType.text = dictItem.value
