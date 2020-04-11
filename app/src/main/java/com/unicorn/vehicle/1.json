@@ -1,111 +1,32 @@
 {
-  "total": 19017,
-  "items": [
-    {
-      "id": 18867,
-      "carID": 5,
-      "userID": "43",
-      "eventType": 0,
-      "serverTime": "2020-04-08 12:05:55",
-      "carNo": "沪A9530警",
-      "userName": "潘超凡",
-      "eventTypeDisplay": "入库"
-    },
-    {
-      "id": 18866,
-      "carID": 9,
-      "userID": "62",
-      "eventType": 0,
-      "serverTime": "2020-04-08 11:50:38",
-      "carNo": "沪A9212警",
-      "userName": "许志铖",
-      "eventTypeDisplay": "入库"
-    },
-    {
-      "id": 18865,
-      "carID": 24,
-      "userID": "",
-      "eventType": 0,
-      "serverTime": "2020-04-08 11:46:36",
-      "carNo": "沪C858BC",
-      "userName": "",
-      "eventTypeDisplay": "入库"
-    },
-    {
-      "id": 18864,
-      "carID": 4,
-      "userID": "19",
-      "eventType": 0,
-      "serverTime": "2020-04-08 11:31:12",
-      "carNo": "沪C512HJ",
-      "userName": "王伟",
-      "eventTypeDisplay": "入库"
-    },
-    {
-      "id": 18863,
-      "carID": 21,
-      "userID": "",
-      "eventType": 0,
-      "serverTime": "2020-04-08 11:30:30",
-      "carNo": "沪A9396警",
-      "userName": "",
-      "eventTypeDisplay": "入库"
-    },
-    {
-      "id": 18862,
-      "carID": 22,
-      "userID": "17",
-      "eventType": 0,
-      "serverTime": "2020-04-08 11:14:36",
-      "carNo": "沪A9431警",
-      "userName": "顾雷",
-      "eventTypeDisplay": "入库"
-    },
-    {
-      "id": 18861,
-      "carID": 21,
-      "userID": "",
-      "eventType": 0,
-      "serverTime": "2020-04-08 11:12:57",
-      "carNo": "沪A9396警",
-      "userName": "",
-      "eventTypeDisplay": "入库"
-    },
-    {
-      "id": 18860,
-      "carID": 22,
-      "userID": "17",
-      "eventType": 0,
-      "serverTime": "2020-04-08 11:12:11",
-      "carNo": "沪A9431警",
-      "userName": "顾雷",
-      "eventTypeDisplay": "入库"
-    },
-    {
-      "id": 18859,
-      "carID": 20,
-      "userID": "",
-      "eventType": 0,
-      "serverTime": "2020-04-08 11:10:40",
-      "carNo": "沪A9338警",
-      "userName": "",
-      "eventTypeDisplay": "入库"
-    },
-    {
-      "id": 18858,
-      "carID": 21,
-      "userID": "",
-      "eventType": 0,
-      "serverTime": "2020-04-08 11:08:38",
-      "carNo": "沪A9396警",
-      "userName": "",
-      "eventTypeDisplay": "入库"
-    }
-  ],
   "success": true,
   "errorMsg": "",
-  "errorCode": "",
-  "totalPage": 1902,
-  "pageNo": 1,
-  "pageSize": 10
+  "errorCode": "0",
+  "data": [
+    {
+      "id": "0",
+      "value": "入库"
+    },
+    {
+      "id": "1",
+      "value": "出库"
+    },
+    {
+      "id": "2",
+      "value": "取钥匙"
+    },
+    {
+      "id": "3",
+      "value": "还钥匙"
+    },
+    {
+      "id": "4",
+      "value": "车辆申请"
+    },
+    {
+      "id": "5",
+      "value": "审批通过"
+    }
+  ],
+  "extendData": null
 }

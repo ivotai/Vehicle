@@ -1,6 +1,7 @@
 package com.unicorn.vehicle.ui.adapter
 
 import android.annotation.SuppressLint
+import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.data.model.CarUsageLog
@@ -14,6 +15,8 @@ class CarUsageLogAdapter : BaseQuickAdapter<CarUsageLog, KVHolder>(R.layout.item
         helper.apply {
             tvCarNo.text = item.carNo
             tvEventType.text = item.eventTypeDisplay
+            tvEventType.setTextColor(item.eventTypeTextColor)
+            Glide.with(mContext).load(item.eventTypeResId).into(ivEventType)
             tvUserName.text = item.userName
             tvServerTime.text = item.serverTime
         }

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,49 +11,73 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:text="车牌号"
         android:textColor="@color/md_black"
-        android:textSize="15dp"
+        android:textSize="22dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/ivEventType"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="8dp"
+        android:src="@mipmap/rk"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCarNo"
+        app:layout_constraintStart_toEndOf="@+id/tvCarNo"
+        app:layout_constraintTop_toTopOf="@+id/tvCarNo" />
 
     <TextView
         android:id="@+id/tvEventType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="车辆使用事件"
+        android:layout_marginStart="2dp"
+        android:text="入库"
         android:textColor="@color/md_black"
-        android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCarNo" />
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCarNo"
+        app:layout_constraintStart_toEndOf="@+id/ivEventType"
+        app:layout_constraintTop_toTopOf="@+id/tvCarNo" />
 
-     <TextView
+    <ImageView
+        android:id="@+id/ivUser"
+        android:layout_width="20dp"
+        android:scaleType="fitXY"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:src="@mipmap/police"
+        app:layout_constraintBottom_toBottomOf="@+id/tvUserName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvUserName" />
+
+    <TextView
         android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="12dp"
         android:text="使用人"
         android:textColor="@color/md_black"
         android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEventType" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivUser"
+        app:layout_constraintTop_toBottomOf="@+id/tvCarNo" />
 
     <TextView
         android:id="@+id/tvServerTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         android:text="时间"
-        android:textColor="@color/md_black"
+        android:textColor="@color/md_grey_400"
         android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvUserName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvUserName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
