@@ -17,6 +17,7 @@ import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.DictItem
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
+import com.unicorn.vehicle.data.model.event.DictItemEvent
 import com.unicorn.vehicle.data.model.param.CarListParam
 import com.unicorn.vehicle.ui.adapter.CarAdapter
 import com.unicorn.vehicle.ui.adapter.DictAdapter
@@ -100,22 +101,24 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
     }
 
     override fun registerEvent() {
-        RxBus.registerEvent(this, DictItem::class.java, Consumer {
+        RxBus.registerEvent(this, DictItemEvent::class.java, Consumer {
+            if (it.key != javaClass.name) return@Consumer
+            val dictItem = it.dictItem
             if (isCarState) {
-                tvCarState.text = it.value
-                carState = it.id
-                if (it.id == null) tvCarState.text = "车辆状态"
+                tvCarState.text = dictItem.value
+                carState = dictItem.id
+                if (dictItem.id == null) tvCarState.text = "车辆状态"
             } else {
-                tvCarType.text = it.value
-                carType = it.id
-                if (it.id == null) tvCarType.text = "车辆类型"
+                tvCarType.text = dictItem.value
+                carType = dictItem.id
+                if (dictItem.id == null) tvCarType.text = "车辆类型"
             }
             dropDownView.collapseDropDown()
             loadFirstPage()
         })
     }
 
-    private val dictAdapter = DictAdapter()
+    private val dictAdapter = DictAdapter(javaClass.name)
 
     //
 

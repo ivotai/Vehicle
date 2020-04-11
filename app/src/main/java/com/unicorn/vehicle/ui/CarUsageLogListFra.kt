@@ -15,6 +15,7 @@ import com.unicorn.vehicle.data.model.CarUsageLog
 import com.unicorn.vehicle.data.model.DictItem
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
+import com.unicorn.vehicle.data.model.event.DictItemEvent
 import com.unicorn.vehicle.data.model.param.CarUsageLogListParam
 import com.unicorn.vehicle.ui.adapter.CarUsageLogAdapter
 import com.unicorn.vehicle.ui.adapter.DictAdapter
@@ -103,16 +104,18 @@ class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
     }
 
     override fun registerEvent() {
-        RxBus.registerEvent(this, DictItem::class.java, Consumer {
-            tvEventType.text = it.value
-            eventType = it.id
-            if (it.id == null) tvEventType.text = "类型"
+        RxBus.registerEvent(this, DictItemEvent::class.java, Consumer {
+            if (it.key != javaClass.name) return@Consumer
+            val dictItem = it.dictItem
+            tvEventType.text = dictItem.value
+            eventType = dictItem.id
+            if (dictItem.id == null) tvEventType.text = "类型"
             dropDownView.collapseDropDown()
             loadFirstPage()
         })
     }
 
-    private val dictAdapter = DictAdapter()
+    private val dictAdapter = DictAdapter(key = javaClass.name)
 
     //
 
