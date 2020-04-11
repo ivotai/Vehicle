@@ -23,6 +23,7 @@
             <intent-filter>
                 <data android:scheme="http" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
@@ -30,7 +31,9 @@
         <activity android:name=".ui.CarRequisitionFra" />
         <activity android:name=".ui.CarRequisitionDetailAct" />
         <activity android:name=".ui.CarSelectAct" />
-        <activity android:name=".ui.MainAct"/>
+        <activity android:name=".ui.MainAct" />
+        <activity android:name=".ui.CarUsageLogListAct" />
+
         <service
             android:name=".jpush.PushService"
             android:enabled="true"
@@ -51,7 +54,8 @@
             </intent-filter>
         </receiver>
 
-        <meta-data android:name="android.max_aspect"
+        <meta-data
+            android:name="android.max_aspect"
             android:value="2.1" />
     </application>
 

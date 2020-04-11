@@ -105,7 +105,7 @@ class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
 
     override fun registerEvent() {
         RxBus.registerEvent(this, DictItemEvent::class.java, Consumer {
-            if (it.key != javaClass.name) return@Consumer
+            if (it.key != this@CarUsageLogListFra.javaClass.name) return@Consumer
             val dictItem = it.dictItem
             tvEventType.text = dictItem.value
             eventType = dictItem.id
@@ -115,7 +115,7 @@ class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
         })
     }
 
-    private val dictAdapter = DictAdapter(key = javaClass.name)
+    private val dictAdapter = DictAdapter(javaClass.name)
 
     //
 
@@ -129,10 +129,14 @@ class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
                     eventType = eventType,
                     startTime = startTime,
                     endTime = endTime,
-                    carNo = etCarNo.trimText()
+                    carNo = etCarNo.trimText(),
+                    // 添加 carID 参数 for 特定车辆查询
+                    carID = carId
                 )
             )
         )
+
+    private val carId by lazy { arguments?.getString(Param, "") ?: "" }
 
     private var eventType: Int? = null
 
