@@ -1,5 +1,6 @@
 package com.unicorn.vehicle.ui
 
+import android.graphics.Color
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
 import com.github.mikephil.charting.data.BarData
@@ -19,6 +20,7 @@ class Chart1Fra : BaseFra() {
     override fun initViews() {
         initChart1()
     }
+    private val colorBlue = Color.parseColor("#E4F2FD")
 
     private val colorPrimary by lazy { ContextCompat.getColor(context!!,R.color.colorPrimary) }
     private fun initChart1() {
@@ -31,7 +33,7 @@ class Chart1Fra : BaseFra() {
 
             xAxis.position = XAxisPosition.BOTTOM
             xAxis.setDrawGridLines(false)
-            xAxis.axisLineColor = colorPrimary
+//            xAxis.axisLineColor = colorBlue
             xAxis.textSize = 12f
             xAxis.setDrawAxisLine(false)
 //            xAxis.textColor = colorPrimary
