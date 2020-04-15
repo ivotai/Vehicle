@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.unicorn.vehicle.ui.CarListFra
 import com.unicorn.vehicle.ui.CarRequisitionFra
 import com.unicorn.vehicle.ui.CarUsageLogListFra
-import com.unicorn.vehicle.ui.ChartsFra
+import com.unicorn.vehicle.ui.Chart1Fra
 
 class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
@@ -17,7 +17,7 @@ class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         0 -> CarRequisitionFra()
         1 -> CarListFra()
         2 -> CarUsageLogListFra()
-        else -> ChartsFra()
+        else -> Chart1Fra()
     }
 
     override fun getCount() = titles.size

@@ -11,10 +11,10 @@ import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StatisticCommonItem
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.base.BaseFra
-import kotlinx.android.synthetic.main.fra_charts.*
+import kotlinx.android.synthetic.main.fra_chart1.*
 import org.joda.time.DateTime
 
-class ChartsFra : BaseFra() {
+class Chart1Fra : BaseFra() {
 
     override fun initViews() {
         initChart1()
@@ -77,7 +77,7 @@ class ChartsFra : BaseFra() {
 
         val barData = BarData(barDataSet)
 //        barData.setValueTextSize(10f)
-        barData.setBarWidth(0.7f)
+        barData.setBarWidth(0.6f)
 
         chart1.setData(barData)
 
@@ -89,6 +89,6 @@ class ChartsFra : BaseFra() {
 
     private var dateEnd = DateTime().toString(displayDateFormat)
 
-    override val layoutId = R.layout.fra_charts
+    override val layoutId = R.layout.fra_chart1
 
 }
