@@ -1,8 +1,20 @@
 package com.unicorn.vehicle.ui
 
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.Legend.LegendForm
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.XAxis.XAxisPosition
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.components.YAxis.YAxisLabelPosition
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.displayDateFormat
 import com.unicorn.vehicle.app.observeOnMain
+import com.unicorn.vehicle.data.model.StatisticCommonItem
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.base.BaseFra
 import kotlinx.android.synthetic.main.fra_charts.*
@@ -14,10 +26,10 @@ class ChartsFra : BaseFra() {
 
     }
 
-    private fun initChart1(){
-        with(chart1){
+    private fun initChart1() {
+        with(chart1) {
             setDrawBarShadow(true)
-           setDrawValueAboveBar(true)
+            setDrawValueAboveBar(true)
             getDescription().setEnabled(true)
 
             // if more than 60 entries are displayed in the chart, no values will be
@@ -34,6 +46,38 @@ class ChartsFra : BaseFra() {
 
             setDrawGridBackground(true)
             // chart.setDrawYLabels(false);
+
+            //
+
+            val xAxis: XAxis = getXAxis()
+            xAxis.position = XAxisPosition.BOTTOM
+            xAxis.setDrawGridLines(false)
+            xAxis.granularity = 1f // only intervals of 1 day
+
+            xAxis.labelCount = 7
+//            xAxis.valueFormatter = xAxisFormatter
+
+            val custom: ValueFormatter =
+                MyValueFormatter("$")
+
+            val leftAxis: YAxis =
+                getAxisLeft()
+            leftAxis.setLabelCount(8, false)
+            leftAxis.valueFormatter = custom
+            leftAxis.setPosition(YAxisLabelPosition.OUTSIDE_CHART)
+            leftAxis.spaceTop = 15f
+            leftAxis.axisMinimum = 0f // this replaces setStartAtZero(true)
+
+            val l: Legend = getLegend()
+            l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+            l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+            l.orientation = Legend.LegendOrientation.HORIZONTAL
+            l.setDrawInside(false)
+            l.form = LegendForm.SQUARE
+            l.formSize = 9f
+            l.textSize = 11f
+            l.xEntrySpace = 4f
+
         }
     }
 
@@ -49,9 +93,21 @@ class ChartsFra : BaseFra() {
             )
         )
             .observeOnMain(this)
-            .subscribe {
-                it
-            }
+            .subscribe { setData(it.data) }
+    }
+
+    private fun setData(list: List<StatisticCommonItem>) {
+        val barEntrys = list.map { BarEntry(list.indexOf(it).toFloat(), it.value.toFloat()) }
+        val barDataSet = BarDataSet(barEntrys,"速度")
+        barDataSet.setDrawIcons(true)
+        val dataSet = ArrayList<IBarDataSet>()
+        dataSet.add(barDataSet)
+
+        val barData = BarData(dataSet)
+        barData.setValueTextSize(10f)
+        barData.setBarWidth(0.9f)
+
+        chart1.setData(barData)
     }
 
     private var dateStart = DateTime().minusMonths(1).toString(displayDateFormat)
