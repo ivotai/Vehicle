@@ -103,6 +103,7 @@ dependencies {
     implementation 'com.rxjava.rxhttp:rxhttp:2.1.1'
     kapt 'com.rxjava.rxhttp:rxhttp-compiler:2.1.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'
 
 }
 
