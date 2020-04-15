@@ -5,6 +5,7 @@ import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
 import com.unicorn.vehicle.data.model.base.Response
 import com.unicorn.vehicle.data.model.param.*
+import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.Body
@@ -46,16 +47,10 @@ interface SimpleApi {
     @POST("Code/DictCarUsageEventType")
     fun getDictCarUsageEventType(): Single<Response<List<DictItem>>>
 
-//    @POST("Code/DictRequisitionState")
-//    fun getRequisitionState(): Observable<Response<List<DictItem>>>
-//
-//    @POST("Code/DictRequisitionFromType")
-//    fun getRequisitionFromType(): Observable<Response<List<DictItem>>>
-//
-//    @POST("Code/DictRequisitionCause")
-//    fun getRequisitionCause(): Observable<Response<List<DictItem>>>
-
     @POST("file/CheckAppVersion")
     fun checkAppVersion(@Body stringQuery: StringQuery): Single<Response<CheckAppVersionResponse>>
+
+    @POST("Statistics/RequisitionCountForCar")
+    fun getRequisitionCountForCar(@Body statisticCommonParam: StatisticCommonParam): Observable<Response<List<StatisticCommonItem>>>
 
 }
