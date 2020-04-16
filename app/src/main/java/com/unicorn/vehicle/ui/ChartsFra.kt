@@ -37,16 +37,20 @@ class ChartsFra : BaseFra() {
 
     private fun showDateRange() {
         MaterialDialog(context!!).show {
-            title(text = "选择开始时间")
+            title(text = "选择开始日期")
             datePicker { _, dateStart ->
                 statisticCommonParam.dateStart = DateTime(dateStart).toString(displayDateFormat)
-                MaterialDialog(context).show {
-                    title(text = "选择结束时间")
-                    datePicker { _, dateEnd ->
-                        statisticCommonParam.dateEnd = DateTime(dateEnd).toString(displayDateFormat)
-                        RxBus.post(statisticCommonParam)
-                    }
-                }
+                showEndDateDialog()
+            }
+        }
+    }
+
+    private fun showEndDateDialog() {
+        MaterialDialog(context!!).show {
+            title(text = "选择结束日期")
+            datePicker { _, dateEnd ->
+                statisticCommonParam.dateEnd = DateTime(dateEnd).toString(displayDateFormat)
+                RxBus.post(statisticCommonParam)
             }
         }
     }

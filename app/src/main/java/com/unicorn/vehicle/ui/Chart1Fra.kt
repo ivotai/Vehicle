@@ -131,6 +131,7 @@ class Chart1Fra : BaseFra() {
             xAxis.axisMaximum = 0 + barData.getGroupWidth(groupSpace, barSpace) * groupCount
             groupBars(0.toFloat(), groupSpace, barSpace)
             invalidate()
+            animateY(1000)
         }
 
     }
