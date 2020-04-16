@@ -6,6 +6,7 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.CombinedData
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StatisticCommonItem
@@ -34,6 +35,9 @@ class Chart1Fra : BaseFra() {
             }
             axisLeft.isEnabled = false
             axisRight.isEnabled = false
+
+            axisRight.axisMinimum = 0f
+            axisLeft.axisMinimum = 0f
         }
     }
 
@@ -58,8 +62,8 @@ class Chart1Fra : BaseFra() {
 
     private fun setData() {
         // 基准 dataSorted1
-        val dataSorted1 = data1.sortedBy { it.value }.takeLast(num)   // 1 2 3 ...
-//        chart1.xAxis.valueFormatter = NameValueFormatter(dataSorted1)
+        val dataSorted1 = data1.sortedBy { it.value } .takeLast(2)  // 1 2 3 ...
+        chart1.xAxis.valueFormatter = NameValueFormatter(dataSorted1)
 //        chart1.xAxis.labelCount = dataSorted1.size
 
         val barEntrys1 =
@@ -83,28 +87,40 @@ class Chart1Fra : BaseFra() {
         barDataSet2.valueTextSize = 12f
         barDataSet2.axisDependency = YAxis.AxisDependency.RIGHT
 
+        val groupSpace = 0.06f
+        val barSpace = 0.02f // x2 dataset
+
+        val barWidth = 0.45f // x2 dataset
+        // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
+        val d = BarData(barDataSet1, barDataSet2)
+        d.barWidth = barWidth
+
+        // make this BarData object grouped
+        d.groupBars(0f, groupSpace, barSpace) // start at x = 0
+
+
         //
-        val barData = BarData(barDataSet1, barDataSet2)
-        val groupSpace = 0.2f
-        val barSpace = 0.00f // x2 dataset
-        val barWidth = 0.4f // x2 dataset
-        barData.barWidth = barWidth
+        val combinedData = CombinedData()
+        combinedData.setData(d)
+
+
+//        barData.barWidth = barWidth
 
 
         // restrict the x-axis range
         chart1.getXAxis().setAxisMinimum(0.0f)
-
-        // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
-
-        // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
+//
+//        // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
+//
+//        // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
         chart1.getXAxis().setAxisMaximum(
-            num.toFloat()
+         combinedData.xMax
         )
 
 
-        barData.groupBars(0f, groupSpace, barSpace)
+//        barData.groupBars(0f, groupSpace, barSpace)
 
-        chart1.data = barData
+        chart1.data = combinedData
         chart1.invalidate()
     }
 
