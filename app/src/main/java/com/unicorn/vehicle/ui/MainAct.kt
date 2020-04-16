@@ -8,7 +8,6 @@ import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.helper.UpdateHelper
@@ -49,7 +48,6 @@ class MainAct : BaseAct() {
     }
 
     private fun addDrawer() {
-        val identifierForParentNode = 23
         val accountHeader = AccountHeaderBuilder()
             .withActivity(this)
             .addProfiles(
@@ -76,17 +74,9 @@ class MainAct : BaseAct() {
                     .withIcon(FontAwesome.Icon.faw_address_book)
                     .withName(MainPagerAdapter.titles[2]),
                 PrimaryDrawerItem()
-                    .withIdentifier(identifierForParentNode.toLong())
+                    .withIdentifier(3)
                     .withIcon(FontAwesome.Icon.faw_chart_bar)
-                    .withName("数据统计")
-                    .withSubItems(
-                        SecondaryDrawerItem().withIdentifier(3)
-                            .withIcon(FontAwesome.Icon.faw_chart_bar)
-                            .withName(MainPagerAdapter.titles[3]),
-                        SecondaryDrawerItem().withIdentifier(4)
-                            .withIcon(FontAwesome.Icon.faw_chart_bar)
-                            .withName(MainPagerAdapter.titles[4])
-                    )
+                    .withName(MainPagerAdapter.titles[3])
             )
             .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                 override fun onItemClick(
@@ -95,7 +85,6 @@ class MainAct : BaseAct() {
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
                     val identifier = drawerItem.identifier.toInt()
-                    if (identifier == identifierForParentNode) return false
                     viewPager.setCurrentItem(identifier, false)
                     return false
                 }
