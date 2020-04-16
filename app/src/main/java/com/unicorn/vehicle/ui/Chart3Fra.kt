@@ -55,7 +55,7 @@ class Chart3Fra : BaseFra() {
     }
 
     private fun setData() {
-        val data1 = list1.sortedBy { it.value }.takeLast(10)
+        val data1 = list1.sortedBy { it.value }.takeLast(20)
 
 //        val barEntrys2 = ArrayList<BarEntry>()
 //        data1.forEachIndexed { index, statisticCommonItem ->

@@ -26,7 +26,7 @@ class Chart1Fra : BaseFra() {
             with(xAxis) {
                 position = XAxis.XAxisPosition.BOTTOM
                 setDrawGridLines(false)
-                textSize = 14f
+                textSize = 12f
                 setDrawAxisLine(false)
             }
             axisLeft.isEnabled = false
@@ -52,30 +52,26 @@ class Chart1Fra : BaseFra() {
     }
 
     private fun setData() {
-        val dataSorted = data1.sortedBy { it.value }   // 1 2 3 ...
+        // 基准 dataSorted1
+        val dataSorted1 = data1.sortedBy { it.value }.takeLast(15)   // 1 2 3 ...
+        chart1.xAxis.valueFormatter = NameValueFormatter(dataSorted1)
+        chart1.xAxis.labelCount = dataSorted1.size
 
-//        chart1.xAxis.valueFormatter = CarValueFormatter(data)
-        chart1.xAxis.labelCount = dataSorted.size
-
-
-        val barEntrys = dataSorted.map { BarEntry(dataSorted.indexOf(it).toFloat(), it.value.toFloat()) }
-        val barDataSet = BarDataSet(barEntrys, "")
-        barDataSet.color = colorPrimary
-        barDataSet.valueTextColor = colorPrimary
-        barDataSet.valueTextSize = 11f
+        val barEntrys1 = dataSorted1.map { BarEntry(dataSorted1.indexOf(it).toFloat(), it.value.toFloat()) }
+        val barDataSet1 = BarDataSet(barEntrys1, "总申请次数（单位“次”）")
+        barDataSet1.color = colorPrimary
+        barDataSet1.valueTextColor = colorPrimary
+        barDataSet1.valueTextSize = 12f
 //        barDataSet.valueFormatter = CarValueFormatter(list)
 
 
 //        val dataSet = ArrayList<IBarDataSet>()
 //        dataSet.add(barDataSet)
 
-        val barData = BarData(barDataSet)
-//        barData.setValueTextSize(10f)
-        barData.setBarWidth(0.6f)
+        val barData = BarData(barDataSet1)
+        barData.barWidth = 0.6f
 
-        chart1.setData(barData)
-
-
+        chart1.data = barData
         chart1.invalidate()
     }
 
