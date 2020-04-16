@@ -1,75 +1,67 @@
 package com.unicorn.vehicle.ui
 
-import android.graphics.Color
 import androidx.core.content.ContextCompat
-import com.github.mikephil.charting.components.XAxis.XAxisPosition
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.displayDateFormat
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StatisticCommonItem
-import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.base.BaseFra
 import kotlinx.android.synthetic.main.fra_chart1.*
-import org.joda.time.DateTime
 
 class Chart1Fra : BaseFra() {
 
     override fun initViews() {
         initChart1()
     }
-    private val colorBlue = Color.parseColor("#E4F2FD")
 
-    private val colorPrimary by lazy { ContextCompat.getColor(context!!,R.color.colorPrimary) }
+    private val colorPrimary by lazy { ContextCompat.getColor(context!!, R.color.colorPrimary) }
+
     private fun initChart1() {
         with(chart1) {
-
             setScaleEnabled(false)
-            description.isEnabled =false
-
-            //
-
-            xAxis.position = XAxisPosition.BOTTOM
-            xAxis.setDrawGridLines(false)
-//            xAxis.axisLineColor = colorBlue
-            xAxis.textSize = 12f
-            xAxis.setDrawAxisLine(false)
-//            xAxis.textColor = colorPrimary
+            description.isEnabled = false
+            with(xAxis) {
+                position = XAxis.XAxisPosition.BOTTOM
+                setDrawGridLines(false)
+                textSize = 14f
+                setDrawAxisLine(false)
+            }
             axisLeft.isEnabled = false
-            axisRight.isEnabled =false
-
-            legend.isEnabled =false
+            axisRight.isEnabled = false
         }
     }
 
     override fun bindIntent() {
-        getRequisitionCountForCar()
+        getData()
     }
 
-    private fun getRequisitionCountForCar() {
-        api.getRequisitionCountForCar(
-            StatisticCommonParam(
-                dateStart = dateStart,
-                dateEnd = dateEnd
-            )
-        )
+    private fun getData() {
+        api.getRequisitionCountForCar()
+            .flatMap {
+                data1 = it.data
+                api.getUsingHoursCountForCar()
+            }
             .observeOnMain(this)
-            .subscribe { setData(it.data) }
+            .subscribe {
+                data2 = it.data
+                setData()
+            }
     }
 
-    private fun setData(list: List<StatisticCommonItem>) {
-        val data = list.sortedBy { it.value }   // 1 2 3 ...
+    private fun setData() {
+        val dataSorted = data1.sortedBy { it.value }   // 1 2 3 ...
 
 //        chart1.xAxis.valueFormatter = CarValueFormatter(data)
-        chart1.xAxis.labelCount = data.size
+        chart1.xAxis.labelCount = dataSorted.size
 
 
-        val barEntrys = data.map { BarEntry(data.indexOf(it).toFloat(), it.value.toFloat()) }
-        val barDataSet = BarDataSet(barEntrys,"")
+        val barEntrys = dataSorted.map { BarEntry(dataSorted.indexOf(it).toFloat(), it.value.toFloat()) }
+        val barDataSet = BarDataSet(barEntrys, "")
         barDataSet.color = colorPrimary
-        barDataSet.valueTextColor  = colorPrimary
+        barDataSet.valueTextColor = colorPrimary
         barDataSet.valueTextSize = 11f
 //        barDataSet.valueFormatter = CarValueFormatter(list)
 
@@ -87,10 +79,9 @@ class Chart1Fra : BaseFra() {
         chart1.invalidate()
     }
 
-    private var dateStart = DateTime().minusMonths(1).toString(displayDateFormat)
-
-    private var dateEnd = DateTime().toString(displayDateFormat)
-
     override val layoutId = R.layout.fra_chart1
+
+    lateinit var data1: List<StatisticCommonItem>
+    lateinit var data2: List<StatisticCommonItem>
 
 }

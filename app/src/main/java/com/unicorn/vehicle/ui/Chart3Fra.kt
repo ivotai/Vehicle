@@ -1,13 +1,10 @@
 package com.unicorn.vehicle.ui
 
-import android.graphics.Color
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.formatter.ValueFormatter
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StatisticCommonItem
