@@ -51,6 +51,7 @@ class Chart1Fra : BaseFra() {
     override fun registerEvent() {
         RxBus.registerEvent(this, StatisticCommonParam::class.java, Consumer {
             getData(it)
+            tvTitle.text = "${it.dateStart} 至 ${it.dateEnd}"
         })
         RxBus.post(StatisticCommonParam())
     }
@@ -68,11 +69,18 @@ class Chart1Fra : BaseFra() {
             }
     }
 
-    private val groupCount = 15
+    private val defaultGroupCount = 15
 
     private fun setData() {
         // 基准 dataSorted1
-        val dataSorted1 = data1.sortedBy { it.value }.takeLast(groupCount)  // 1 2 3 ...
+        var dataSorted1 = data1.sortedBy { it.value }  // 1 2 3 ...
+
+        //
+        var groupCount = defaultGroupCount
+        if (dataSorted1.size > defaultGroupCount) dataSorted1 =
+            dataSorted1.takeLast(defaultGroupCount)
+        else groupCount = dataSorted1.size
+
         chart.xAxis.valueFormatter = NameValueFormatter(dataSorted1)
         chart.xAxis.labelCount = dataSorted1.size
 
