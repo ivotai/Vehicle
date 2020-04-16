@@ -22,7 +22,7 @@ class Chart3Fra : BaseFra() {
     private fun initChart1() {
         with(chart3) {
 
-            setScaleEnabled(false)
+//            setScaleEnabled(false)
             description.isEnabled = false
 
             //
@@ -65,7 +65,7 @@ class Chart3Fra : BaseFra() {
 
 
 //        chart3.xAxis.valueFormatter = CarValueFormatter(data1)
-        chart3.xAxis.labelCount = data1.size
+//        chart3.xAxis.labelCount = data1.size
 //        chart3.xAxis.setCenterAxisLabels(true)
 
 

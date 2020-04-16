@@ -19,16 +19,18 @@ class Chart1Fra : BaseFra() {
     }
 
     private val colorPrimary by lazy { ContextCompat.getColor(context!!, R.color.colorPrimary) }
+    private val colorMd by lazy { ContextCompat.getColor(context!!, R.color.md_orange_400) }
 
     private fun initChart1() {
         with(chart1) {
-            setScaleEnabled(false)
-            description.isEnabled = false
+//            setScaleEnabled(false)
+//            description.isEnabled = false
             with(xAxis) {
                 position = XAxis.XAxisPosition.BOTTOM
                 setDrawGridLines(false)
                 textSize = 12f
                 setDrawAxisLine(false)
+                setCenterAxisLabels(true)
             }
             axisLeft.isEnabled = false
             axisRight.isEnabled = false
@@ -71,13 +73,22 @@ class Chart1Fra : BaseFra() {
         val barEntrys2 = ArrayList<BarEntry>()
         dataSorted1.forEachIndexed { index, item ->
             val value = data2.find { it.name == item.name }?.value ?: 0.0
-            barEntrys2.add(BarEntry(index.toFloat(), value.toFloat()))
+            barEntrys2.add(BarEntry(index.toFloat() + 0, value.toFloat()))
         }
+        val barDataSet2 = BarDataSet(barEntrys2, "总使用时间（单位“小时”）")
+        barDataSet2.color = colorMd
+        barDataSet2.valueTextColor = colorMd
+        barDataSet2.valueTextSize = 12f
+        barDataSet2.axisDependency = YAxis.AxisDependency.RIGHT
 
-
-        val barData = BarData(barDataSet1)
-        barData.barWidth = 0.6f
-
+        //
+        val barData = BarData(barDataSet1, barDataSet2)
+        val groupSpace = 0.2f
+        val barSpace = 0.00f // x2 dataset
+        val barWidth = 0.4f // x2 dataset
+        barData.barWidth = barWidth
+        barData.groupBars(0f, groupSpace, barSpace)
+        chart1.xAxis.setAxisMaximum(barData.getXMax() + 0.25f)
         chart1.data = barData
         chart1.invalidate()
     }
