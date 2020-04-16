@@ -120,7 +120,7 @@ class Chart1Fra : BaseFra() {
 
 //        barData.groupBars(0f, groupSpace, barSpace)
 
-        chart1.data = combinedData
+//        chart1.data = combinedData
         chart1.invalidate()
     }
 
