@@ -51,6 +51,12 @@ interface SimpleApi {
     fun checkAppVersion(@Body stringQuery: StringQuery): Single<Response<CheckAppVersionResponse>>
 
     @POST("Statistics/RequisitionCountForCar")
-    fun getRequisitionCountForCar(@Body statisticCommonParam: StatisticCommonParam): Observable<Response<List<StatisticCommonItem>>>
+    fun getRequisitionCountForCar(@Body statisticCommonParam: StatisticCommonParam = StatisticCommonParam()): Observable<Response<List<StatisticCommonItem>>>
+
+    @POST("Statistics/RequisitionCountForUser")
+    fun getRequisitionCountForUser(@Body statisticCommonParam: StatisticCommonParam = StatisticCommonParam()): Observable<Response<List<StatisticCommonItem>>>
+
+    @POST("Statistics/UsingHoursAverageForUser")
+    fun getUsingHoursAverageForUser(@Body statisticCommonParam: StatisticCommonParam = StatisticCommonParam()): Observable<Response<List<StatisticCommonItem>>>
 
 }

@@ -18,12 +18,7 @@ class ChartsFra : BaseFra() {
         viewPaper.offscreenPageLimit = ChartsPagerAdapter.titles.size - 1
         viewPaper.adapter = ChartsPagerAdapter(childFragmentManager)
         navigationTabStrip.setViewPager(viewPaper)
-        navigationTabStrip.setTitles(
-            ChartsPagerAdapter.titles[0],
-            ChartsPagerAdapter.titles[1],
-            ChartsPagerAdapter.titles[2]
-        )
-
+        navigationTabStrip.setTitles(ChartsPagerAdapter.titles[0], ChartsPagerAdapter.titles[1])
 
         val drawable = IconicsDrawable(context!!)
             .icon(FontAwesome.Icon.faw_calendar_alt)
