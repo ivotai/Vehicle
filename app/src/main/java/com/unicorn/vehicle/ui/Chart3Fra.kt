@@ -32,13 +32,11 @@ class Chart3Fra : BaseFra() {
 
             xAxis.position = XAxisPosition.BOTTOM
             xAxis.setDrawGridLines(false)
-//            xAxis.axisLineColor = colorBlue
             xAxis.textSize = 12f
             xAxis.setDrawAxisLine(false)
-//            xAxis.textColor = colorPrimary
             axisLeft.isEnabled = false
             axisRight.isEnabled = false
-
+            legend.isEnabled =false
         }
     }
 
@@ -62,54 +60,42 @@ class Chart3Fra : BaseFra() {
     private fun setData() {
         val data1 = list1.sortedBy { it.value }.takeLast(10)
 
-        val barEntrys2 = ArrayList<BarEntry>()
-        data1.forEachIndexed { index, statisticCommonItem ->
-            val value = list2.find { it.name == statisticCommonItem.name }?.value ?: 0.0
-            barEntrys2.add(BarEntry(index.toFloat() + 0.5f, value.toFloat()))
-        }
+//        val barEntrys2 = ArrayList<BarEntry>()
+//        data1.forEachIndexed { index, statisticCommonItem ->
+//            val value = list2.find { it.name == statisticCommonItem.name }?.value ?: 0.0
+//            barEntrys2.add(BarEntry(index.toFloat() + 0.5f, value.toFloat()))
+//        }
 
 
-        chart3.xAxis.valueFormatter = CarValueFormatter(data1)
+//        chart3.xAxis.valueFormatter = CarValueFormatter(data1)
         chart3.xAxis.labelCount = data1.size
-        chart3.xAxis.mAxisMinimum = 0.0f
-        chart3.xAxis.setCenterAxisLabels(true)
+//        chart3.xAxis.setCenterAxisLabels(true)
 
 
-        val barEntrys =
-            data1.map { BarEntry(data1.indexOf(it).toFloat() + 0.5f, it.value.toFloat()) }
-
-        //
+        val barEntrys = data1.map { BarEntry(data1.indexOf(it).toFloat(), it.value.toFloat()) }
 
 
         val barDataSet = BarDataSet(barEntrys, "总使用次数")
-        barDataSet.setAxisDependency(YAxis.AxisDependency.LEFT)
         barDataSet.color = colorPrimary
-//        barDataSet.valueTextColor = colorPrimary
-//        barDataSet.valueTextSize = 11f
+        barDataSet.valueTextColor  = colorPrimary
+        barDataSet.valueTextSize = 11f
 
-        barDataSet.setDrawValues(true)
         val groupSpace = 0.2f
         val barSpace = 0.00f // x2 dataset
 
         val barWidth = 0.4f // x2 dataset
-        val barDataSet2 = BarDataSet(barEntrys2, "平均使用时间")
-        barDataSet2.color = Color.RED
-        barDataSet2.setDrawValues(true)
-        barDataSet2.valueTextColor = colorPrimary
-        barDataSet2.valueTextSize = 11f
-        barDataSet2.setAxisDependency(YAxis.AxisDependency.RIGHT)
+//        val barDataSet2 = BarDataSet(barEntrys2, "平均使用时间")
+//        barDataSet2.color = Color.RED
+//        barDataSet2.setDrawValues(true)
+//        barDataSet2.valueTextColor = colorPrimary
+//        barDataSet2.valueTextSize = 11f
+//        barDataSet2.setAxisDependency(YAxis.AxisDependency.RIGHT)
 
-        barDataSet2.valueFormatter = object : ValueFormatter(){
-            override fun getBarLabel(barEntry: BarEntry): String {
-                return "${barEntry.y.toInt()}"
-            }
-        }
         val barData = BarData(barDataSet)
 //        barData.setValueTextSize(10f)
-        barData.setBarWidth(barWidth)
-        barData.setDrawValues(true)
+//        barData.setBarWidth(barWidth)
 //        barData.groupBars(0f, groupSpace, barSpace)
-
+        barData.setBarWidth(0.6f)
         chart3.setData(barData)
         chart3.invalidate()
     }
