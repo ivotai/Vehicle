@@ -8,7 +8,7 @@ class CarValueFormatter(private val data: List<StatisticCommonItem>) : ValueForm
 
     override fun getAxisLabel(value: Float, axis: AxisBase): String {
         val index = value.toInt()
-        return data[index].name
+        return if (index in data.indices) data[index].name else "hehe"
     }
 
 //    override fun getBarLabel(barEntry: BarEntry): String {
