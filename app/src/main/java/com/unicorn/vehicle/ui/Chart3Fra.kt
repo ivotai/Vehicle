@@ -3,10 +3,10 @@ package com.unicorn.vehicle.ui
 import android.graphics.Color
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StatisticCommonItem
@@ -35,10 +35,10 @@ class Chart3Fra : BaseFra() {
             xAxis.textSize = 12f
             xAxis.setDrawAxisLine(false)
 //            xAxis.textColor = colorPrimary
-            axisLeft.isEnabled = false
-            axisRight.isEnabled = false
+//            axisLeft.isEnabled = false
+//            axisRight.isEnabled = false
 
-            legend.isEnabled = false
+//            legend.isEnabled = false
         }
     }
 
@@ -60,7 +60,7 @@ class Chart3Fra : BaseFra() {
     }
 
     private fun setData() {
-        val data1 = list1.sortedByDescending { it.value }.take(10)
+        val data1 = list1.sortedByDescending { it.value }.take(15)
 
         val barEntrys2 = ArrayList<BarEntry>()
         data1.forEachIndexed { index, statisticCommonItem ->
@@ -75,26 +75,37 @@ class Chart3Fra : BaseFra() {
 
 
         val barEntrys = data1.map { BarEntry(data1.indexOf(it).toFloat(), it.value.toFloat()) }
-        val barDataSet = BarDataSet(barEntrys, "")
+
+        //
+//        chart3.axisLeft.setAxisMaximum(barEntrys.maxBy { it.y }!!.y)
+//        chart3.axisLeft.setAxisMinimum(0f)
+//        chart3.axisRight.setAxisMaximum(barEntrys2.maxBy { it.y }!!.y)
+//        chart3.axisRight.setAxisMinimum(0f)
+
+
+        val barDataSet = BarDataSet(barEntrys, "总使用次数")
+        barDataSet.setAxisDependency(YAxis.AxisDependency.LEFT)
         barDataSet.color = colorPrimary
         barDataSet.valueTextColor = colorPrimary
         barDataSet.valueTextSize = 11f
 //        barDataSet.valueFormatter = CarValueFormatter(list)
-
-
-        val barDataSet2 = BarDataSet(barEntrys2, "")
+        val barWidth = 0.45f
+        val groupSpace = 0.06f
+        val barSpace = 0.02f
+        val barDataSet2 = BarDataSet(barEntrys2, "平均使用时间")
         barDataSet2.color = Color.RED
         barDataSet2.valueTextColor = colorPrimary
         barDataSet2.valueTextSize = 11f
+        barDataSet.setAxisDependency(YAxis.AxisDependency.RIGHT)
 
-        val dataSet = ArrayList<IBarDataSet>()
-        dataSet.add(barDataSet)
-        dataSet.add(barDataSet2)
+//        val dataSet = ArrayList<IBarDataSet>()
+//        dataSet.add(barDataSet)
+//        dataSet.add(barDataSet2)
 
-        val barData = BarData(dataSet)
+        val barData = BarData(barDataSet,barDataSet2)
 //        barData.setValueTextSize(10f)
-        barData.setBarWidth(0.6f)
-
+        barData.setBarWidth(barWidth)
+        barData.groupBars(0f, groupSpace, barSpace)
         chart3.setData(barData)
 
 
