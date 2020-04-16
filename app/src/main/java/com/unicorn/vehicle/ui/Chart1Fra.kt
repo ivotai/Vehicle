@@ -2,6 +2,7 @@ package com.unicorn.vehicle.ui
 
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -57,16 +58,22 @@ class Chart1Fra : BaseFra() {
         chart1.xAxis.valueFormatter = NameValueFormatter(dataSorted1)
         chart1.xAxis.labelCount = dataSorted1.size
 
-        val barEntrys1 = dataSorted1.map { BarEntry(dataSorted1.indexOf(it).toFloat(), it.value.toFloat()) }
+        val barEntrys1 =
+            dataSorted1.map { BarEntry(dataSorted1.indexOf(it).toFloat(), it.value.toFloat()) }
         val barDataSet1 = BarDataSet(barEntrys1, "总申请次数（单位“次”）")
         barDataSet1.color = colorPrimary
         barDataSet1.valueTextColor = colorPrimary
         barDataSet1.valueTextSize = 12f
+        barDataSet1.axisDependency = YAxis.AxisDependency.LEFT
 //        barDataSet.valueFormatter = CarValueFormatter(list)
 
+        // 基准 dataSorted1
+        val barEntrys2 = ArrayList<BarEntry>()
+        dataSorted1.forEachIndexed { index, item ->
+            val value = data2.find { it.name == item.name }?.value ?: 0.0
+            barEntrys2.add(BarEntry(index.toFloat(), value.toFloat()))
+        }
 
-//        val dataSet = ArrayList<IBarDataSet>()
-//        dataSet.add(barDataSet)
 
         val barData = BarData(barDataSet1)
         barData.barWidth = 0.6f
