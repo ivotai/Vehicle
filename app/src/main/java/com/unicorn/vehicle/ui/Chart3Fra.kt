@@ -35,8 +35,8 @@ class Chart3Fra : BaseFra() {
             xAxis.textSize = 12f
             xAxis.setDrawAxisLine(false)
 //            xAxis.textColor = colorPrimary
-//            axisLeft.isEnabled = false
-//            axisRight.isEnabled = false
+            axisLeft.isEnabled = false
+            axisRight.isEnabled = false
 
 //            legend.isEnabled = false
         }
@@ -60,7 +60,7 @@ class Chart3Fra : BaseFra() {
     }
 
     private fun setData() {
-        val data1 = list1.sortedByDescending { it.value }.take(15)
+        val data1 = list1.sortedBy { it.value }.takeLast(10)
 
         val barEntrys2 = ArrayList<BarEntry>()
         data1.forEachIndexed { index, statisticCommonItem ->
@@ -70,7 +70,7 @@ class Chart3Fra : BaseFra() {
 
 
 
-        chart3.xAxis.valueFormatter = CarValueFormatter(data1)
+//        chart3.xAxis.valueFormatter = CarValueFormatter(data1)
         chart3.xAxis.labelCount = data1.size
 
 
@@ -98,9 +98,7 @@ class Chart3Fra : BaseFra() {
         barDataSet2.valueTextSize = 11f
         barDataSet.setAxisDependency(YAxis.AxisDependency.RIGHT)
 
-//        val dataSet = ArrayList<IBarDataSet>()
-//        dataSet.add(barDataSet)
-//        dataSet.add(barDataSet2)
+
 
         val barData = BarData(barDataSet,barDataSet2)
 //        barData.setValueTextSize(10f)

@@ -60,7 +60,7 @@ class Chart1Fra : BaseFra() {
     }
 
     private fun setData(list: List<StatisticCommonItem>) {
-        val data = list.sortedBy { it.value }
+        val data = list.sortedBy { it.value }   // 1 2 3 ...
 
         chart1.xAxis.valueFormatter = CarValueFormatter(data)
         chart1.xAxis.labelCount = data.size
