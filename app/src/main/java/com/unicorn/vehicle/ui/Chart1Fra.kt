@@ -1,6 +1,7 @@
 package com.unicorn.vehicle.ui
 
 import androidx.core.content.ContextCompat
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
@@ -18,7 +19,6 @@ class Chart1Fra : BaseFra() {
         initChart()
     }
 
-
     private fun initChart() {
         with(chart) {
 //            setScaleEnabled(false)
@@ -30,11 +30,14 @@ class Chart1Fra : BaseFra() {
                 setDrawAxisLine(false)
                 setCenterAxisLabels(true)
             }
+            // 影藏坐标轴
             axisLeft.isEnabled = false
             axisRight.isEnabled = false
-
+            // 确保了对齐
             axisRight.axisMinimum = 0f
             axisLeft.axisMinimum = 0f
+
+            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
         }
     }
 
@@ -65,12 +68,17 @@ class Chart1Fra : BaseFra() {
 
         val barEntrys1 =
             dataSorted1.map { BarEntry(dataSorted1.indexOf(it).toFloat(), it.value.toFloat()) }
-        val barDataSet1 = BarDataSet(barEntrys1, "总申请次数（单位“次”）")
-        barDataSet1.color = colorPrimary
-        barDataSet1.valueTextColor = colorPrimary
-        barDataSet1.valueTextSize = 12f
-        barDataSet1.axisDependency = YAxis.AxisDependency.LEFT
-//        barDataSet.valueFormatter = CarValueFormatter(list)
+        val barDataSet1 = BarDataSet(barEntrys1, "总申请次数").apply {
+            color = colorPrimary
+            valueTextColor = colorPrimary
+            valueTextSize = 12f
+            axisDependency = YAxis.AxisDependency.LEFT
+//            valueFormatter = object : ValueFormatter() {
+//                override fun getBarLabel(barEntry: BarEntry): String {
+//                    return "${barEntry.y.toInt()}次"
+//                }
+//            }
+        }
 
         // 基准 dataSorted1
         val barEntrys2 = ArrayList<BarEntry>()
@@ -78,11 +86,12 @@ class Chart1Fra : BaseFra() {
             val value = data2.find { it.name == item.name }?.value ?: 0.0
             barEntrys2.add(BarEntry(index.toFloat() + 0, value.toFloat()))
         }
-        val barDataSet2 = BarDataSet(barEntrys2, "总使用时间（单位“小时”）")
-        barDataSet2.color = colorMd
-        barDataSet2.valueTextColor = colorMd
-        barDataSet2.valueTextSize = 12f
-        barDataSet2.axisDependency = YAxis.AxisDependency.RIGHT
+        val barDataSet2 = BarDataSet(barEntrys2, "总使用时间（小时）").apply {
+            color = colorMd
+            valueTextColor = colorMd
+            valueTextSize = 12f
+            axisDependency = YAxis.AxisDependency.RIGHT
+        }
 
         // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
         val barData = BarData(barDataSet1, barDataSet2)

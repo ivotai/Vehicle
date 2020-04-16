@@ -8,10 +8,7 @@ class NameValueFormatter(private val data: List<StatisticCommonItem>) : ValueFor
 
     override fun getAxisLabel(value: Float, axis: AxisBase): String {
         val index = value.toInt()
-        return if (index in data.indices) data[index].name else "无用的标签"
+        return if (index in data.indices) data[index].name else ""
     }
 
-//    override fun getBarLabel(barEntry: BarEntry): String {
-//        return "${barEntry.y.toInt()}次"
-//    }
 }
