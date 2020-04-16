@@ -4,33 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.gigamole.navigationtabstrip.NavigationTabStrip
-        android:id="@+id/navigationTabStrip"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:nts_active_color="@color/colorPrimary"
-        app:nts_animation_duration="300"
-        app:nts_color="@color/colorPrimary"
-        app:nts_corners_radius="1.5dp"
-        app:nts_factor="2.5"
-        app:nts_gravity="bottom"
-        app:nts_inactive_color="#c4c4c4"
-        app:nts_size="15sp"
-        app:nts_type="line"
-        app:nts_typeface="fonts/typeface.otf"
-        app:nts_weight="3dp" />
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPaper"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/navigationTabStrip" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.tabs.TabLayout
+            app:tabMode="scrollable"
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top" />
+
+    </androidx.viewpager.widget.ViewPager>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

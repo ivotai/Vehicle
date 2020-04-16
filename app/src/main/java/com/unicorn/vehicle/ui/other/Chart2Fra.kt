@@ -1,4 +1,4 @@
-package com.unicorn.vehicle.ui
+package com.unicorn.vehicle.ui.other
 
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.XAxis
@@ -9,10 +9,11 @@ import com.github.mikephil.charting.data.BarEntry
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StatisticCommonItem
+import com.unicorn.vehicle.ui.NameValueFormatter
 import com.unicorn.vehicle.ui.base.BaseFra
 import kotlinx.android.synthetic.main.fra_chart1.*
 
-class Chart1Fra : BaseFra() {
+class Chart2Fra : BaseFra() {
 
     override fun initViews() {
         initChart1()
@@ -54,13 +55,11 @@ class Chart1Fra : BaseFra() {
             }
     }
 
-    private val num =15
-
     private fun setData() {
         // 基准 dataSorted1
-        val dataSorted1 = data1.sortedBy { it.value }.takeLast(num)   // 1 2 3 ...
-//        chart1.xAxis.valueFormatter = NameValueFormatter(dataSorted1)
-//        chart1.xAxis.labelCount = dataSorted1.size
+        val dataSorted1 = data1.sortedBy { it.value }.takeLast(15)   // 1 2 3 ...
+        chart1.xAxis.valueFormatter = NameValueFormatter(dataSorted1)
+        chart1.xAxis.labelCount = dataSorted1.size
 
         val barEntrys1 =
             dataSorted1.map { BarEntry(dataSorted1.indexOf(it).toFloat(), it.value.toFloat()) }
@@ -89,21 +88,8 @@ class Chart1Fra : BaseFra() {
         val barSpace = 0.00f // x2 dataset
         val barWidth = 0.4f // x2 dataset
         barData.barWidth = barWidth
-
-
-        // restrict the x-axis range
-        chart1.getXAxis().setAxisMinimum(0.0f)
-
-        // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
-
-        // barData.getGroupWith(...) is a helper that calculates the width each group needs based on the provided parameters
-        chart1.getXAxis().setAxisMaximum(
-            num.toFloat()
-        )
-
-
         barData.groupBars(0f, groupSpace, barSpace)
-
+        chart1.xAxis.setAxisMaximum(barData.getXMax() + 0.25f)
         chart1.data = barData
         chart1.invalidate()
     }
