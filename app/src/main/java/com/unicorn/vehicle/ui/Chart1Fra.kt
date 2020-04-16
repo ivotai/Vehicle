@@ -8,9 +8,12 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.unicorn.vehicle.R
+import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StatisticCommonItem
+import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.base.BaseFra
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fra_horizontal_bar_chart.*
 
 class Chart1Fra : BaseFra() {
@@ -42,14 +45,21 @@ class Chart1Fra : BaseFra() {
     }
 
     override fun bindIntent() {
-        getData()
+
     }
 
-    private fun getData() {
-        api.getRequisitionCountForCar()
+    override fun registerEvent() {
+        RxBus.registerEvent(this, StatisticCommonParam::class.java, Consumer {
+            getData(it)
+        })
+        RxBus.post(StatisticCommonParam())
+    }
+
+    private fun getData(statisticCommonParam: StatisticCommonParam) {
+        api.getRequisitionCountForCar(statisticCommonParam)
             .flatMap {
                 data1 = it.data
-                api.getUsingHoursCountForCar()
+                api.getUsingHoursCountForCar(statisticCommonParam)
             }
             .observeOnMain(this)
             .subscribe {
