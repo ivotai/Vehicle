@@ -30,6 +30,7 @@ class Chart3Fra : BaseFra() {
                 setDrawGridLines(false)
                 textSize = 12f
                 setDrawAxisLine(false)
+                textColor = md_grey_600
             }
             // 影藏坐标轴
             axisLeft.isEnabled = false
@@ -38,18 +39,18 @@ class Chart3Fra : BaseFra() {
             axisRight.axisMinimum = 0f
             axisLeft.axisMinimum = 0f
 
-            with(legend){
+            with(legend) {
                 verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-                horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+                horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
             }
         }
     }
 
     override fun bindIntent() {
         getData(StatisticCommonParam())
-        swipe.swipeListener = object :Swipe.SwipeListener{
+        swipe.swipeListener = object : Swipe.SwipeListener {
             override fun onSwipe(statisticCommonParam: StatisticCommonParam) {
-               getData(statisticCommonParam)
+                getData(statisticCommonParam)
             }
         }
     }
@@ -74,7 +75,7 @@ class Chart3Fra : BaseFra() {
 
         val barEntrys =
             dataSorted.map { BarEntry(dataSorted.indexOf(it).toFloat(), it.value.toFloat()) }
-        val barDataSet = BarDataSet(barEntrys, "总申请次数（单位“次”，按车辆分组）").apply {
+        val barDataSet = BarDataSet(barEntrys, "总申请次数").apply {
             color = colorPrimary
             valueTextColor = colorPrimary
             valueTextSize = 12f
@@ -95,7 +96,7 @@ class Chart3Fra : BaseFra() {
     }
 
     private val colorPrimary by lazy { ContextCompat.getColor(context!!, R.color.colorPrimary) }
-    private val colorMd by lazy { ContextCompat.getColor(context!!, R.color.md_teal_400) }
+    private val md_grey_600 by lazy { ContextCompat.getColor(context!!, R.color.md_grey_600) }
 
     lateinit var data1: List<StatisticCommonItem>
     lateinit var data2: List<StatisticCommonItem>

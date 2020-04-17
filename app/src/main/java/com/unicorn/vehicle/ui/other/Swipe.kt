@@ -18,7 +18,7 @@ class Swipe(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs
     override val containerView = this
 
     private val list = listOf("近三月", "近一月", "近一周", "近三天", "今天")
-    private var pos = list.size - 1
+    private var pos = 1
 
     init {
         LayoutInflater.from(context).inflate(R.layout.swipe, this, true)
