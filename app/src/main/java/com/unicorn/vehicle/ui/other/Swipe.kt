@@ -5,6 +5,10 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.jakewharton.rxbinding3.view.clicks
+import com.mikepenz.iconics.IconicsDrawable
+import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
+import com.mikepenz.iconics.utils.toIconicsColor
+import com.mikepenz.iconics.utils.toIconicsSizeDp
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.displayDateFormat
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
@@ -54,6 +58,18 @@ class Swipe(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs
 
     private fun refreshText() {
         textView.text = list[pos]
+    }
+
+    fun setColor(color: Int){
+        textView.setTextColor(color)
+        iivLeft.setImageDrawable(IconicsDrawable(context)
+            .icon(FontAwesome.Icon.faw_chevron_left)
+            .color(color.toIconicsColor())
+            .size(18.toIconicsSizeDp()))
+        iivRight.setImageDrawable(IconicsDrawable(context)
+            .icon(FontAwesome.Icon.faw_chevron_right)
+            .color(color.toIconicsColor())
+            .size(18.toIconicsSizeDp()))
     }
 
     interface SwipeListener {

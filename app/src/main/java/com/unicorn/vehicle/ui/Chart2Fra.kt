@@ -69,7 +69,7 @@ class Chart2Fra : BaseFra() {
             }
     }
 
-    private val defaultGroupCount = 12
+    private val defaultGroupCount = 10
 
     private fun setData() {
         // 基准 dataSorted1

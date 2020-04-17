@@ -65,6 +65,9 @@ class Chart1Fra : BaseFra() {
                 horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
             }
         }
+        // 改变颜色试试
+        swipe1.setColor(mdColor1)
+        swipe2.setColor(mdColor2)
     }
 
     override fun bindIntent() {
@@ -106,8 +109,8 @@ class Chart1Fra : BaseFra() {
         val barEntrys =
             dataSorted.map { BarEntry(dataSorted.indexOf(it).toFloat(), it.value.toFloat()) }
         val barDataSet = BarDataSet(barEntrys, "总申请次数").apply {
-            color = colorPrimary
-            valueTextColor = colorPrimary
+            color = mdColor1
+            valueTextColor = mdColor1
             valueTextSize = 12f
             valueFormatter = IntValueFormatter()
         }
@@ -131,8 +134,8 @@ class Chart1Fra : BaseFra() {
         val barEntrys =
             dataSorted.map { BarEntry(dataSorted.indexOf(it).toFloat(), it.value.toFloat()) }
         val barDataSet = BarDataSet(barEntrys, "总使用时间（小时）").apply {
-            color = colorPrimary
-            valueTextColor = colorPrimary
+            color = mdColor2
+            valueTextColor = mdColor2
             valueTextSize = 12f
             valueFormatter = IntValueFormatter()
         }
@@ -146,8 +149,9 @@ class Chart1Fra : BaseFra() {
         }
     }
 
-    private val colorPrimary by lazy { ContextCompat.getColor(context!!, R.color.colorPrimary) }
+    private val mdColor1 by lazy { ContextCompat.getColor(context!!, R.color.md_indigo_300) }
     private val md_grey_600 by lazy { ContextCompat.getColor(context!!, R.color.md_grey_600) }
+    private val mdColor2 by lazy { ContextCompat.getColor(context!!, R.color.md_green_300) }
 
     override val layoutId = R.layout.fra_chart1
 
