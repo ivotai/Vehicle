@@ -102,7 +102,7 @@ class Chart1Fra : BaseFra() {
         val barEntrys2 = ArrayList<BarEntry>()
         dataSorted1.forEachIndexed { index, item ->
             val value = data2.find { it.name == item.name }?.value ?: 0.0
-            barEntrys2.add(BarEntry(index.toFloat() + 0, value.toFloat()))
+            barEntrys2.add(BarEntry(index.toFloat(), value.toFloat()))
         }
         val barDataSet2 = BarDataSet(barEntrys2, "总使用时间（小时）").apply {
             color = colorMd
