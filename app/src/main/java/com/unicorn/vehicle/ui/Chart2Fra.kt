@@ -24,7 +24,7 @@ class Chart2Fra : BaseFra() {
 
     private fun initChart() {
         with(chart) {
-//            setScaleEnabled(false)
+            setScaleEnabled(false)
             description.isEnabled = false
             with(xAxis) {
                 position = XAxis.XAxisPosition.BOTTOM

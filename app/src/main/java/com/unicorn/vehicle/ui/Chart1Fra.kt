@@ -6,7 +6,6 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.formatter.ValueFormatter
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StatisticCommonItem
@@ -55,8 +54,8 @@ class Chart1Fra : BaseFra() {
                 textColor = md_grey_600
             }
             // 影藏坐标轴
-//            axisLeft.isEnabled = false
-//            axisRight.isEnabled = false
+            axisLeft.isEnabled = false
+            axisRight.isEnabled = false
             // 确保了对齐
             axisRight.axisMinimum = 0f
             axisLeft.axisMinimum = 0f
@@ -110,11 +109,7 @@ class Chart1Fra : BaseFra() {
             color = colorPrimary
             valueTextColor = colorPrimary
             valueTextSize = 12f
-            valueFormatter = object : ValueFormatter() {
-                override fun getBarLabel(barEntry: BarEntry): String {
-                    return "${barEntry.y.toInt()}"
-                }
-            }
+            valueFormatter = IntValueFormatter()
         }
 
         val barData = BarData(barDataSet)
@@ -139,11 +134,7 @@ class Chart1Fra : BaseFra() {
             color = colorPrimary
             valueTextColor = colorPrimary
             valueTextSize = 12f
-            valueFormatter = object : ValueFormatter() {
-                override fun getBarLabel(barEntry: BarEntry): String {
-                    return "${barEntry.y.toInt()}"
-                }
-            }
+            valueFormatter = IntValueFormatter()
         }
 
         val barData = BarData(barDataSet)
