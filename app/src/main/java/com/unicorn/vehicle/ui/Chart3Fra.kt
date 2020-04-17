@@ -10,7 +10,9 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StatisticCommonItem
+import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.base.BaseFra
+import com.unicorn.vehicle.ui.other.Swipe
 import kotlinx.android.synthetic.main.fra_chart3.*
 
 class Chart3Fra : BaseFra() {
@@ -44,12 +46,16 @@ class Chart3Fra : BaseFra() {
     }
 
     override fun bindIntent() {
-        getData()
+        getData(StatisticCommonParam())
+        swipe.swipeListener = object :Swipe.SwipeListener{
+            override fun onSwipe(statisticCommonParam: StatisticCommonParam) {
+               getData(statisticCommonParam)
+            }
+        }
     }
 
-
-    private fun getData() {
-        api.getRequisitionCountForCar()
+    private fun getData(statisticCommonParam: StatisticCommonParam) {
+        api.getRequisitionCountForCar(statisticCommonParam)
             .observeOnMain(this)
             .subscribe {
                 data1 = it.data
@@ -60,7 +66,6 @@ class Chart3Fra : BaseFra() {
     private val defaultGroupCount = 10
 
     private fun setData() {
-        // 基准 dataSorted1
         var dataSorted = data1.sortedBy { it.value }  // 1 2 3 ...
         if (dataSorted.size > defaultGroupCount) dataSorted = dataSorted.takeLast(defaultGroupCount)
 
@@ -80,19 +85,13 @@ class Chart3Fra : BaseFra() {
             }
         }
 
-
         val barData = BarData(barDataSet)
-
         with(chart1) {
             data = barData
-
             barData.barWidth = 0.7f
-
-
             invalidate()
             animateY(1000)
         }
-
     }
 
     private val colorPrimary by lazy { ContextCompat.getColor(context!!, R.color.colorPrimary) }
