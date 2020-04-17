@@ -106,6 +106,7 @@ dependencies {
     //noinspection GradleDependency
     implementation "com.mikepenz:iconics-core:4.0.2"
     implementation "com.mikepenz:iconics-views:4.0.2"
+    implementation 'com.mikepenz:ionicons-typeface:2.0.1.5-kotlin@aar'
 }
 
 androidExtensions {

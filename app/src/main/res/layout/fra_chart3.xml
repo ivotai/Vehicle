@@ -20,14 +20,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.unicorn.vehicle.ui.other.Swipe
+        android:id="@+id/swipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle1" />
+
     <com.github.mikephil.charting.charts.HorizontalBarChart
         android:id="@+id/chart1"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle1" />
+        app:layout_constraintTop_toBottomOf="@+id/swipe" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
