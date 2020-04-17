@@ -1,6 +1,8 @@
 package com.unicorn.vehicle.ui
 
 import androidx.core.content.ContextCompat
+import com.blankj.utilcode.util.ConvertUtils
+import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -100,8 +102,9 @@ class Chart1Fra : BaseFra() {
     private val defaultGroupCount = 10
 
     private fun setData1(data: List<StatisticCommonItem>) {
-        var dataSorted = data.sortedBy { it.value }  // 1 2 3 ...
-        if (dataSorted.size > defaultGroupCount) dataSorted = dataSorted.takeLast(defaultGroupCount)
+        changeChartHeight(chart1, data.size)
+        val dataSorted = data.sortedBy { it.value }  // 1 2 3 ...
+//        if (dataSorted.size > defaultGroupCount) dataSorted = dataSorted.takeLast(defaultGroupCount)
 
         chart1.xAxis.valueFormatter = NameValueFormatter(dataSorted)
         chart1.xAxis.labelCount = dataSorted.size
@@ -124,9 +127,16 @@ class Chart1Fra : BaseFra() {
         }
     }
 
+    private fun changeChartHeight(chart: HorizontalBarChart, size: Int) {
+        val params = chart.layoutParams
+        chart.layoutParams.height = ConvertUtils.dp2px(maxOf(size, 10) * 30f)
+        chart.layoutParams = params
+    }
+
     private fun setData2(data: List<StatisticCommonItem>) {
+        changeChartHeight(chart2, data.size)
         var dataSorted = data.sortedBy { it.value }  // 1 2 3 ...
-        if (dataSorted.size > defaultGroupCount) dataSorted = dataSorted.takeLast(defaultGroupCount)
+//        if (dataSorted.size > defaultGroupCount) dataSorted = dataSorted.takeLast(defaultGroupCount)
 
         chart2.xAxis.valueFormatter = NameValueFormatter(dataSorted)
         chart2.xAxis.labelCount = dataSorted.size

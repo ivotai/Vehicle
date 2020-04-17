@@ -4,28 +4,130 @@
   "errorCode": "0",
   "data": [
     {
-      "id": "0",
-      "value": "入库"
-    },
-    {
-      "id": "1",
-      "value": "出库"
-    },
-    {
-      "id": "2",
-      "value": "取钥匙"
-    },
-    {
-      "id": "3",
-      "value": "还钥匙"
-    },
-    {
-      "id": "4",
-      "value": "车辆申请"
+      "id": "9",
+      "name": "沪A9212警",
+      "value": 1990.0,
+      "desc": null
     },
     {
       "id": "5",
-      "value": "审批通过"
+      "name": "沪A9530警",
+      "value": 1930.0,
+      "desc": null
+    },
+    {
+      "id": "10",
+      "name": "沪C356YP",
+      "value": 1662.0,
+      "desc": null
+    },
+    {
+      "id": "4",
+      "name": "沪C512HJ",
+      "value": 1615.0,
+      "desc": null
+    },
+    {
+      "id": "3",
+      "name": "沪A9434警",
+      "value": 1614.0,
+      "desc": null
+    },
+    {
+      "id": "1",
+      "name": "沪A9320警",
+      "value": 1595.0,
+      "desc": null
+    },
+    {
+      "id": "13",
+      "name": "沪C2R6E3",
+      "value": 1544.0,
+      "desc": null
+    },
+    {
+      "id": "6",
+      "name": "沪C1E3N2",
+      "value": 1525.0,
+      "desc": null
+    },
+    {
+      "id": "7",
+      "name": "沪A9344警",
+      "value": 1493.0,
+      "desc": null
+    },
+    {
+      "id": "2",
+      "name": "沪C385JU",
+      "value": 1407.0,
+      "desc": null
+    },
+    {
+      "id": "8",
+      "name": "沪C385FJ",
+      "value": 1296.0,
+      "desc": null
+    },
+    {
+      "id": "11",
+      "name": "沪BEQ890",
+      "value": 1228.0,
+      "desc": null
+    },
+    {
+      "id": "18",
+      "name": "沪A9278警",
+      "value": 750.0,
+      "desc": null
+    },
+    {
+      "id": "14",
+      "name": "沪AFR6595",
+      "value": 486.0,
+      "desc": null
+    },
+    {
+      "id": "23",
+      "name": "沪A9416警",
+      "value": 445.0,
+      "desc": null
+    },
+    {
+      "id": "15",
+      "name": "沪A9554警",
+      "value": 326.0,
+      "desc": null
+    },
+    {
+      "id": "16",
+      "name": "沪AMT605",
+      "value": 284.0,
+      "desc": null
+    },
+    {
+      "id": "22",
+      "name": "沪A9431警",
+      "value": 146.0,
+      "desc": null
+    },
+    {
+      "id": "26",
+      "name": "沪A9438警",
+      "value": 119.0,
+      "desc": null
+    },
+    {
+      "id": "20",
+      "name": "沪A9338警",
+      "value": 24.0,
+      "desc": null
+    },
+    {
+      "id": "19",
+      "name": "沪A9581警",
+      "value": 1.0,
+      "desc": null
     }
   ],
   "extendData": null
