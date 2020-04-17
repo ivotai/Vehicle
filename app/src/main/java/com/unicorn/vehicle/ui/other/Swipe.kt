@@ -17,8 +17,8 @@ class Swipe(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs
 
     override val containerView = this
 
-    private val list = listOf("近三月", "近一月", "近一周", "近三天", "今天")
-    private var pos = 1
+    private val list = listOf("近一年", "近三月", "近一月", "近一周", "近三天", "今天")
+    private var pos = 2
 
     init {
         LayoutInflater.from(context).inflate(R.layout.swipe, this, true)
@@ -43,11 +43,12 @@ class Swipe(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs
     }
 
     private fun getParam() = when (pos) {
-        4 -> StatisticCommonParam(dateStart = DateTime().toString(displayDateFormat))
-        3 -> StatisticCommonParam(dateStart = DateTime().minusDays(3).toString(displayDateFormat))
-        2 -> StatisticCommonParam(dateStart = DateTime().minusWeeks(1).toString(displayDateFormat))
-        1 -> StatisticCommonParam(dateStart = DateTime().minusMonths(1).toString(displayDateFormat))
-        0 -> StatisticCommonParam(dateStart = DateTime().minusMonths(3).toString(displayDateFormat))
+        5 -> StatisticCommonParam(dateStart = DateTime().toString(displayDateFormat))
+        4 -> StatisticCommonParam(dateStart = DateTime().minusDays(3).toString(displayDateFormat))
+        3 -> StatisticCommonParam(dateStart = DateTime().minusWeeks(1).toString(displayDateFormat))
+        2 -> StatisticCommonParam(dateStart = DateTime().minusMonths(1).toString(displayDateFormat))
+        1 -> StatisticCommonParam(dateStart = DateTime().minusMonths(3).toString(displayDateFormat))
+        0 -> StatisticCommonParam(dateStart = DateTime().minusYears(1).toString(displayDateFormat))
         else -> StatisticCommonParam()
     }
 
