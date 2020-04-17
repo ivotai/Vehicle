@@ -12,15 +12,15 @@ import com.unicorn.vehicle.data.model.StatisticCommonItem
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.base.BaseFra
 import com.unicorn.vehicle.ui.other.Swipe
-import kotlinx.android.synthetic.main.fra_chart3.*
+import kotlinx.android.synthetic.main.fra_chart1.*
 
 class Chart1Fra : BaseFra() {
 
     override fun initViews() {
-        initChart1()
+        initChart()
     }
 
-    private fun initChart1() {
+    private fun initChart() {
         with(chart1) {
             setScaleEnabled(false)
             description.isEnabled = false
@@ -149,6 +149,6 @@ class Chart1Fra : BaseFra() {
     private val colorPrimary by lazy { ContextCompat.getColor(context!!, R.color.colorPrimary) }
     private val md_grey_600 by lazy { ContextCompat.getColor(context!!, R.color.md_grey_600) }
 
-    override val layoutId = R.layout.fra_chart3
+    override val layoutId = R.layout.fra_chart1
 
 }

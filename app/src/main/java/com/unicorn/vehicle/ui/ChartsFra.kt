@@ -10,7 +10,6 @@ import com.mikepenz.iconics.utils.toIconicsSizeDp
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.displayDateFormat
-import com.unicorn.vehicle.app.safeClicks
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.adapter.pager.ChartsPagerAdapter
 import com.unicorn.vehicle.ui.base.BaseFra
@@ -28,11 +27,11 @@ class ChartsFra : BaseFra() {
             .icon(FontAwesome.Icon.faw_calendar_alt)
             .color(Color.WHITE.toIconicsColor())
             .size(24.toIconicsSizeDp())
-        fab.setImageDrawable(drawable)
+//        fab.setImageDrawable(drawable)
     }
 
     override fun bindIntent() {
-        fab.safeClicks().subscribe { showDateRange() }
+//        fab.safeClicks().subscribe { showDateRange() }
     }
 
     private fun showDateRange() {

@@ -8,13 +8,12 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.RxBus
 import com.unicorn.vehicle.app.observeOnMain
 import com.unicorn.vehicle.data.model.StatisticCommonItem
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.base.BaseFra
-import io.reactivex.functions.Consumer
-import kotlinx.android.synthetic.main.fra_horizontal_bar_chart.*
+import com.unicorn.vehicle.ui.other.Swipe
+import kotlinx.android.synthetic.main.fra_chart2.*
 
 class Chart2Fra : BaseFra() {
 
@@ -23,7 +22,7 @@ class Chart2Fra : BaseFra() {
     }
 
     private fun initChart() {
-        with(chart) {
+        with(chart1) {
             setScaleEnabled(false)
             description.isEnabled = false
             with(xAxis) {
@@ -32,6 +31,7 @@ class Chart2Fra : BaseFra() {
                 textSize = 12f
                 setDrawAxisLine(false)
                 setCenterAxisLabels(true)
+                textColor = md_grey_600
             }
             // 影藏坐标轴
             axisLeft.isEnabled = false
@@ -40,23 +40,23 @@ class Chart2Fra : BaseFra() {
             axisRight.axisMinimum = 0f
             axisLeft.axisMinimum = 0f
 
-            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+            with(legend) {
+                verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+//                horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+            }
         }
     }
 
     override fun bindIntent() {
-
+        getData()
+        swipe1.swipeListener = object : Swipe.SwipeListener {
+            override fun onSwipe(statisticCommonParam: StatisticCommonParam) {
+                getData(statisticCommonParam)
+            }
+        }
     }
 
-    override fun registerEvent() {
-        RxBus.registerEvent(this, StatisticCommonParam::class.java, Consumer {
-            getData(it)
-            tvTitle.text = "${it.dateStart} 至 ${it.dateEnd}"
-        })
-        RxBus.post(StatisticCommonParam())
-    }
-
-    private fun getData(statisticCommonParam: StatisticCommonParam) {
+    private fun getData(statisticCommonParam: StatisticCommonParam = StatisticCommonParam()) {
         api.getRequisitionCountForUser(statisticCommonParam)
             .flatMap {
                 data1 = it.data
@@ -69,7 +69,7 @@ class Chart2Fra : BaseFra() {
             }
     }
 
-    private val defaultGroupCount = 15
+    private val defaultGroupCount = 12
 
     private fun setData() {
         // 基准 dataSorted1
@@ -81,8 +81,8 @@ class Chart2Fra : BaseFra() {
             dataSorted1.takeLast(defaultGroupCount)
         else groupCount = dataSorted1.size
 
-        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted1)
-        chart.xAxis.labelCount = dataSorted1.size
+        chart1.xAxis.valueFormatter = NameValueFormatter(dataSorted1)
+        chart1.xAxis.labelCount = dataSorted1.size
 
         val barEntrys1 =
             dataSorted1.map { BarEntry(dataSorted1.indexOf(it).toFloat(), it.value.toFloat()) }
@@ -91,11 +91,7 @@ class Chart2Fra : BaseFra() {
             valueTextColor = colorPrimary
             valueTextSize = 12f
             axisDependency = YAxis.AxisDependency.LEFT
-//            valueFormatter = object : ValueFormatter() {
-//                override fun getBarLabel(barEntry: BarEntry): String {
-//                    return "${barEntry.y.toInt()}次"
-//                }
-//            }
+            valueFormatter = IntValueFormatter()
         }
 
         // 基准 dataSorted1
@@ -109,17 +105,18 @@ class Chart2Fra : BaseFra() {
             valueTextColor = colorMd
             valueTextSize = 12f
             axisDependency = YAxis.AxisDependency.RIGHT
+            valueFormatter = IntValueFormatter()
         }
 
         // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
         val barData = BarData(barDataSet1, barDataSet2)
 
-        with(chart) {
+        with(chart1) {
             data = barData
 
-            val groupSpace = 0.1f
+            val groupSpace = 0.2f
             val barSpace = 0.00f // x2 DataSet
-            val barWidth = 0.45f // x2 DataSet
+            val barWidth = 0.4f // x2 DataSet
 
             // specify the width each bar should have
             barData.barWidth = barWidth
@@ -137,11 +134,12 @@ class Chart2Fra : BaseFra() {
     }
 
     private val colorPrimary by lazy { ContextCompat.getColor(context!!, R.color.colorPrimary) }
-    private val colorMd by lazy { ContextCompat.getColor(context!!, R.color.md_red_300) }
+    private val colorMd by lazy { ContextCompat.getColor(context!!, R.color.md_teal_300) }
+    private val md_grey_600 by lazy { ContextCompat.getColor(context!!, R.color.md_grey_600) }
 
     lateinit var data1: List<StatisticCommonItem>
     lateinit var data2: List<StatisticCommonItem>
 
-    override val layoutId = R.layout.fra_horizontal_bar_chart
+    override val layoutId = R.layout.fra_chart2
 
 }
