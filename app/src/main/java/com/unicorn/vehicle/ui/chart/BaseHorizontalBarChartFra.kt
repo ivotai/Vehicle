@@ -33,6 +33,8 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
 
     protected open val titleVisible = true
 
+    protected open val autoZoom = true
+
     override fun initViews() {
         initChart()
         tvTitle.text = title
@@ -120,8 +122,7 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
         invalidate()
         animateY(800)
 
-        zoom(dataSorted.size)
-
+        if (autoZoom) zoom(dataSorted.size)
     }
 
     private fun zoom(size: Int) = with(chart) {

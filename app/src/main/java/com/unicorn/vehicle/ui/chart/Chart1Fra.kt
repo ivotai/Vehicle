@@ -13,4 +13,6 @@ class Chart1Fra : BaseHorizontalBarChartFra() {
 
     override val titleVisible = false
 
+    override val autoZoom = false
+
 }
