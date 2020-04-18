@@ -12,7 +12,6 @@ import com.unicorn.vehicle.data.model.StatisticCommonItem
 import com.unicorn.vehicle.data.model.base.Response
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.IntValueFormatter
-import com.unicorn.vehicle.ui.NameValueFormatter
 import com.unicorn.vehicle.ui.base.BaseFra
 import com.unicorn.vehicle.ui.other.Swipe
 import io.reactivex.Observable
@@ -35,13 +34,14 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
 
     private fun initChart() {
         with(chart) {
-            isScaleXEnabled = false
+            setScaleEnabled(false)
             description.isEnabled = false
             with(xAxis) {
                 position = XAxis.XAxisPosition.BOTTOM
                 setDrawGridLines(false)
-                setDrawAxisLine(false)
+                setDrawAxisLine(true)
                 textColor = mdGrey600
+                textSize = 12f
                 // 神技能
                 xAxis.granularity = 1f
             }
@@ -79,9 +79,9 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
 //        val dataSorted =data.sortedBy { it.value }  // 1 2 3 ...
         val temp = ArrayList<StatisticCommonItem>()
         temp.addAll(list)
-//        temp.addAll(list)
-//        temp.addAll(list)
-//        temp.addAll(list)
+        temp.addAll(list)
+        temp.addAll(list)
+        temp.addAll(list)
 //        temp.addAll(list)
 //        temp.addAll(list)
 //        temp.addAll(list)
@@ -96,7 +96,7 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
 //        xAxis.textSize = textSizeHeight
 
         //
-        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted)
+//        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted)
         chart.xAxis.labelCount = dataSorted.size
 
         //
@@ -112,29 +112,26 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
         val barDataSet = BarDataSet(barEntrys, seriesName).apply {
             color = mdColor
             valueTextColor = mdColor
-//            valueTextSize = textSizeHeight
+            valueTextSize = 12f
             valueFormatter = IntValueFormatter()
         }
 
         val barData = BarData(barDataSet)
         barData.barWidth = barWidth
         data = barData
-
-
         invalidate()
-//        resetZoom()
-        zoomIn()
-
-//        zoomToCenter(1f, size.toFloat() / 15f)
-//            moveViewTo(0f, barData.yMax, YAxis.AxisDependency.LEFT)
-
         animateY(1000)
-
+        // some problem with resetZoom
+//        resetZoom()
+        fitScreen()
+        zoom(1f, size.toFloat() / displayCount, 0f, 0f)
+        scaleY
+        scaleX
 //        moveViewTo(0f, barData.xMax, YAxis.AxisDependency.LEFT)
 
     }
 
-
+    private val displayCount = 15f
     private val barWidth = 0.7f
 
     private val mdColor by lazy { ContextCompat.getColor(context!!, R.color.md_indigo_300) }
