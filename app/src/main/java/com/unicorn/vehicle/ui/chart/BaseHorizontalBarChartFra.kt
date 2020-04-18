@@ -3,6 +3,7 @@ package com.unicorn.vehicle.ui.chart
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -12,9 +13,11 @@ import com.unicorn.vehicle.data.model.StatisticCommonItem
 import com.unicorn.vehicle.data.model.base.Response
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.IntValueFormatter
+import com.unicorn.vehicle.ui.NameValueFormatter
 import com.unicorn.vehicle.ui.base.BaseFra
 import com.unicorn.vehicle.ui.other.Swipe
 import io.reactivex.Observable
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fra_base_horizontal_bar_chart.*
 
 abstract class BaseHorizontalBarChartFra : BaseFra() {
@@ -40,6 +43,7 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
                 position = XAxis.XAxisPosition.BOTTOM
                 setDrawGridLines(false)
                 setDrawAxisLine(true)
+                axisLineColor = mdColor
                 textColor = mdGrey600
                 textSize = 12f
                 // 神技能
@@ -70,33 +74,20 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
     private fun fetchData(statisticCommonParam: StatisticCommonParam = StatisticCommonParam()) {
         getData(statisticCommonParam = statisticCommonParam)
             .observeOnMain(this)
-            .subscribe { renderChart(it.data) }
+            .subscribeBy(
+                onNext = {
+                    renderChart(it.data)
+                },
+                onError = {
+                }
+            )
     }
 
     private fun renderChart(list: List<StatisticCommonItem>) = with(chart) {
-
-
-//        val dataSorted =data.sortedBy { it.value }  // 1 2 3 ...
-        val temp = ArrayList<StatisticCommonItem>()
-        temp.addAll(list)
-        temp.addAll(list)
-        temp.addAll(list)
-        temp.addAll(list)
-//        temp.addAll(list)
-//        temp.addAll(list)
-//        temp.addAll(list)
-//        temp.addAll(list)
-
-        val dataSorted = temp.sortedBy { it.value }
-        val size = dataSorted.size
-
-        // 计算动态字体大小
-//        val factor = 0.35f
-//        val textSizeHeight = height / size * barWidth / 2 * factor
-//        xAxis.textSize = textSizeHeight
+        val dataSorted = list.sortedBy { it.value } // 1 2 3...
 
         //
-//        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted)
+        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted)
         chart.xAxis.labelCount = dataSorted.size
 
         //
@@ -121,14 +112,19 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
         data = barData
         invalidate()
         animateY(1000)
+
+        zoom(dataSorted.size)
+    }
+
+    private fun zoom(size: Int) = with(chart) {
         // some problem with resetZoom
 //        resetZoom()
         fitScreen()
         zoom(1f, size.toFloat() / displayCount, 0f, 0f)
         scaleY
         scaleX
-//        moveViewTo(0f, barData.xMax, YAxis.AxisDependency.LEFT)
-
+        // 很奇怪把 xMax 的值放到 y 上...
+        moveViewTo(0f, barData.xMax, YAxis.AxisDependency.LEFT)
     }
 
     private val displayCount = 15f
