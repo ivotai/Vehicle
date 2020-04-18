@@ -5,6 +5,7 @@ import com.blankj.utilcode.util.ConvertUtils
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -15,6 +16,7 @@ import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.base.BaseFra
 import com.unicorn.vehicle.ui.other.Swipe
 import kotlinx.android.synthetic.main.fra_chart1.*
+import kotlinx.android.synthetic.main.fra_chart1.view.*
 
 class Chart1Fra : BaseFra() {
 
@@ -24,7 +26,8 @@ class Chart1Fra : BaseFra() {
 
     private fun initChart() {
         with(chart1) {
-            setScaleEnabled(false)
+//            setScaleEnabled(false)
+
             description.isEnabled = false
             with(xAxis) {
                 position = XAxis.XAxisPosition.BOTTOM
@@ -32,6 +35,8 @@ class Chart1Fra : BaseFra() {
                 textSize = 12f
                 setDrawAxisLine(false)
                 textColor = md_grey_600
+                // 神技能
+                xAxis.granularity = 1f
             }
             // 影藏坐标轴
             axisLeft.isEnabled = false
@@ -88,7 +93,7 @@ class Chart1Fra : BaseFra() {
     }
 
     private fun getData1(statisticCommonParam: StatisticCommonParam = StatisticCommonParam()) {
-        api.getRequisitionCountForCar(statisticCommonParam)
+        api.getUsageCountForCar(statisticCommonParam)
             .observeOnMain(this)
             .subscribe { setData1(it.data) }
     }
@@ -99,11 +104,14 @@ class Chart1Fra : BaseFra() {
             .subscribe { setData2(it.data) }
     }
 
+    private val textSize= 0f
     private val defaultGroupCount = 10
 
     private fun setData1(data: List<StatisticCommonItem>) {
-        changeChartHeight(chart1, data.size)
         val dataSorted = data.sortedBy { it.value }  // 1 2 3 ...
+        val size = dataSorted.size
+
+
 //        if (dataSorted.size > defaultGroupCount) dataSorted = dataSorted.takeLast(defaultGroupCount)
 
         chart1.xAxis.valueFormatter = NameValueFormatter(dataSorted)
@@ -114,7 +122,7 @@ class Chart1Fra : BaseFra() {
         val barDataSet = BarDataSet(barEntrys, "总申请次数").apply {
             color = mdColor1
             valueTextColor = mdColor1
-            valueTextSize = 12f
+            valueTextSize = 300f/size.toFloat()/2f
             valueFormatter = IntValueFormatter()
         }
 
@@ -124,12 +132,16 @@ class Chart1Fra : BaseFra() {
             barData.barWidth = 0.7f
             invalidate()
             animateY(1000)
+
+            chart1.zoomToCenter(1f,size.toFloat()/10f)
+            chart1.moveViewTo(0f,barData.yMax,YAxis.AxisDependency.LEFT)
         }
     }
 
     private fun changeChartHeight(chart: HorizontalBarChart, size: Int) {
         val params = chart.layoutParams
         chart.layoutParams.height = ConvertUtils.dp2px(maxOf(size, 10) * 30f)
+        chart.layoutParams.height = 0
         chart.layoutParams = params
     }
 
