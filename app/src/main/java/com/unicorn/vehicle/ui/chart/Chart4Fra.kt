@@ -1,14 +1,14 @@
 package com.unicorn.vehicle.ui.chart
 
-import com.unicorn.vehicle.data.model.StatisticCommonItem
-import com.unicorn.vehicle.data.model.base.Response
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
-import io.reactivex.Observable
 
 class Chart4Fra : BaseHorizontalBarChartFra() {
 
-    override fun api(statisticCommonParam: StatisticCommonParam): Observable<Response<List<StatisticCommonItem>>> {
-        return api.getUsageCountForCar(statisticCommonParam)
-    }
+    override val title = "总使用次数"
+
+    override val seriesName = "总使用次数（单位：次）"
+
+    override fun getData(statisticCommonParam: StatisticCommonParam) =
+        api.getUsageCountForCar(statisticCommonParam = statisticCommonParam)
 
 }

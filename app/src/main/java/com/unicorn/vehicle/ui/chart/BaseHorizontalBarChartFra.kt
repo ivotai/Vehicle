@@ -3,7 +3,6 @@ package com.unicorn.vehicle.ui.chart
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -13,7 +12,6 @@ import com.unicorn.vehicle.data.model.StatisticCommonItem
 import com.unicorn.vehicle.data.model.base.Response
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.IntValueFormatter
-import com.unicorn.vehicle.ui.NameValueFormatter
 import com.unicorn.vehicle.ui.base.BaseFra
 import com.unicorn.vehicle.ui.other.Swipe
 import io.reactivex.Observable
@@ -21,20 +19,27 @@ import kotlinx.android.synthetic.main.fra_base_horizontal_bar_chart.*
 
 abstract class BaseHorizontalBarChartFra : BaseFra() {
 
-    abstract fun api(statisticCommonParam: StatisticCommonParam): Observable<Response<List<StatisticCommonItem>>>
+    abstract val title: String
+
+    abstract val seriesName: String
+
+    abstract fun getData(statisticCommonParam: StatisticCommonParam): Observable<Response<List<StatisticCommonItem>>>
 
     override fun initViews() {
         initChart()
+        tvTitle.text = title
+        // 改变颜色试试
+        swipe.setColor(mdColor)
     }
 
     private fun initChart() {
         with(chart) {
-//            setScaleEnabled(false)
-
+            isScaleXEnabled = false
             description.isEnabled = false
             with(xAxis) {
                 position = XAxis.XAxisPosition.BOTTOM
                 setDrawGridLines(false)
+                // todo 动态调整
                 textSize = 12f
                 setDrawAxisLine(false)
                 textColor = mdGrey600
@@ -45,51 +50,48 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
             axisLeft.isEnabled = false
             axisRight.isEnabled = false
             // 确保了对齐
-            axisRight.axisMinimum = 0f
+//            axisRight.axisMinimum = 0f
             axisLeft.axisMinimum = 0f
-
             with(legend) {
-                verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+                verticalAlignment = Legend.LegendVerticalAlignment.TOP
                 horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
             }
         }
-
-        // 改变颜色试试
-        swipe.setColor(mdColor)
     }
 
     override fun bindIntent() {
-        getData()
+        fetchData()
         swipe.swipeListener = object : Swipe.SwipeListener {
             override fun onSwipe(statisticCommonParam: StatisticCommonParam) {
-                getData(statisticCommonParam)
+                fetchData(statisticCommonParam)
             }
         }
-
     }
 
-    private fun getData(statisticCommonParam: StatisticCommonParam = StatisticCommonParam()) {
-        api(statisticCommonParam)
+    private fun fetchData(statisticCommonParam: StatisticCommonParam = StatisticCommonParam()) {
+        getData(statisticCommonParam)
             .observeOnMain(this)
-            .subscribe { setData1(it.data) }
+            .subscribe { setData(it.data) }
     }
 
-    private fun setData1(data: List<StatisticCommonItem>) {
-        val dataSorted = data.sortedBy { it.value }  // 1 2 3 ...
+    private fun setData(data: List<StatisticCommonItem>) {
+//        val dataSorted =data.sortedBy { it.value }  // 1 2 3 ...
+        val dataSorted = ArrayList<StatisticCommonItem>()
+        dataSorted.addAll(data)
+        dataSorted.addAll(data)
         val size = dataSorted.size
 
 
-//        if (dataSorted.size > defaultGroupCount) dataSorted = dataSorted.takeLast(defaultGroupCount)
 
-        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted)
+//        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted)
         chart.xAxis.labelCount = dataSorted.size
 
         val barEntrys =
             dataSorted.map { BarEntry(dataSorted.indexOf(it).toFloat(), it.value.toFloat()) }
-        val barDataSet = BarDataSet(barEntrys, "总申请次数").apply {
+        val barDataSet = BarDataSet(barEntrys, seriesName).apply {
             color = mdColor
             valueTextColor = mdColor
-            valueTextSize = 300f/size.toFloat()/2f
+            valueTextSize = 300f / size.toFloat() / 2f
             valueFormatter = IntValueFormatter()
         }
 
@@ -100,8 +102,8 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
             invalidate()
             animateY(1000)
 
-            chart.zoomToCenter(1f,size.toFloat()/10f)
-            chart.moveViewTo(0f,barData.yMax, YAxis.AxisDependency.LEFT)
+//            chart.zoomToCenter(1f, size.toFloat() / 10f)
+//            chart.moveViewTo(0f, barData.yMax, YAxis.AxisDependency.LEFT)
         }
     }
 
