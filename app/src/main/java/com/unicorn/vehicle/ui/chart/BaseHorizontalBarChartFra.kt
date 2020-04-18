@@ -115,11 +115,13 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
 
         val barData = BarData(barDataSet)
         barData.barWidth = barWidth
+
         data = barData
         invalidate()
-        animateY(1000)
+        animateY(800)
 
         zoom(dataSorted.size)
+
     }
 
     private fun zoom(size: Int) = with(chart) {
@@ -127,10 +129,8 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
 //        resetZoom()
         fitScreen()
         zoom(1f, size.toFloat() / displayCount, 0f, 0f)
-        scaleY
-        scaleX
         // 很奇怪把 xMax 的值放到 y 上...
-        moveViewTo(0f, barData.xMax, YAxis.AxisDependency.LEFT)
+        moveViewTo(0f, data.entryCount.toFloat(), YAxis.AxisDependency.LEFT)
     }
 
     private val displayCount = 12f
