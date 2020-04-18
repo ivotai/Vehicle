@@ -12,6 +12,7 @@ import com.unicorn.vehicle.data.model.StatisticCommonItem
 import com.unicorn.vehicle.data.model.base.Response
 import com.unicorn.vehicle.data.model.param.StatisticCommonParam
 import com.unicorn.vehicle.ui.IntValueFormatter
+import com.unicorn.vehicle.ui.NameValueFormatter
 import com.unicorn.vehicle.ui.base.BaseFra
 import com.unicorn.vehicle.ui.other.Swipe
 import io.reactivex.Observable
@@ -39,8 +40,6 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
             with(xAxis) {
                 position = XAxis.XAxisPosition.BOTTOM
                 setDrawGridLines(false)
-                // todo 动态调整
-                textSize = 12f
                 setDrawAxisLine(false)
                 textColor = mdGrey600
                 // 神技能
@@ -69,43 +68,74 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
     }
 
     private fun fetchData(statisticCommonParam: StatisticCommonParam = StatisticCommonParam()) {
-        getData(statisticCommonParam)
+        getData(statisticCommonParam = statisticCommonParam)
             .observeOnMain(this)
-            .subscribe { setData(it.data) }
+            .subscribe { renderChart(it.data) }
     }
 
-    private fun setData(data: List<StatisticCommonItem>) {
+    private fun renderChart(list: List<StatisticCommonItem>) = with(chart) {
+
+
 //        val dataSorted =data.sortedBy { it.value }  // 1 2 3 ...
-        val dataSorted = ArrayList<StatisticCommonItem>()
-        dataSorted.addAll(data)
-        dataSorted.addAll(data)
+        val temp = ArrayList<StatisticCommonItem>()
+        temp.addAll(list)
+//        temp.addAll(list)
+//        temp.addAll(list)
+//        temp.addAll(list)
+//        temp.addAll(list)
+//        temp.addAll(list)
+//        temp.addAll(list)
+//        temp.addAll(list)
+
+        val dataSorted = temp.sortedBy { it.value }
         val size = dataSorted.size
 
+        // 计算动态字体大小
+//        val factor = 0.35f
+//        val textSizeHeight = height / size * barWidth / 2 * factor
+//        xAxis.textSize = textSizeHeight
 
-
-//        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted)
+        //
+        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted)
         chart.xAxis.labelCount = dataSorted.size
 
-        val barEntrys =
-            dataSorted.map { BarEntry(dataSorted.indexOf(it).toFloat(), it.value.toFloat()) }
+        //
+        val barEntrys = ArrayList<BarEntry>()
+        dataSorted.forEachIndexed { index, item ->
+            barEntrys.add(
+                BarEntry(
+                    index.toFloat(),
+                    item.value.toFloat()
+                )
+            )
+        }
         val barDataSet = BarDataSet(barEntrys, seriesName).apply {
             color = mdColor
             valueTextColor = mdColor
-            valueTextSize = 300f / size.toFloat() / 2f
+//            valueTextSize = textSizeHeight
             valueFormatter = IntValueFormatter()
         }
 
         val barData = BarData(barDataSet)
-        with(chart) {
-            chart.data = barData
-            barData.barWidth = 0.7f
-            invalidate()
-            animateY(1000)
+        barData.barWidth = barWidth
+        data = barData
 
-//            chart.zoomToCenter(1f, size.toFloat() / 10f)
-//            chart.moveViewTo(0f, barData.yMax, YAxis.AxisDependency.LEFT)
-        }
+
+        invalidate()
+//        resetZoom()
+        zoomIn()
+
+//        zoomToCenter(1f, size.toFloat() / 15f)
+//            moveViewTo(0f, barData.yMax, YAxis.AxisDependency.LEFT)
+
+        animateY(1000)
+
+//        moveViewTo(0f, barData.xMax, YAxis.AxisDependency.LEFT)
+
     }
+
+
+    private val barWidth = 0.7f
 
     private val mdColor by lazy { ContextCompat.getColor(context!!, R.color.md_indigo_300) }
     private val mdGrey600 by lazy { ContextCompat.getColor(context!!, R.color.md_grey_600) }
