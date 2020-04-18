@@ -1,5 +1,6 @@
 package com.unicorn.vehicle.ui.chart
 
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -30,9 +31,12 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
 
     protected open val useIntValueFormatter = true
 
+    protected open val titleVisible = true
+
     override fun initViews() {
         initChart()
         tvTitle.text = title
+        if (!titleVisible) tvTitle.visibility = View.GONE
         // 改变颜色试试
         swipe.setColor(mdColor)
     }
@@ -129,7 +133,7 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
         moveViewTo(0f, barData.xMax, YAxis.AxisDependency.LEFT)
     }
 
-    private val displayCount = 15f
+    private val displayCount = 12f
     private val barWidth = 0.7f
 
     private val mdColor by lazy { ContextCompat.getColor(context!!, R.color.md_indigo_300) }

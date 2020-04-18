@@ -11,4 +11,6 @@ class Chart1Fra : BaseHorizontalBarChartFra() {
     override fun getData(statisticCommonParam: StatisticCommonParam) =
         api.getUsageCountForCar(statisticCommonParam = statisticCommonParam)
 
+    override val titleVisible = false
+
 }

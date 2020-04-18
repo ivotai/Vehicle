@@ -13,4 +13,6 @@ class Chart2Fra : BaseHorizontalBarChartFra() {
 
     override val useIntValueFormatter = false
 
+    override val titleVisible = false
+
 }
