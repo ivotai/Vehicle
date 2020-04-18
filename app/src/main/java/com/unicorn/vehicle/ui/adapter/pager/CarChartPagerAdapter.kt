@@ -2,7 +2,8 @@ package com.unicorn.vehicle.ui.adapter.pager
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.unicorn.vehicle.ui.chart.Chart1NFra
+import com.unicorn.vehicle.ui.chart.Chart1Fra
+import com.unicorn.vehicle.ui.chart.Chart2Fra
 
 class CarChartPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
@@ -11,7 +12,7 @@ class CarChartPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) 
     }
 
     override fun getItem(position: Int) =
-        if (position == 0) Chart1NFra() else Chart1NFra()
+        if (position == 0) Chart1Fra() else Chart2Fra()
 
     override fun getCount() = titles.size
 

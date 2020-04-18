@@ -28,6 +28,8 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
 
     abstract fun getData(statisticCommonParam: StatisticCommonParam): Observable<Response<List<StatisticCommonItem>>>
 
+    protected open val useIntValueFormatter = true
+
     override fun initViews() {
         initChart()
         tvTitle.text = title
@@ -104,7 +106,7 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
             color = mdColor
             valueTextColor = mdColor
             valueTextSize = 12f
-            valueFormatter = IntValueFormatter()
+            if (useIntValueFormatter) valueFormatter = IntValueFormatter()
         }
 
         val barData = BarData(barDataSet)
