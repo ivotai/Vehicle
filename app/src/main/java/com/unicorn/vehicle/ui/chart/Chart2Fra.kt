@@ -9,7 +9,7 @@ class Chart2Fra : BaseHorizontalBarChartFra() {
     override val seriesName = "平均每日使用时长（单位：小时）"
 
     override fun getData(statisticCommonParam: StatisticCommonParam) =
-        api.getUsingHoursAverageForCar(statisticCommonParam = statisticCommonParam)
+        api.getUsingHoursAverageForCar(statisticCommonParam)
 
     override val useIntValueFormatter = false
 

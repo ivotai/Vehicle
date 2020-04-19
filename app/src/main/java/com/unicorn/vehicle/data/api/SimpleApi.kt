@@ -56,8 +56,8 @@ interface SimpleApi {
     @POST("Statistics/UsingHoursAverageForCar")
     fun getUsingHoursAverageForCar(@Body statisticCommonParam: StatisticCommonParam = StatisticCommonParam()): Observable<Response<List<StatisticCommonItem>>>
 
-    @POST("Statistics/RequisitionCountForUser")
-    fun getRequisitionCountForUser(@Body statisticCommonParam: StatisticCommonParam = StatisticCommonParam()): Observable<Response<List<StatisticCommonItem>>>
+    @POST("Statistics/UsageCountForUser")
+    fun getUsageCountForUser(@Body statisticCommonParam: StatisticCommonParam = StatisticCommonParam()): Observable<Response<List<StatisticCommonItem>>>
 
     @POST("Statistics/UsingHoursAverageForUser")
     fun getUsingHoursAverageForUser(@Body statisticCommonParam: StatisticCommonParam = StatisticCommonParam()): Observable<Response<List<StatisticCommonItem>>>

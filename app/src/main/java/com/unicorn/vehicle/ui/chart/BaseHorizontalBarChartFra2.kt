@@ -18,18 +18,20 @@ import com.unicorn.vehicle.ui.NameValueFormatter
 import com.unicorn.vehicle.ui.base.BaseFra
 import com.unicorn.vehicle.ui.other.Swipe
 import io.reactivex.Observable
-import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fra_base_horizontal_bar_chart.*
 
-abstract class BaseHorizontalBarChartFra : BaseFra() {
+abstract class BaseHorizontalBarChartFra2 : BaseFra() {
 
     abstract val title: String
 
-    abstract val seriesName: String
+    abstract val seriesName1: String
+    abstract val seriesName2: String
 
-    abstract fun getData(statisticCommonParam: StatisticCommonParam): Observable<Response<List<StatisticCommonItem>>>
+    abstract fun getData1(statisticCommonParam: StatisticCommonParam): Observable<Response<List<StatisticCommonItem>>>
+    abstract fun getData2(statisticCommonParam: StatisticCommonParam): Observable<Response<List<StatisticCommonItem>>>
 
-    protected open val useIntValueFormatter = true
+    protected open val useIntValueFormatter1 = true
+    protected open val useIntValueFormatter2 = true
 
     protected open val titleVisible = true
 
@@ -40,7 +42,7 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
         tvTitle.text = title
         if (!titleVisible) tvTitle.visibility = View.GONE
         // 改变颜色试试
-        swipe.setColor(mdColor)
+        swipe.setColor(mdColor1)
     }
 
     private fun initChart() {
@@ -51,7 +53,8 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
                 position = XAxis.XAxisPosition.BOTTOM
                 setDrawGridLines(false)
                 setDrawAxisLine(true)
-                axisLineColor = mdColor
+                axisLineColor = mdColor1
+                setCenterAxisLabels(true)
                 textColor = mdGrey600
                 textSize = 12f
                 // 神技能
@@ -61,7 +64,7 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
             axisLeft.isEnabled = false
             axisRight.isEnabled = false
             // 确保了对齐
-//            axisRight.axisMinimum = 0f
+            axisRight.axisMinimum = 0f
             axisLeft.axisMinimum = 0f
             with(legend) {
                 verticalAlignment = Legend.LegendVerticalAlignment.TOP
@@ -80,49 +83,77 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
     }
 
     private fun fetchData(statisticCommonParam: StatisticCommonParam = StatisticCommonParam()) {
-        getData(statisticCommonParam = statisticCommonParam)
+        getData1(statisticCommonParam)
+            .flatMap {
+                data1 = it.data
+                getData2(statisticCommonParam)
+            }
             .observeOnMain(this)
-            .subscribeBy(
-                onNext = {
-                    renderChart(it.data)
-                },
-                onError = {
-                }
-            )
+            .subscribe {
+                data2 = it.data
+                renderChart()
+            }
     }
 
-    private fun renderChart(list: List<StatisticCommonItem>) = with(chart) {
-        val dataSorted = list.sortedBy { it.value } // 1 2 3...
+    private fun renderChart() = with(chart) {
+        // 基准 dataSorted1
+        val dataSorted1 = data1.sortedBy { it.value }  // 1 2 3 ...
+
+        // groupCount
+        val groupCount = dataSorted1.size
 
         //
-        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted)
-        chart.xAxis.labelCount = dataSorted.size
+        chart.xAxis.valueFormatter = NameValueFormatter(dataSorted1)
+        chart.xAxis.labelCount = dataSorted1.size
 
         //
-        val barEntrys = ArrayList<BarEntry>()
-        dataSorted.forEachIndexed { index, item ->
-            barEntrys.add(
+        val barEntrys1 = ArrayList<BarEntry>()
+        dataSorted1.forEachIndexed { index, item ->
+            barEntrys1.add(
                 BarEntry(
                     index.toFloat(),
                     item.value.toFloat()
                 )
             )
         }
-        val barDataSet = BarDataSet(barEntrys, seriesName).apply {
-            color = mdColor
-            valueTextColor = mdColor
+        val barDataSet1 = BarDataSet(barEntrys1, seriesName1).apply {
+            color = mdColor1
+            valueTextColor = mdColor1
             valueTextSize = 12f
-            if (useIntValueFormatter) valueFormatter = IntValueFormatter()
+            axisDependency = YAxis.AxisDependency.LEFT
+            if (useIntValueFormatter1) valueFormatter = IntValueFormatter()
         }
 
-        val barData = BarData(barDataSet)
-        barData.barWidth = barWidth
+        // 基准 dataSorted1
+        val barEntrys2 = ArrayList<BarEntry>()
+        dataSorted1.forEachIndexed { index, item ->
+            val value = data2.find { it.name == item.name }?.value ?: 0.0
+            barEntrys2.add(BarEntry(index.toFloat() + 0, value.toFloat()))
+        }
+        val barDataSet2 = BarDataSet(barEntrys2, seriesName2).apply {
+            color = mdColor2
+            valueTextColor = mdColor2
+            valueTextSize = 12f
+            axisDependency = YAxis.AxisDependency.RIGHT
+            if (useIntValueFormatter2) valueFormatter = IntValueFormatter()
+        }
 
+        val barData = BarData(barDataSet1, barDataSet2)
+        barData.barWidth = barWidth
         data = barData
+
+        val groupSpace = 0.2f
+        val barSpace = 0.00f // x2 DataSet
+//        val barWidth = 0.4f // x2 DataSet
+        xAxis.axisMinimum = data.xMin
+//        xAxis.axisMaximum = 0 + barData.getGroupWidth(groupSpace, barSpace) * groupCount
+        xAxis.axisMaximum = data.xMax
+        groupBars(0.toFloat(), groupSpace, barSpace)
+
         invalidate()
         animateY(800)
 
-        if (autoZoom) zoom(dataSorted.size)
+        if (autoZoom) zoom(dataSorted1.size)
     }
 
     private fun zoom(size: Int) = with(chart) {
@@ -134,11 +165,15 @@ abstract class BaseHorizontalBarChartFra : BaseFra() {
         moveViewTo(0f, data.entryCount.toFloat(), YAxis.AxisDependency.LEFT)
     }
 
-    private val displayCount = 16f
-    private val barWidth = 0.7f
+    private val displayCount = 10f
+    private val barWidth = 0.4f
 
-    private val mdColor by lazy { ContextCompat.getColor(context!!, R.color.colorPrimary) }
+    private val mdColor1 by lazy { ContextCompat.getColor(context!!, R.color.colorPrimary) }
+    private val mdColor2 by lazy { ContextCompat.getColor(context!!, R.color.md_teal_300) }
     private val mdGrey600 by lazy { ContextCompat.getColor(context!!, R.color.md_grey_600) }
+
+    lateinit var data1: List<StatisticCommonItem>
+    lateinit var data2: List<StatisticCommonItem>
 
     override val layoutId: Int = R.layout.fra_base_horizontal_bar_chart
 

@@ -9,10 +9,8 @@ class Chart1Fra : BaseHorizontalBarChartFra() {
     override val seriesName = "总使用次数（单位：次）"
 
     override fun getData(statisticCommonParam: StatisticCommonParam) =
-        api.getUsageCountForCar(statisticCommonParam = statisticCommonParam)
+        api.getUsageCountForCar(statisticCommonParam)
 
     override val titleVisible = false
-
-    override val autoZoom = false
 
 }

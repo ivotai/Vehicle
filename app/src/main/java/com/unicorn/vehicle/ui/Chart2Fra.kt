@@ -57,7 +57,7 @@ class Chart2Fra : BaseFra() {
     }
 
     private fun getData(statisticCommonParam: StatisticCommonParam = StatisticCommonParam()) {
-        api.getRequisitionCountForUser(statisticCommonParam)
+        api.getUsageCountForUser(statisticCommonParam)
             .flatMap {
                 data1 = it.data
                 api.getUsingHoursAverageForUser(statisticCommonParam)
