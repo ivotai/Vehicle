@@ -41,6 +41,7 @@ object UpdateHelper {
             .setMaxProgress(100)
             .show()
         val destPath = "${Holder.appComponent.context().cacheDir.path}/vehicle.apk"
+//        val testUrl = "http://renjiawen1988.vicp.cc:33333/smartkeybox/api/file/LatestAppDownload"
         RxHttp.get(apkUrl)
             .asDownload(
                 destPath,
