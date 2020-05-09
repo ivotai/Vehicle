@@ -15,13 +15,13 @@
         android:paddingEnd="12dp"
         android:paddingBottom="2dp"
         android:text="申请日期：2019-10-01"
-        android:textColor="@color/md_white"
+        android:textColor="@color/material_white"
         android:layout_marginBottom="8dp"
         app:rv_backgroundColor="@color/colorPrimary"
         app:rv_isRadiusHalfHeight="true" />
 
     <com.google.android.material.card.MaterialCardView
-        app:cardBackgroundColor="@color/md_white"
+        app:cardBackgroundColor="@color/material_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="1dp"
@@ -38,7 +38,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="秦萱熙"
-                android:textColor="@color/md_black"
+                android:textColor="@color/material_black"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

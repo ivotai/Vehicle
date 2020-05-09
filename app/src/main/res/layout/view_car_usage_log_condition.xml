@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="类型"
-            android:textColor="@color/md_white"
+            android:textColor="@color/material_white"
             android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/tvStartTime"
             app:layout_constraintHorizontal_bias="0.5"
@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="开始日期"
-            android:textColor="@color/md_white"
+            android:textColor="@color/material_white"
             android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/tvEndTime"
             app:layout_constraintHorizontal_bias="0.5"
@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="结束日期"
-            android:textColor="@color/md_white"
+            android:textColor="@color/material_white"
             android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/rfl"
             app:layout_constraintHorizontal_bias="0.5"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                app:rv_backgroundColor="@color/md_white"
+                app:rv_backgroundColor="@color/material_white"
                 app:rv_isRadiusHalfHeight="true">
 
                 <EditText

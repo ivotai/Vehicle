@@ -82,7 +82,7 @@ dependencies {
     // other
     implementation 'com.blankj:utilcodex:1.26.0'
     implementation 'joda-time:joda-time:2.10.5'
-    implementation 'com.wada811:android-material-design-colors:3.0.0'
+    implementation 'com.zzhoujay.materialcolors:materialcolors:1.0.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
