@@ -12,5 +12,6 @@ data class Car(
     val requisitionUserName: String,
     val pictureUrl: String,
     val keyInBox: Boolean,
-    val carInGarage: Boolean
+    val carInGarage: Boolean,
+    val orgID: Int
 )
