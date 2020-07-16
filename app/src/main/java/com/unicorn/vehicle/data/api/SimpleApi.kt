@@ -42,7 +42,7 @@ interface SimpleApi {
     fun getCarState(): Single<Response<List<DictItem>>>
 
     @POST("Code/DictCarType")
-    fun getCarType(): Single<Response<List<DictItem>>>
+    fun getCarType(@Body orgParam: OrgParam = OrgParam()): Single<Response<List<DictItem>>>
 
     @POST("Code/DictCarUsageEventType")
     fun getDictCarUsageEventType(): Single<Response<List<DictItem>>>
