@@ -2,133 +2,17 @@
   "success": true,
   "errorMsg": "",
   "errorCode": "0",
-  "data": [
-    {
-      "id": "9",
-      "name": "沪A9212警",
-      "value": 1990.0,
-      "desc": null
-    },
-    {
-      "id": "5",
-      "name": "沪A9530警",
-      "value": 1930.0,
-      "desc": null
-    },
-    {
-      "id": "10",
-      "name": "沪C356YP",
-      "value": 1662.0,
-      "desc": null
-    },
-    {
-      "id": "4",
-      "name": "沪C512HJ",
-      "value": 1615.0,
-      "desc": null
-    },
-    {
-      "id": "3",
-      "name": "沪A9434警",
-      "value": 1614.0,
-      "desc": null
-    },
-    {
-      "id": "1",
-      "name": "沪A9320警",
-      "value": 1595.0,
-      "desc": null
-    },
-    {
-      "id": "13",
-      "name": "沪C2R6E3",
-      "value": 1544.0,
-      "desc": null
-    },
-    {
-      "id": "6",
-      "name": "沪C1E3N2",
-      "value": 1525.0,
-      "desc": null
-    },
-    {
-      "id": "7",
-      "name": "沪A9344警",
-      "value": 1493.0,
-      "desc": null
-    },
-    {
-      "id": "2",
-      "name": "沪C385JU",
-      "value": 1407.0,
-      "desc": null
-    },
-    {
-      "id": "8",
-      "name": "沪C385FJ",
-      "value": 1296.0,
-      "desc": null
-    },
-    {
-      "id": "11",
-      "name": "沪BEQ890",
-      "value": 1228.0,
-      "desc": null
-    },
-    {
-      "id": "18",
-      "name": "沪A9278警",
-      "value": 750.0,
-      "desc": null
-    },
-    {
-      "id": "14",
-      "name": "沪AFR6595",
-      "value": 486.0,
-      "desc": null
-    },
-    {
-      "id": "23",
-      "name": "沪A9416警",
-      "value": 445.0,
-      "desc": null
-    },
-    {
-      "id": "15",
-      "name": "沪A9554警",
-      "value": 326.0,
-      "desc": null
-    },
-    {
-      "id": "16",
-      "name": "沪AMT605",
-      "value": 284.0,
-      "desc": null
-    },
-    {
-      "id": "22",
-      "name": "沪A9431警",
-      "value": 146.0,
-      "desc": null
-    },
-    {
-      "id": "26",
-      "name": "沪A9438警",
-      "value": 119.0,
-      "desc": null
-    },
-    {
-      "id": "20",
-      "name": "沪A9338警",
-      "value": 24.0,
-      "desc": null
-    },
-    {
-      "id": "19",
-      "name": "沪A9581警",
-      "value": 1.0,
-      "desc": null
-    }
-  ],
+  "data": {
+    "sid": "pwqr3rosk4zpbiinqqlibg1q",
+    "uid": "",
+    "userName": "桂阳",
+    "role": 1,
+    "roleName": "管理员",
+    "orgID": 28,
+    "orgName": "金海派出所",
+    "encryptionId": "9427D75E43C8AA3813C0E560724709015C98F644481049FCF0F09EEAC91C4220C321B3B8CB02BA28F6AE61825525BA7D61BE78FC8CA44820A248F06A376A1B47C3A5BC7DADA6ADA573CEF3D9354D592DF4566F8EFE75648A530BD8742C616161",
+    "userKey": "15FA3E348C418A86C2781183BCCF580C",
+    "userToken": "9427D75E43C8AA3813C0E560724709015C98F644481049FCF0F09EEAC91C4220C321B3B8CB02BA28F6AE61825525BA7D61BE78FC8CA44820A248F06A376A1B47C3A5BC7DADA6ADA573CEF3D9354D592DF4566F8EFE75648A530BD8742C616161"
+  },
   "extendData": null
 }
