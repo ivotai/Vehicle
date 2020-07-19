@@ -12,12 +12,14 @@ import com.blankj.utilcode.util.ActivityUtils
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.*
+import com.unicorn.vehicle.app.helper.EncryptionHelper
 import com.unicorn.vehicle.data.model.CarUsageLog
 import com.unicorn.vehicle.data.model.DictItem
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
 import com.unicorn.vehicle.data.model.event.DictItemEvent
 import com.unicorn.vehicle.data.model.param.CarUsageLogListParam
+import com.unicorn.vehicle.data.model.param.GeneralParam
 import com.unicorn.vehicle.ui.adapter.CarUsageLogAdapter
 import com.unicorn.vehicle.ui.adapter.DictAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
@@ -123,20 +125,24 @@ class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
 
     override val simpleAdapter = CarUsageLogAdapter()
 
-    override fun loadPage(pageNo: Int): Single<PageResponse<CarUsageLog>> =
-        api.getCarUsageLogList(
-            PageRequest(
-                pageNo = pageNo,
-                searchParam = CarUsageLogListParam(
-                    eventType = eventType,
-                    startTime = startTime,
-                    endTime = endTime,
-                    carNo = etCarNo.trimText(),
-                    // 添加 carID 参数 for 特定车辆查询
-                    carID = carId
-                )
+    override fun loadPage(pageNo: Int): Single<PageResponse<CarUsageLog>> {
+        val pageRequest = PageRequest(
+            pageNo = pageNo,
+            searchParam = CarUsageLogListParam(
+                eventType = eventType,
+                startTime = startTime,
+                endTime = endTime,
+                carNo = etCarNo.trimText(),
+                // 添加 carID 参数 for 特定车辆查询
+                carID = carId
             )
         )
+        val generalParam = GeneralParam.create(pageRequest)
+        return api.getCarUsageLogList(generalParam).doOnSuccess {
+            val json = EncryptionHelper.decrypt(it.encryptionData)
+            it.items = json.toBeanList()
+        }
+    }
 
     private val carId by lazy { arguments?.getString(Param, "") ?: "" }
 
