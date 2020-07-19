@@ -122,7 +122,12 @@ class CarRequisitionDetailAct : BaseAct() {
 
     private fun deny() {
         val mask = DialogHelper.showMask(this)
-        api.deny(carRequisition = carRequisition)
+        val generalParam = GeneralParam.create(carRequisition)
+        api.deny(generalParam)
+            .doOnSuccess {
+                val json = EncryptionHelper.decrypt(it.encryptionData)
+                it.data = json.toBean()
+            }
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
