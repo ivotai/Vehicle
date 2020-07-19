@@ -12,6 +12,6 @@ const val displayDateFormat2 = "yyyy-MM-dd HH:mm:ss"
 
 const val imgBaseUrl = "http://renjiawen1988.vicp.cc:33333/SmartKeyBoxMobile/"
 
-//const val imgBaseUrl = "http://car.menze.net.cn/"
+//const val imgBaseUrl = "http://car.menze.net.cn/" // 外网
 
 const val baseUrl = "${imgBaseUrl}api/"
