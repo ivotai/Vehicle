@@ -68,6 +68,10 @@ class CarUsageLogListFra : SimplePageFra<CarUsageLog, KVHolder>() {
                 return@subscribe
             }
             api.getDictCarUsageEventType()
+                .doOnSuccess {
+                    val json = EncryptionHelper.decrypt(it.encryptionData)
+                    it.data = json.toBeanList()
+                }
                 .observeOnMain(this)
                 .subscribeBy(
                     onSuccess = { response ->
