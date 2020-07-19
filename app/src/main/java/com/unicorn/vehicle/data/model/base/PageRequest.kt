@@ -1,7 +1,6 @@
 package com.unicorn.vehicle.data.model.base
 
 import com.unicorn.vehicle.app.defaultPageSize
-import com.unicorn.vehicle.app.loggedUser
 import com.unicorn.vehicle.data.model.BasePostInfo
 
 data class PageRequest<T>(
