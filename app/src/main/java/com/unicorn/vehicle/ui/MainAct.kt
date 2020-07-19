@@ -72,11 +72,12 @@ class MainAct : BaseAct() {
                 PrimaryDrawerItem()
                     .withIdentifier(2)
                     .withIcon(FontAwesome.Icon.faw_address_book)
-                    .withName(MainPagerAdapter.titles[2]),
-                PrimaryDrawerItem()
-                    .withIdentifier(3)
-                    .withIcon(FontAwesome.Icon.faw_chart_bar)
-                    .withName(MainPagerAdapter.titles[3])
+                    .withName(MainPagerAdapter.titles[2])
+                // 暂时隐藏统计
+//                PrimaryDrawerItem()
+//                    .withIdentifier(3)
+//                    .withIcon(FontAwesome.Icon.faw_chart_bar)
+//                    .withName(MainPagerAdapter.titles[3])
             )
             .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                 override fun onItemClick(
