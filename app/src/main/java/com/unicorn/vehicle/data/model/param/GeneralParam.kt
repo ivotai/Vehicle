@@ -11,18 +11,20 @@ data class GeneralParam(
     val UserToken: String = loggedUser.userToken
 ) {
     companion object {
-        fun create(a: Any): GeneralParam {
-            val json = Holder.appComponent.gson().toJson(a)
+        fun create(basePostInfo: BasePostInfo): GeneralParam {
+            // 确保从服务获取的数据也被填充 uid
+            if (basePostInfo.idCardNumber == null) basePostInfo.idCardNumber = loggedUser.uid
+            val json = Holder.appComponent.gson().toJson(basePostInfo)
             val param = EncryptionHelper.encrypt(json)
             return GeneralParam(Param = param)
         }
 
         fun createForBasePostInfo(): GeneralParam {
-            return create(a = BasePostInfo())
+            return create(basePostInfo = BasePostInfo())
         }
 
         fun createForOrgParam(): GeneralParam {
-            return create(a = OrgParam())
+            return create(basePostInfo = OrgParam())
         }
     }
 }
