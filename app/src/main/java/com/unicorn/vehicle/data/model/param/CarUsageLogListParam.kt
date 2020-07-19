@@ -1,6 +1,6 @@
 package com.unicorn.vehicle.data.model.param
 
-import com.unicorn.vehicle.app.orgId
+import com.unicorn.vehicle.app.loggedUser
 
 data class CarUsageLogListParam(
     val carID: String? = null,
@@ -9,5 +9,5 @@ data class CarUsageLogListParam(
     val eventType: Int? = null,
     val startTime: String? = null,
     val endTime: String? = null,
-    val orgID: Int = orgId
+    val orgID: Int = loggedUser.orgID
 )
