@@ -1,11 +1,17 @@
 package com.unicorn.vehicle.data.model
 
+import com.unicorn.vehicle.app.helper.EncryptionHelper
+
 data class LoggedUser(
-    val sid: String,
-    val uid: String,
-    val userName: String,
+    val encryptionId: String,
+    val orgID: Int,
+    val orgName: String,
     val role: Int,
     val roleName: String = "角色",
-    val orgID: Int,
-    val orgName: String
-)
+//    val sid: String,
+    val userKey: String,
+    val userName: String,
+    val userToken: String
+) {
+    val uid: String get() = EncryptionHelper.decrypt(encryptionId)
+}
