@@ -3,11 +3,12 @@ package com.unicorn.vehicle.data.model.base
 import com.blankj.utilcode.util.ToastUtils
 
 open class Response<T>(
-    errorCode: String,
     val success: Boolean,
     val errorMsg: String,
-    val data: T
-) : ErrorCode(errorCode) {
+    var data: T,
+    val errorCode: String,
+    val encryptionData: String
+) {
     val failed: Boolean
         get() {
             val failed = !success
