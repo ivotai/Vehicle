@@ -83,6 +83,10 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
             }
             isCarState = true
             api.getCarState()
+                .doOnSuccess {
+                    val json = EncryptionHelper.decrypt(it.encryptionData)
+                    it.data = json.toBeanList()
+                }
                 .observeOnMain(this)
                 .subscribeBy(
                     onSuccess = { response ->
