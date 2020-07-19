@@ -9,16 +9,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.unicorn.vehicle.R
-import com.unicorn.vehicle.app.RxBus
-import com.unicorn.vehicle.app.addDefaultItemDecoration
-import com.unicorn.vehicle.app.observeOnMain
-import com.unicorn.vehicle.app.trimText
+import com.unicorn.vehicle.app.*
+import com.unicorn.vehicle.app.helper.EncryptionHelper
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.DictItem
 import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
 import com.unicorn.vehicle.data.model.event.DictItemEvent
 import com.unicorn.vehicle.data.model.param.CarListParam
+import com.unicorn.vehicle.data.model.param.GeneralParam
 import com.unicorn.vehicle.ui.adapter.CarAdapter
 import com.unicorn.vehicle.ui.adapter.DictAdapter
 import com.unicorn.vehicle.ui.base.KVHolder
@@ -128,17 +127,21 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
 
     override val simpleAdapter = CarAdapter()
 
-    override fun loadPage(pageNo: Int): Single<PageResponse<Car>> =
-        api.getCarList(
-            PageRequest(
-                pageNo = pageNo,
-                searchParam = CarListParam(
-                    carType = carType,
-                    carState = carState,
-                    no = etNo.trimText()
-                )
+    override fun loadPage(pageNo: Int): Single<PageResponse<Car>> {
+        val pageRequest = PageRequest(
+            pageNo = pageNo,
+            searchParam = CarListParam(
+                carType = carType,
+                carState = carState,
+                no = etNo.trimText()
             )
         )
+        val generalParam = GeneralParam.create(pageRequest)
+        return api.getCarList(generalParam).doOnSuccess {
+            val json = EncryptionHelper.decrypt(it.encryptionData)
+            it.items = json.toBeanList()
+        }
+    }
 
     private var carType: Int? = null
 
