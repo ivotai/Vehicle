@@ -1,6 +1,7 @@
 package com.unicorn.vehicle.app.di.component
 
 import android.content.Context
+import com.google.gson.Gson
 import com.unicorn.vehicle.app.di.module.ApiModule
 import com.unicorn.vehicle.app.di.module.BasicModule
 import com.unicorn.vehicle.app.di.module.NetworkModule
@@ -15,5 +16,7 @@ interface AppComponent {
     fun simpleApi(): SimpleApi
 
     fun context(): Context
+
+    fun gson(): Gson
 
 }
