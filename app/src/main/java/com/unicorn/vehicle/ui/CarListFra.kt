@@ -65,7 +65,7 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
                 return@subscribe
             }
             isCarState = false
-            api.getCarType()
+            api.getDictCarType()
                 .doOnSuccess {
                     val json = EncryptionHelper.decrypt(it.encryptionData)
                     it.data = json.toBeanList()
@@ -86,7 +86,7 @@ class CarListFra : SimplePageFra<Car, KVHolder>() {
                 return@subscribe
             }
             isCarState = true
-            api.getCarState()
+            api.getDictCarState()
                 .doOnSuccess {
                     val json = EncryptionHelper.decrypt(it.encryptionData)
                     it.data = json.toBeanList()
