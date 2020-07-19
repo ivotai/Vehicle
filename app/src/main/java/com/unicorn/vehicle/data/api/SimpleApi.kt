@@ -1,13 +1,11 @@
 package com.unicorn.vehicle.data.api
 
 import com.unicorn.vehicle.data.model.*
-import com.unicorn.vehicle.data.model.base.PageRequest
 import com.unicorn.vehicle.data.model.base.PageResponse
 import com.unicorn.vehicle.data.model.base.Response
 import com.unicorn.vehicle.data.model.param.*
 import io.reactivex.Observable
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -17,35 +15,32 @@ interface SimpleApi {
     @POST("Authorization/UserLogin")
     fun login(@Body userLoginParam: UserLoginParam): Single<Response<LoggedUser>>
 
-    @POST("Authorization/UserLogin")
-    fun autoLogin(@Body userLoginParam: UserLoginParam): Call<Response<LoggedUser>>
-
     @POST("Car/CarRequisitionList")
-    fun getCarRequisitionList(@Body pageRequest: PageRequest<CarRequisitionListParam>): Single<PageResponse<CarRequisition>>
+    fun getCarRequisitionList(@Body generalParam: GeneralParam): Single<PageResponse<CarRequisition>>
 
     @POST("Car/CarRequisitionInfo")
-    fun getCarRequisition(@Body stringQuery: StringQuery): Single<Response<CarRequisition>>
+    fun getCarRequisition(@Body generalParam: GeneralParam): Single<Response<CarRequisition>>
 
     @POST("Car/CarList")
-    fun getCarList(@Body pageRequest: PageRequest<CarListParam>): Single<PageResponse<Car>>
+    fun getCarList(@Body generalParam: GeneralParam): Single<PageResponse<Car>>
 
     @POST("Car/CarRequisitionApprove")
-    fun approve(@Body carRequisition: CarRequisition): Single<Response<CarRequisition>>
+    fun approve(@Body generalParam: GeneralParam): Single<Response<CarRequisition>>
 
     @POST("Car/CarRequisitionDeny")
-    fun deny(@Body carRequisition: CarRequisition): Single<Response<CarRequisition>>
+    fun deny(@Body generalParam: GeneralParam): Single<Response<CarRequisition>>
 
     @POST("Car/CarUsageLogList")
-    fun getCarUsageLogList(@Body pageRequest: PageRequest<CarUsageLogListParam>): Single<PageResponse<CarUsageLog>>
+    fun getCarUsageLogList(@Body generalParam: GeneralParam): Single<PageResponse<CarUsageLog>>
 
     @POST("Code/DictCarState")
-    fun getCarState(): Single<Response<List<DictItem>>>
+    fun getDictCarState(@Body generalParam: GeneralParam = GeneralParam.createForBasePostInfo()): Single<Response<List<DictItem>>>
 
     @POST("Code/DictCarType")
-    fun getCarType(@Body orgParam: OrgParam = OrgParam()): Single<Response<List<DictItem>>>
+    fun getDictCarType(@Body generalParam: GeneralParam = GeneralParam.createForOrgParam()): Single<Response<List<DictItem>>>
 
     @POST("Code/DictCarUsageEventType")
-    fun getDictCarUsageEventType(): Single<Response<List<DictItem>>>
+    fun getDictCarUsageEventType(@Body generalParam: GeneralParam = GeneralParam.createForBasePostInfo()): Single<Response<List<DictItem>>>
 
     @POST("file/CheckAppVersion")
     fun checkAppVersion(@Body stringQuery: StringQuery): Single<Response<CheckAppVersionResponse>>
