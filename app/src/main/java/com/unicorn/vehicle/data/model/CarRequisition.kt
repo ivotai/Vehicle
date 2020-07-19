@@ -29,4 +29,4 @@ data class CarRequisition(
     val requisitionDestination: String,
     val state: Int,
     val stateDisplay: String
-) : Serializable
+) : Serializable, BasePostInfo()

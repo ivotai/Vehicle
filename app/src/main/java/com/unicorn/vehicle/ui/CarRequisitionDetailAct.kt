@@ -99,7 +99,12 @@ class CarRequisitionDetailAct : BaseAct() {
 
     private fun approve() {
         val mask = DialogHelper.showMask(this)
-        api.approve(carRequisition = carRequisition)
+        val generalParam = GeneralParam.create(carRequisition)
+        api.approve(generalParam)
+            .doOnSuccess {
+                val json = EncryptionHelper.decrypt(it.encryptionData)
+                it.data = json.toBean()
+            }
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
