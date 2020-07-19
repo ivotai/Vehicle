@@ -74,3 +74,5 @@ class ParameterizedTypeImpl(val clz: Class<*>) : ParameterizedType {
 
     override fun getActualTypeArguments(): Array<Type> = arrayOf(clz)
 }
+
+inline fun <reified T> String.toBean():T = Holder.appComponent.gson().fromJson(this,T::class.java)
