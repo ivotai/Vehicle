@@ -8,10 +8,12 @@ import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.vehicle.R
 import com.unicorn.vehicle.app.*
 import com.unicorn.vehicle.app.helper.DialogHelper
+import com.unicorn.vehicle.app.helper.EncryptionHelper
 import com.unicorn.vehicle.data.model.Car
 import com.unicorn.vehicle.data.model.CarRequisition
 import com.unicorn.vehicle.data.model.param.StringQuery
 import com.unicorn.vehicle.data.model.event.RefreshCarRequisitionList
+import com.unicorn.vehicle.data.model.param.GeneralParam
 import com.unicorn.vehicle.ui.base.BaseAct
 import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
@@ -50,7 +52,12 @@ class CarRequisitionDetailAct : BaseAct() {
         }
 
         val mask = DialogHelper.showMask(this)
-        api.getCarRequisition(StringQuery(key = carRequisitionId))
+        val generalParam = GeneralParam.create(StringQuery(key = carRequisitionId))
+        api.getCarRequisition(generalParam)
+            .doOnSuccess {
+                val json = EncryptionHelper.decrypt(it.encryptionData)
+                it.data = json.toBean()
+            }
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {

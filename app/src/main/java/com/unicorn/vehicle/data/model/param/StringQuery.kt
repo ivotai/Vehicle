@@ -1,3 +1,5 @@
 package com.unicorn.vehicle.data.model.param
 
-data class StringQuery(val key: String)
+import com.unicorn.vehicle.data.model.BasePostInfo
+
+data class StringQuery(val key: String) : BasePostInfo()
