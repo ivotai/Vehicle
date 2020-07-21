@@ -1,6 +1,8 @@
 package com.unicorn.vehicle.app.di.module
 
 import com.google.gson.Gson
+import com.unicorn.vehicle.app.Cookie
+import com.unicorn.vehicle.app.SESSION
 import com.unicorn.vehicle.app.baseUrl
 import dagger.Module
 import dagger.Provides
@@ -20,6 +22,13 @@ class NetworkModule {
     fun provideOkHttpClient(gson: Gson): OkHttpClient {
         val builder = OkHttpClient.Builder()
             .readTimeout(10, TimeUnit.SECONDS)
+            .addInterceptor { chain ->
+                chain.request().newBuilder()
+                    .removeHeader("UserAgent")
+                    .addHeader("UserAgent", "SmartKeyManagementApp")
+                    .build()
+                    .let { chain.proceed(it) }
+            }
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
