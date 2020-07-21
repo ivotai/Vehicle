@@ -1,8 +1,6 @@
 package com.unicorn.vehicle.app.di.module
 
 import com.google.gson.Gson
-import com.unicorn.vehicle.app.Cookie
-import com.unicorn.vehicle.app.SESSION
 import com.unicorn.vehicle.app.baseUrl
 import dagger.Module
 import dagger.Provides
@@ -11,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import rxhttp.wrapper.param.RxHttp
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -38,6 +37,8 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+        RxHttp.init(okHttpClient)
+
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
