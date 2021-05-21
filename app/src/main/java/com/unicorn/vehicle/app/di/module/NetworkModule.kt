@@ -26,8 +26,8 @@ class NetworkModule {
             .readTimeout(10, TimeUnit.SECONDS)
             .addInterceptor { chain ->
                 chain.request().newBuilder()
-                    .removeHeader("UserAgent")
-                    .addHeader("UserAgent", "SmartKeyManagementApp")
+                    .removeHeader("User-Agent")
+                    .addHeader("User-Agent", "SmartKeyManagementApp")
                     .build()
                     .let { chain.proceed(it) }
             }
